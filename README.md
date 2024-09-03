@@ -20,11 +20,10 @@ Need some inspiration or interested in what AutoGen can do? Check out applicatio
 - [Fine-tuning](samples/tools/finetuning/) - Tools to fine-tune local models.
 - [WebArena Benchmark](samples/tools/webarena/) - Running AutoGen agents on WebArena.
 
-### Applications with code
-Applications built with AutoGen (code in repo)
+## :city_sunset: Gallery
+Demonstrations, code, and videos of applications built with AutoGen.
 
-### Videos / External
-Applications built with AutoGen (no code or code external)
+[Gallery](https://autogen-ai.github.io/autogen/docs/Gallery)
 
 ## Contributing
 Created something with AutoGen? We'd 💙 to share it with the community, please create a PR here or contact us at auto-gen@outlook.com.
