@@ -22,7 +22,12 @@ from ..chatmanager import AutoGenChatManager, WebSocketConnectionManager
 from ..database import workflow_from_id
 from ..database.dbmanager import DBManager
 from ..datamodel import Agent, Message, Model, Response, Session, Skill, Workflow
-from ..utils import check_and_cast_datetime_fields, init_app_folders, md5_hash, test_model
+from ..utils import (
+    check_and_cast_datetime_fields,
+    init_app_folders,
+    md5_hash,
+    test_model,
+)
 from ..version import VERSION
 
 managers = {"chat": None}  # manage calls to autogen
@@ -125,7 +130,8 @@ def create_entity(model: Any, model_class: Any, filters: dict = None):
         print(ex_error)
         return {
             "status": False,
-            "message": f"Error occurred while creating {model_class.__name__}: " + str(ex_error),
+            "message": f"Error occurred while creating {model_class.__name__}: "
+            + str(ex_error),
         }
 
 
@@ -136,7 +142,9 @@ def list_entity(
     order: str = "desc",
 ):
     """List all entities for a user"""
-    return dbmanager.get(model_class, filters=filters, return_json=return_json, order=order)
+    return dbmanager.get(
+        model_class, filters=filters, return_json=return_json, order=order
+    )
 
 
 def delete_entity(model_class: Any, filters: dict = None):
@@ -226,13 +234,17 @@ async def delete_agent(agent_id: int, user_id: str):
 @api.post("/agents/link/model/{agent_id}/{model_id}")
 async def link_agent_model(agent_id: int, model_id: int):
     """Link a model to an agent"""
-    return dbmanager.link(link_type="agent_model", primary_id=agent_id, secondary_id=model_id)
+    return dbmanager.link(
+        link_type="agent_model", primary_id=agent_id, secondary_id=model_id
+    )
 
 
 @api.delete("/agents/link/model/{agent_id}/{model_id}")
 async def unlink_agent_model(agent_id: int, model_id: int):
     """Unlink a model from an agent"""
-    return dbmanager.unlink(link_type="agent_model", primary_id=agent_id, secondary_id=model_id)
+    return dbmanager.unlink(
+        link_type="agent_model", primary_id=agent_id, secondary_id=model_id
+    )
 
 
 @api.get("/agents/link/model/{agent_id}")
@@ -244,13 +256,17 @@ async def get_agent_models(agent_id: int):
 @api.post("/agents/link/skill/{agent_id}/{skill_id}")
 async def link_agent_skill(agent_id: int, skill_id: int):
     """Link an a skill to an agent"""
-    return dbmanager.link(link_type="agent_skill", primary_id=agent_id, secondary_id=skill_id)
+    return dbmanager.link(
+        link_type="agent_skill", primary_id=agent_id, secondary_id=skill_id
+    )
 
 
 @api.delete("/agents/link/skill/{agent_id}/{skill_id}")
 async def unlink_agent_skill(agent_id: int, skill_id: int):
     """Unlink an a skill from an agent"""
-    return dbmanager.unlink(link_type="agent_skill", primary_id=agent_id, secondary_id=skill_id)
+    return dbmanager.unlink(
+        link_type="agent_skill", primary_id=agent_id, secondary_id=skill_id
+    )
 
 
 @api.get("/agents/link/skill/{agent_id}")
@@ -387,7 +403,9 @@ async def run_session_workflow(message: Message, session_id: int, workflow_id: i
         )
         # save incoming message
         dbmanager.upsert(message)
-        user_dir = os.path.join(folders["files_static_root"], "user", md5_hash(message.user_id))
+        user_dir = os.path.join(
+            folders["files_static_root"], "user", md5_hash(message.user_id)
+        )
         os.makedirs(user_dir, exist_ok=True)
         workflow = workflow_from_id(workflow_id, dbmanager=dbmanager)
         agent_response: Message = managers["chat"].chat(
@@ -426,7 +444,9 @@ async def process_socket_message(data: dict, websocket: WebSocket, client_id: st
         user_message = Message(**data["data"])
         session_id = data["data"].get("session_id", None)
         workflow_id = data["data"].get("workflow_id", None)
-        response = await run_session_workflow(message=user_message, session_id=session_id, workflow_id=workflow_id)
+        response = await run_session_workflow(
+            message=user_message, session_id=session_id, workflow_id=workflow_id
+        )
         response_socket_message = {
             "type": "agent_response",
             "data": response,

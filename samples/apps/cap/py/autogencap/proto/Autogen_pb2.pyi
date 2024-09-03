@@ -1,7 +1,12 @@
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import (
+    ClassVar as _ClassVar,
+    Mapping as _Mapping,
+    Optional as _Optional,
+    Union as _Union,
+)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -14,7 +19,9 @@ class DataMap(_message.Message):
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: str
-        def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
+        def __init__(
+            self, key: _Optional[str] = ..., value: _Optional[str] = ...
+        ) -> None: ...
 
     DATA_FIELD_NUMBER: _ClassVar[int]
     data: _containers.ScalarMap[str, str]
@@ -66,5 +73,8 @@ class PrepChat(_message.Message):
     clear_history: bool
     prepare_recipient: bool
     def __init__(
-        self, recipient: _Optional[str] = ..., clear_history: bool = ..., prepare_recipient: bool = ...
+        self,
+        recipient: _Optional[str] = ...,
+        clear_history: bool = ...,
+        prepare_recipient: bool = ...,
     ) -> None: ...

@@ -8,7 +8,6 @@ import sys
 import time
 from typing import Any, Dict
 
-import _paths
 import zmq
 from autogencap.Config import dealer_url, router_url, xpub_url, xsub_url
 from zmq.utils.monitor import recv_monitor_message
@@ -45,7 +44,10 @@ def event_monitor(pub_socket: zmq.Socket) -> None:
         mon_evt = recv_monitor_message(monitor)
         evt.update(mon_evt)
         print(evt)
-        if evt["event"] == zmq.EVENT_MONITOR_STOPPED or evt["event"] == zmq.EVENT_HANDSHAKE_SUCCEEDED:
+        if (
+            evt["event"] == zmq.EVENT_MONITOR_STOPPED
+            or evt["event"] == zmq.EVENT_HANDSHAKE_SUCCEEDED
+        ):
             break
     monitor.close()
 
@@ -149,4 +151,6 @@ if __name__ == "__main__":
         else:
             print("Invalid argument. Please use 'pub', 'sub' 'router', 'req', 'rep'")
     else:
-        print("Please provide an argument. Please use 'pub', 'sub' 'router', 'req', 'rep'")
+        print(
+            "Please provide an argument. Please use 'pub', 'sub' 'router', 'req', 'rep'"
+        )

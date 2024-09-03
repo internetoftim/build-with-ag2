@@ -5,7 +5,6 @@
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
 import re
-import threading
 import time
 
 import zmq
@@ -13,7 +12,6 @@ import zmq
 from autogencap.Actor import Actor
 from autogencap.ActorConnector import ActorConnector, ActorSender
 from autogencap.Broker import Broker
-from autogencap.Config import router_url, xpub_url, xsub_url
 from autogencap.constants import Directory_Svc_Topic
 from autogencap.DebugLog import Debug, Error, Info
 from autogencap.proto.CAP_pb2 import (
@@ -59,7 +57,9 @@ class DirectoryActor(Actor):
         sender_connection = ActorSender(self._context, sender_topic)
         sender_connection.send_bin_msg(Pong.__name__, serialized_msg)
 
-    def _on_actor_registration_msg(self, topic: str, msg_type: str, msg: bytes, sender_topic: str):
+    def _on_actor_registration_msg(
+        self, topic: str, msg_type: str, msg: bytes, sender_topic: str
+    ):
         actor_reg = ActorRegistration()
         actor_reg.ParseFromString(msg)
         Info("DirectorySvc", f"Actor registration: {actor_reg.actor_info.name}")
@@ -77,7 +77,9 @@ class DirectoryActor(Actor):
         serialized_msg = err.SerializeToString()
         sender_connection.send_bin_msg(ErrorMsg.__name__, serialized_msg)
 
-    def _on_actor_lookup_msg(self, topic: str, msg_type: str, msg: bytes, sender_topic: str):
+    def _on_actor_lookup_msg(
+        self, topic: str, msg_type: str, msg: bytes, sender_topic: str
+    ):
         actor_lookup = ActorLookup()
         actor_lookup.ParseFromString(msg)
         Debug("DirectorySvc", f"Actor lookup: {actor_lookup.actor_info.name}")
@@ -86,7 +88,9 @@ class DirectoryActor(Actor):
         try:
             pattern = re.compile(actor_lookup.actor_info.name)
         except re.error:
-            Error("DirectorySvc", f"Invalid regex pattern: {actor_lookup.actor_info.name}")
+            Error(
+                "DirectorySvc", f"Invalid regex pattern: {actor_lookup.actor_info.name}"
+            )
         else:
             found_actor_list = [
                 self._registered_actors[registered_actor]
@@ -117,7 +121,9 @@ class DirectorySvc:
         Debug("DirectorySvc", "Pinging existing DirectorySvc")
         ping = Ping()
         serialized_msg = ping.SerializeToString()
-        _, _, resp = self._directory_connector.send_recv_msg(Ping.__name__, serialized_msg, num_attempts=1)
+        _, _, resp = self._directory_connector.send_recv_msg(
+            Ping.__name__, serialized_msg, num_attempts=1
+        )
         if resp is None:
             return True
         return False
@@ -126,11 +132,16 @@ class DirectorySvc:
         Debug("DirectorySvc", "Starting.")
         self._directory_connector = ActorConnector(self._context, Directory_Svc_Topic)
         if self._no_other_directory():
-            self._directory_actor = DirectoryActor(Directory_Svc_Topic, "Directory Service")
+            self._directory_actor = DirectoryActor(
+                Directory_Svc_Topic, "Directory Service"
+            )
             self._directory_actor.on_start(self._context)
             Info("DirectorySvc", "Directory service started.")
         else:
-            Info("DirectorySvc", "Another directory service is running. This instance will not start.")
+            Info(
+                "DirectorySvc",
+                "Another directory service is running. This instance will not start.",
+            )
 
     def stop(self):
         if self._directory_actor:
@@ -144,7 +155,9 @@ class DirectorySvc:
         actor_reg = ActorRegistration()
         actor_reg.actor_info.CopyFrom(actor_info)
         serialized_msg = actor_reg.SerializeToString()
-        _, _, resp = self._directory_connector.send_recv_msg(ActorRegistration.__name__, serialized_msg)
+        _, _, resp = self._directory_connector.send_recv_msg(
+            ActorRegistration.__name__, serialized_msg
+        )
         report_error_msg(resp, "DirectorySvc")
 
     def register_actor_by_name(self, actor_name: str):
@@ -155,7 +168,9 @@ class DirectorySvc:
         actor_info = ActorInfo(name=name_regex)
         actor_lookup = ActorLookup(actor_info=actor_info)
         serialized_msg = actor_lookup.SerializeToString()
-        _, _, resp = self._directory_connector.send_recv_msg(ActorLookup.__name__, serialized_msg)
+        _, _, resp = self._directory_connector.send_recv_msg(
+            ActorLookup.__name__, serialized_msg
+        )
         actor_lookup_resp = ActorLookupResponse()
         actor_lookup_resp.ParseFromString(resp)
         return actor_lookup_resp

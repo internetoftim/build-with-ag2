@@ -4,7 +4,13 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent, config_list_from_json
+from autogen import (
+    AssistantAgent,
+    GroupChat,
+    GroupChatManager,
+    UserProxyAgent,
+    config_list_from_json,
+)
 
 
 def ag_groupchat_demo():

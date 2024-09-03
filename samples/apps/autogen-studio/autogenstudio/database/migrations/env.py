@@ -4,7 +4,6 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-import os
 from logging.config import fileConfig
 
 from alembic import context

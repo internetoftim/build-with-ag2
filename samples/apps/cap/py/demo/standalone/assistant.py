@@ -6,7 +6,6 @@
 # SPDX-License-Identifier: MIT
 import time
 
-import _paths
 from autogencap.ag_adapter.CAP2AG import CAP2AG
 from autogencap.DebugLog import Info
 from autogencap.runtime_factory import RuntimeFactory
@@ -25,7 +24,12 @@ class StandaloneAssistant:
         assistant = AssistantAgent("assistant", llm_config={"config_list": config_list})
         # Composable Agent Network adapter
         ensemble = RuntimeFactory.get_runtime("ZMQ")
-        assistant_adptr = CAP2AG(ag_agent=assistant, the_other_name="user_proxy", init_chat=False, self_recursive=True)
+        assistant_adptr = CAP2AG(
+            ag_agent=assistant,
+            the_other_name="user_proxy",
+            init_chat=False,
+            self_recursive=True,
+        )
         ensemble.register(assistant_adptr)
         ensemble.connect()
 

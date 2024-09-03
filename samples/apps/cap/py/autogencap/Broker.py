@@ -75,7 +75,10 @@ class Broker:
     def thread_fn(self):
         try:
             if not self._init_sockets():
-                Debug("BROKER", "Receive thread not started since sockets were not initialized")
+                Debug(
+                    "BROKER",
+                    "Receive thread not started since sockets were not initialized",
+                )
                 self._run = False
                 self._start_event.set()
                 return

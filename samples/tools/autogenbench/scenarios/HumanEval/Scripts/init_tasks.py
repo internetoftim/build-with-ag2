@@ -9,7 +9,6 @@
 # (default: ../scenarios/human_eval_two_agents_gpt4.jsonl and ./scenarios/human_eval_two_agents_gpt35.jsonl)
 #
 
-import base64
 import gzip
 import io
 import json

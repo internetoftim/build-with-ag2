@@ -59,7 +59,9 @@ file_handler.setFormatter(formatter)
 
 
 def config() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run end-to-end evaluation on the benchmark")
+    parser = argparse.ArgumentParser(
+        description="Run end-to-end evaluation on the benchmark"
+    )
     parser.add_argument("--render", action="store_true", help="Render the browser")
     parser.add_argument(
         "--slow_mo",
@@ -67,7 +69,9 @@ def config() -> argparse.Namespace:
         default=0,
         help="Slow down the browser by the specified amount",
     )
-    parser.add_argument("--action_set_tag", default="id_accessibility_tree", help="Action type")
+    parser.add_argument(
+        "--action_set_tag", default="id_accessibility_tree", help="Action type"
+    )
     parser.add_argument(
         "--observation_type",
         choices=["accessibility_tree", "html", "image"],
@@ -143,7 +147,10 @@ def config() -> argparse.Namespace:
     args = parser.parse_args()
 
     # check the whether the action space is compatible with the observation space
-    if args.action_set_tag == "id_accessibility_tree" and args.observation_type != "accessibility_tree":
+    if (
+        args.action_set_tag == "id_accessibility_tree"
+        and args.observation_type != "accessibility_tree"
+    ):
         raise ValueError(
             f"Action type {args.action_set_tag} is incompatible with the observation type {args.observation_type}"
         )
@@ -179,7 +186,9 @@ def test(
 
     for config_file in config_file_list:
         try:
-            render_helper = RenderHelper(config_file, args.result_dir, args.action_set_tag)
+            render_helper = RenderHelper(
+                config_file, args.result_dir, args.action_set_tag
+            )
 
             # get intent
             with open(config_file) as f:

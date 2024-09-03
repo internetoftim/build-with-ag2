@@ -4,9 +4,6 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-import base64
-import json
-import os
 
 import testbed_utils
 

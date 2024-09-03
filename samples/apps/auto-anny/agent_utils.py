@@ -34,7 +34,9 @@ There is no need to use the word TERMINATE in this response.
         request_reply=False,
         silent=True,
     )
-    response = await assistant.a_generate_reply(assistant.chat_messages[user_proxy], user_proxy)
+    response = await assistant.a_generate_reply(
+        assistant.chat_messages[user_proxy], user_proxy
+    )
     await assistant.a_send(response, user_proxy, request_reply=False, silent=True)
 
     last_message = assistant.chat_messages[user_proxy][-1]["content"]

@@ -5,7 +5,6 @@
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
 # from .util import get_app_root
-import os
 import time
 from datetime import datetime
 from pathlib import Path
@@ -37,7 +36,9 @@ def workflow_from_id(workflow_id: int, dbmanager: Any):
     if not workflow or len(workflow) == 0:
         raise ValueError("The specified workflow does not exist.")
     workflow = workflow[0].model_dump(mode="json")
-    workflow_agent_links = dbmanager.get(WorkflowAgentLink, filters={"workflow_id": workflow_id}).data
+    workflow_agent_links = dbmanager.get(
+        WorkflowAgentLink, filters={"workflow_id": workflow_id}
+    ).data
 
     def dump_agent(agent: Agent):
         exclude = []
@@ -54,9 +55,14 @@ def workflow_from_id(workflow_id: int, dbmanager: Any):
 
     def get_agent(agent_id):
         with Session(dbmanager.engine) as session:
-            agent: Agent = dbmanager.get_items(Agent, filters={"id": agent_id}, session=session).data[0]
+            agent: Agent = dbmanager.get_items(
+                Agent, filters={"id": agent_id}, session=session
+            ).data[0]
             agent_dict = dump_agent(agent)
-            agent_dict["skills"] = [Skill.model_validate(skill.model_dump(mode="json")) for skill in agent.skills]
+            agent_dict["skills"] = [
+                Skill.model_validate(skill.model_dump(mode="json"))
+                for skill in agent.skills
+            ]
             model_exclude = [
                 "id",
                 "agent_id",
@@ -65,11 +71,18 @@ def workflow_from_id(workflow_id: int, dbmanager: Any):
                 "user_id",
                 "description",
             ]
-            models = [model.model_dump(mode="json", exclude=model_exclude) for model in agent.models]
-            agent_dict["models"] = [model.model_dump(mode="json") for model in agent.models]
+            models = [
+                model.model_dump(mode="json", exclude=model_exclude)
+                for model in agent.models
+            ]
+            agent_dict["models"] = [
+                model.model_dump(mode="json") for model in agent.models
+            ]
 
             if len(models) > 0:
-                agent_dict["config"]["llm_config"] = agent_dict.get("config", {}).get("llm_config", {})
+                agent_dict["config"]["llm_config"] = agent_dict.get("config", {}).get(
+                    "llm_config", {}
+                )
                 llm_config = agent_dict["config"]["llm_config"]
                 if llm_config:
                     llm_config["config_list"] = models
@@ -143,13 +156,21 @@ def run_migration(engine_uri: str):
 def init_db_samples(dbmanager: Any):
     workflows = dbmanager.get(Workflow).data
     workflow_names = [w.name for w in workflows]
-    if "Default Workflow" in workflow_names and "Travel Planning Workflow" in workflow_names:
-        logger.info("Database already initialized with Default and Travel Planning Workflows")
+    if (
+        "Default Workflow" in workflow_names
+        and "Travel Planning Workflow" in workflow_names
+    ):
+        logger.info(
+            "Database already initialized with Default and Travel Planning Workflows"
+        )
         return
     logger.info("Initializing database with Default and Travel Planning Workflows")
     # models
     gpt_4_model = Model(
-        model="gpt-4-1106-preview", description="OpenAI GPT-4 model", user_id="guestuser@gmail.com", api_type="open_ai"
+        model="gpt-4-1106-preview",
+        description="OpenAI GPT-4 model",
+        user_id="guestuser@gmail.com",
+        api_type="open_ai",
     )
     azure_model = Model(
         model="gpt4-turbo",
@@ -194,7 +215,9 @@ def init_db_samples(dbmanager: Any):
         llm_config=False,
     )
     user_proxy = Agent(
-        user_id="guestuser@gmail.com", type=AgentType.userproxy, config=user_proxy_config.model_dump(mode="json")
+        user_id="guestuser@gmail.com",
+        type=AgentType.userproxy,
+        config=user_proxy_config.model_dump(mode="json"),
     )
 
     painter_assistant_config = AgentConfig(
@@ -207,7 +230,9 @@ def init_db_samples(dbmanager: Any):
         llm_config={},
     )
     painter_assistant = Agent(
-        user_id="guestuser@gmail.com", type=AgentType.assistant, config=painter_assistant_config.model_dump(mode="json")
+        user_id="guestuser@gmail.com",
+        type=AgentType.assistant,
+        config=painter_assistant_config.model_dump(mode="json"),
     )
 
     planner_assistant_config = AgentConfig(
@@ -220,7 +245,9 @@ def init_db_samples(dbmanager: Any):
         llm_config={},
     )
     planner_assistant = Agent(
-        user_id="guestuser@gmail.com", type=AgentType.assistant, config=planner_assistant_config.model_dump(mode="json")
+        user_id="guestuser@gmail.com",
+        type=AgentType.assistant,
+        config=planner_assistant_config.model_dump(mode="json"),
     )
 
     local_assistant_config = AgentConfig(
@@ -233,7 +260,9 @@ def init_db_samples(dbmanager: Any):
         llm_config={},
     )
     local_assistant = Agent(
-        user_id="guestuser@gmail.com", type=AgentType.assistant, config=local_assistant_config.model_dump(mode="json")
+        user_id="guestuser@gmail.com",
+        type=AgentType.assistant,
+        config=local_assistant_config.model_dump(mode="json"),
     )
 
     language_assistant_config = AgentConfig(
@@ -265,14 +294,22 @@ def init_db_samples(dbmanager: Any):
         speaker_selection_method="auto",
     )
     travel_groupchat_agent = Agent(
-        user_id="guestuser@gmail.com", type=AgentType.groupchat, config=travel_groupchat_config.model_dump(mode="json")
+        user_id="guestuser@gmail.com",
+        type=AgentType.groupchat,
+        config=travel_groupchat_config.model_dump(mode="json"),
     )
 
     # workflows
-    default_workflow = Workflow(name="Default Workflow", description="Default workflow", user_id="guestuser@gmail.com")
+    default_workflow = Workflow(
+        name="Default Workflow",
+        description="Default workflow",
+        user_id="guestuser@gmail.com",
+    )
 
     travel_workflow = Workflow(
-        name="Travel Planning Workflow", description="Travel workflow", user_id="guestuser@gmail.com"
+        name="Travel Planning Workflow",
+        description="Travel workflow",
+        user_id="guestuser@gmail.com",
     )
 
     with Session(dbmanager.engine) as session:
@@ -292,10 +329,21 @@ def init_db_samples(dbmanager: Any):
         session.add(travel_workflow)
         session.commit()
 
-        dbmanager.link(link_type="agent_model", primary_id=painter_assistant.id, secondary_id=gpt_4_model.id)
-        dbmanager.link(link_type="agent_skill", primary_id=painter_assistant.id, secondary_id=generate_image_skill.id)
         dbmanager.link(
-            link_type="workflow_agent", primary_id=default_workflow.id, secondary_id=user_proxy.id, agent_type="sender"
+            link_type="agent_model",
+            primary_id=painter_assistant.id,
+            secondary_id=gpt_4_model.id,
+        )
+        dbmanager.link(
+            link_type="agent_skill",
+            primary_id=painter_assistant.id,
+            secondary_id=generate_image_skill.id,
+        )
+        dbmanager.link(
+            link_type="workflow_agent",
+            primary_id=default_workflow.id,
+            secondary_id=user_proxy.id,
+            agent_type="sender",
         )
         dbmanager.link(
             link_type="workflow_agent",
@@ -306,19 +354,52 @@ def init_db_samples(dbmanager: Any):
 
         # link agents to travel groupchat agent
 
-        dbmanager.link(link_type="agent_agent", primary_id=travel_groupchat_agent.id, secondary_id=planner_assistant.id)
-        dbmanager.link(link_type="agent_agent", primary_id=travel_groupchat_agent.id, secondary_id=local_assistant.id)
         dbmanager.link(
-            link_type="agent_agent", primary_id=travel_groupchat_agent.id, secondary_id=language_assistant.id
+            link_type="agent_agent",
+            primary_id=travel_groupchat_agent.id,
+            secondary_id=planner_assistant.id,
         )
-        dbmanager.link(link_type="agent_agent", primary_id=travel_groupchat_agent.id, secondary_id=user_proxy.id)
-        dbmanager.link(link_type="agent_model", primary_id=travel_groupchat_agent.id, secondary_id=gpt_4_model.id)
-        dbmanager.link(link_type="agent_model", primary_id=planner_assistant.id, secondary_id=gpt_4_model.id)
-        dbmanager.link(link_type="agent_model", primary_id=local_assistant.id, secondary_id=gpt_4_model.id)
-        dbmanager.link(link_type="agent_model", primary_id=language_assistant.id, secondary_id=gpt_4_model.id)
+        dbmanager.link(
+            link_type="agent_agent",
+            primary_id=travel_groupchat_agent.id,
+            secondary_id=local_assistant.id,
+        )
+        dbmanager.link(
+            link_type="agent_agent",
+            primary_id=travel_groupchat_agent.id,
+            secondary_id=language_assistant.id,
+        )
+        dbmanager.link(
+            link_type="agent_agent",
+            primary_id=travel_groupchat_agent.id,
+            secondary_id=user_proxy.id,
+        )
+        dbmanager.link(
+            link_type="agent_model",
+            primary_id=travel_groupchat_agent.id,
+            secondary_id=gpt_4_model.id,
+        )
+        dbmanager.link(
+            link_type="agent_model",
+            primary_id=planner_assistant.id,
+            secondary_id=gpt_4_model.id,
+        )
+        dbmanager.link(
+            link_type="agent_model",
+            primary_id=local_assistant.id,
+            secondary_id=gpt_4_model.id,
+        )
+        dbmanager.link(
+            link_type="agent_model",
+            primary_id=language_assistant.id,
+            secondary_id=gpt_4_model.id,
+        )
 
         dbmanager.link(
-            link_type="workflow_agent", primary_id=travel_workflow.id, secondary_id=user_proxy.id, agent_type="sender"
+            link_type="workflow_agent",
+            primary_id=travel_workflow.id,
+            secondary_id=user_proxy.id,
+            agent_type="sender",
         )
         dbmanager.link(
             link_type="workflow_agent",
@@ -326,4 +407,6 @@ def init_db_samples(dbmanager: Any):
             secondary_id=travel_groupchat_agent.id,
             agent_type="receiver",
         )
-        logger.info("Successfully initialized database with Default and Travel Planning Workflows")
+        logger.info(
+            "Successfully initialized database with Default and Travel Planning Workflows"
+        )

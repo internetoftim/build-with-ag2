@@ -12,7 +12,13 @@ from autogen import ConversableAgent
 
 from ..actor_runtime import IRuntime
 from ..DebugLog import Debug, Error, Info, Warn, shorten
-from ..proto.Autogen_pb2 import GenReplyReq, GenReplyResp, PrepChat, ReceiveReq, Terminate
+from ..proto.Autogen_pb2 import (
+    GenReplyReq,
+    GenReplyResp,
+    PrepChat,
+    ReceiveReq,
+    Terminate,
+)
 from .AG2CAP import AG2CAP
 from .AGActor import AGActor
 
@@ -24,7 +30,13 @@ class CAP2AG(AGActor):
 
     States = Enum("States", ["INIT", "CONVERSING"])
 
-    def __init__(self, ag_agent: ConversableAgent, the_other_name: str, init_chat: bool, self_recursive: bool = True):
+    def __init__(
+        self,
+        ag_agent: ConversableAgent,
+        the_other_name: str,
+        init_chat: bool,
+        self_recursive: bool = True,
+    ):
         super().__init__(ag_agent.name, ag_agent.description)
         self._the_ag_agent: ConversableAgent = ag_agent
         self._ag2can_other_agent: AG2CAP = None
@@ -56,11 +68,15 @@ class CAP2AG(AGActor):
         """
         Process a text message received from the AutoGen system.
         """
-        Info(self._can2ag_name, f"proc_txt_msg: [{topic}], [{msg_type}], {shorten(msg)}")
+        Info(
+            self._can2ag_name, f"proc_txt_msg: [{topic}], [{msg_type}], {shorten(msg)}"
+        )
         if self.STATE == self.States.INIT:
             self.STATE = self.States.CONVERSING
             if self._init_chat:
-                self._the_ag_agent.initiate_chat(self._ag2can_other_agent, message=msg, summary_method=None)
+                self._the_ag_agent.initiate_chat(
+                    self._ag2can_other_agent, message=msg, summary_method=None
+                )
             else:
                 self._the_ag_agent.receive(msg, self._ag2can_other_agent, True)
         else:
@@ -86,7 +102,9 @@ class CAP2AG(AGActor):
                 data[key] = value
         else:
             data = receive_params.data
-        self._the_ag_agent.receive(data, self._ag2can_other_agent, request_reply, silent)
+        self._the_ag_agent.receive(
+            data, self._ag2can_other_agent, request_reply, silent
+        )
         self._ag2can_other_agent.set_name(save_name)
 
     def on_receive_msg(self, msg: bytes):
@@ -103,7 +121,9 @@ class CAP2AG(AGActor):
 
             if self._init_chat:
                 self._the_ag_agent.initiate_chat(
-                    self._ag2can_other_agent, message=receive_params.data, summary_method=None
+                    self._ag2can_other_agent,
+                    message=receive_params.data,
+                    summary_method=None,
                 )
             else:
                 self._call_agent_receive(receive_params)
@@ -146,7 +166,11 @@ class CAP2AG(AGActor):
     def on_prepchat_msg(self, msg, sender_topic):
         prep_chat = PrepChat()
         prep_chat.ParseFromString(msg)
-        self._the_ag_agent._prepare_chat(self._ag2can_other_agent, prep_chat.clear_history, prep_chat.prepare_recipient)
+        self._the_ag_agent._prepare_chat(
+            self._ag2can_other_agent,
+            prep_chat.clear_history,
+            prep_chat.prepare_recipient,
+        )
         return True
 
     def on_bin_msg(self, msg: bytes, msg_type: str, topic: str, sender: str):
@@ -161,8 +185,14 @@ class CAP2AG(AGActor):
         elif msg_type == PrepChat.__name__:
             return self.on_prepchat_msg(msg, sender)
         elif msg_type == Terminate.__name__:
-            Warn(self._can2ag_name, f"TERMINATE received: topic=[{topic}], msg_type=[{msg_type}]")
+            Warn(
+                self._can2ag_name,
+                f"TERMINATE received: topic=[{topic}], msg_type=[{msg_type}]",
+            )
             return False
         else:
-            Error(self._can2ag_name, f"Unhandled message type: topic=[{topic}], msg_type=[{msg_type}]")
+            Error(
+                self._can2ag_name,
+                f"Unhandled message type: topic=[{topic}], msg_type=[{msg_type}]",
+            )
         return True

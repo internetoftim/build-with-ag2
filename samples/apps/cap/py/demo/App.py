@@ -10,11 +10,8 @@ Demo App
 
 import argparse
 
-import _paths
 import autogencap.Config as Config
 import autogencap.DebugLog as DebugLog
-from AGDemo import ag_demo
-from AGGroupChatDemo import ag_groupchat_demo
 from CAPAutGenGroupDemo import cap_ag_group_demo
 from CAPAutoGenPairDemo import cap_ag_pair_demo
 from ComplexActorDemo import complex_actor_demo
@@ -29,7 +26,9 @@ from single_threaded import single_threaded_demo
 def parse_args():
     # Create a parser for the command line arguments
     parser = argparse.ArgumentParser(description="Demo App")
-    parser.add_argument("--log_level", type=int, default=1, help="Set the log level (0-3)")
+    parser.add_argument(
+        "--log_level", type=int, default=1, help="Set the log level (0-3)"
+    )
     # Parse the command line arguments
     args = parser.parse_args()
     # Set the log level

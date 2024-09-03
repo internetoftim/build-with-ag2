@@ -132,12 +132,20 @@ class AutoGenChatManager:
 
         output = ""
         if workflow.summary_method == "last":
-            successful_code_blocks = extract_successful_code_blocks(workflow_manager.agent_history)
+            successful_code_blocks = extract_successful_code_blocks(
+                workflow_manager.agent_history
+            )
             last_message = (
-                workflow_manager.agent_history[-1]["message"]["content"] if workflow_manager.agent_history else ""
+                workflow_manager.agent_history[-1]["message"]["content"]
+                if workflow_manager.agent_history
+                else ""
             )
             successful_code_blocks = "\n\n".join(successful_code_blocks)
-            output = (last_message + "\n" + successful_code_blocks) if successful_code_blocks else last_message
+            output = (
+                (last_message + "\n" + successful_code_blocks)
+                if successful_code_blocks
+                else last_message
+            )
         elif workflow.summary_method == "llm":
             client = workflow_manager.receiver.client
             status_message = SocketMessage(
@@ -200,7 +208,9 @@ class WebSocketConnectionManager:
         """
         async with self.active_connections_lock:
             try:
-                self.active_connections = [conn for conn in self.active_connections if conn[0] != websocket]
+                self.active_connections = [
+                    conn for conn in self.active_connections if conn[0] != websocket
+                ]
                 print(f"Connection Closed. Total: {len(self.active_connections)}")
             except ValueError:
                 print("Error: WebSocket connection not found")
@@ -212,7 +222,9 @@ class WebSocketConnectionManager:
         for connection, _ in self.active_connections[:]:
             await self.disconnect(connection)
 
-    async def send_message(self, message: Union[Dict, str], websocket: WebSocket) -> None:
+    async def send_message(
+        self, message: Union[Dict, str], websocket: WebSocket
+    ) -> None:
         """
         Sends a JSON message to a single WebSocket connection.
 

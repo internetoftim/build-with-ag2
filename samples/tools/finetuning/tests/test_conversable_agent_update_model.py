@@ -58,7 +58,9 @@ def test_custom_model_client():
         def update_model(self, preference_data, messages, **kwargs):
             return {"loss": TEST_LOSS}
 
-    config_list = [{"model": TEST_LOCAL_MODEL_NAME, "model_client_cls": "UpdatableCustomModel"}]
+    config_list = [
+        {"model": TEST_LOCAL_MODEL_NAME, "model_client_cls": "UpdatableCustomModel"}
+    ]
 
     assistant = AssistantAgent(
         "assistant",
@@ -79,7 +81,9 @@ def test_custom_model_client():
     response_content = res.summary
 
     assert response_content == TEST_CUSTOM_RESPONSE
-    preference_data = [("this is what the response should have been like", response_content)]
+    preference_data = [
+        ("this is what the response should have been like", response_content)
+    ]
     update_model_stats = update_model(assistant, preference_data, user_proxy)
     assert update_model_stats["update_stats"]["loss"] == TEST_LOSS
 
@@ -138,7 +142,9 @@ def test_custom_model_update_func_missing_raises_error():
         def get_usage(response) -> Dict:
             return {}
 
-    config_list = [{"model": TEST_LOCAL_MODEL_NAME, "model_client_cls": "UpdatableCustomModel"}]
+    config_list = [
+        {"model": TEST_LOCAL_MODEL_NAME, "model_client_cls": "UpdatableCustomModel"}
+    ]
 
     assistant = AssistantAgent(
         "assistant",

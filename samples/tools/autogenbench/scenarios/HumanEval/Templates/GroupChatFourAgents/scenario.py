@@ -4,9 +4,6 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-import base64
-import json
-import os
 
 import testbed_utils
 
@@ -117,4 +114,6 @@ run_tests(__ENTRY_POINT__)
 )
 
 ##############################
-testbed_utils.finalize(agents=[assistant, user_proxy, guardrails_agent, distractor_agent, manager])
+testbed_utils.finalize(
+    agents=[assistant, user_proxy, guardrails_agent, distractor_agent, manager]
+)

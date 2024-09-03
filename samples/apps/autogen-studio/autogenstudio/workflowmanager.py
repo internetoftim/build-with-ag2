@@ -16,7 +16,12 @@ from .datamodel import (
     Message,
     SocketMessage,
 )
-from .utils import clear_folder, get_skills_from_prompt, load_code_execution_config, sanitize_model
+from .utils import (
+    clear_folder,
+    get_skills_from_prompt,
+    load_code_execution_config,
+    sanitize_model,
+)
 
 
 class WorkflowManager:
@@ -91,7 +96,9 @@ class WorkflowManager:
                     "allow_repeat_speaker",
                 }
             }
-        result = agent.model_dump(warnings=False, exclude=exclude, include=include, mode=mode)
+        result = agent.model_dump(
+            warnings=False, exclude=exclude, include=include, mode=mode
+        )
         return result["config"]
 
     def process_message(
@@ -116,7 +123,11 @@ class WorkflowManager:
             sender_type: The type of the sender of the message.
         """
 
-        message = message if isinstance(message, dict) else {"content": message, "role": "user"}
+        message = (
+            message
+            if isinstance(message, dict)
+            else {"content": message, "role": "user"}
+        )
         message_payload = {
             "recipient": receiver.name,
             "sender": sender.name,
@@ -198,9 +209,13 @@ class WorkflowManager:
             skills_prompt = ""
             skills_prompt = get_skills_from_prompt(skills, self.work_dir)
             if agent.config.system_message:
-                agent.config.system_message = agent.config.system_message + "\n\n" + skills_prompt
+                agent.config.system_message = (
+                    agent.config.system_message + "\n\n" + skills_prompt
+                )
             else:
-                agent.config.system_message = get_default_system_message(agent.type) + "\n\n" + skills_prompt
+                agent.config.system_message = (
+                    get_default_system_message(agent.type) + "\n\n" + skills_prompt
+                )
         return agent
 
     def load(self, agent: Any) -> autogen.Agent:
@@ -276,7 +291,9 @@ class ExtendedConversableAgent(autogen.ConversableAgent):
         silent: Optional[bool] = False,
     ):
         if self.message_processor:
-            self.message_processor(sender, self, message, request_reply, silent, sender_type="agent")
+            self.message_processor(
+                sender, self, message, request_reply, silent, sender_type="agent"
+            )
         super().receive(message, sender, request_reply, silent)
 
 
@@ -296,5 +313,7 @@ class ExtendedGroupChatManager(autogen.GroupChatManager):
         silent: Optional[bool] = False,
     ):
         if self.message_processor:
-            self.message_processor(sender, self, message, request_reply, silent, sender_type="groupchat")
+            self.message_processor(
+                sender, self, message, request_reply, silent, sender_type="groupchat"
+            )
         super().receive(message, sender, request_reply, silent)

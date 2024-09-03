@@ -9,11 +9,9 @@
 # (default: ../scenarios/human_eval_two_agents_gpt4.jsonl and ./scenarios/human_eval_two_agents_gpt35.jsonl)
 #
 
-import io
 import json
 import os
 import re
-import sys
 import tarfile
 
 import requests
@@ -94,7 +92,9 @@ def create_jsonl(name, problems, template):
         for item in problems.items():
             data = item[1]
 
-            task_id = item[0].replace("MATH/", "").replace(".json", "").replace("/", "_")
+            task_id = (
+                item[0].replace("MATH/", "").replace(".json", "").replace("/", "_")
+            )
             print(f"Converting: [{item[0]}] {task_id}")
 
             record = {

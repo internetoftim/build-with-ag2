@@ -1,5 +1,5 @@
 # Build with AutoGen
-Sample code and application showcases to get you going with AutoGen 
+Sample code and application showcases to get you going with AutoGen
 
 ## :notebook_with_decorative_cover: Cookbook
 Looking for a way to create group chats, sequential chats, nested chats, RAG agents, etc., check out these cookbooks that will get you started.

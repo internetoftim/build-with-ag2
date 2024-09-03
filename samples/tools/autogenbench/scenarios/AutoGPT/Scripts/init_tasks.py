@@ -9,14 +9,11 @@
 # (default: ../scenarios/human_eval_two_agents_gpt4.jsonl and ./scenarios/human_eval_two_agents_gpt35.jsonl)
 #
 
-import base64
 import glob
 import json
 import os
 import re
-import sys
 
-from huggingface_hub import snapshot_download
 
 SCRIPT_PATH = os.path.realpath(__file__)
 SCRIPT_NAME = os.path.basename(SCRIPT_PATH)
@@ -86,7 +83,9 @@ def create_jsonl(name, template):
                         "__CONTAIN__": json.dumps(should_contain),  # Double-encoded
                     },
                     "should_not_contain.json.txt": {
-                        "__NO_CONTAIN__": json.dumps(should_not_contain),  # Double-encoded
+                        "__NO_CONTAIN__": json.dumps(
+                            should_not_contain
+                        ),  # Double-encoded
                     },
                 },
             }

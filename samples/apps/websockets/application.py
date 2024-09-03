@@ -11,12 +11,11 @@ import logging
 import os
 from contextlib import asynccontextmanager  # noqa: E402
 from datetime import datetime
-from typing import AsyncIterator, Dict, Iterator, List
+from typing import AsyncIterator, Dict, List
 
 import uvicorn  # noqa: E402
 from fastapi import FastAPI  # noqa: E402
 from fastapi.responses import HTMLResponse  # noqa: E402
-from websockets.sync.client import connect as ws_connect
 
 import autogen
 from autogen.io.websockets import IOWebsockets
@@ -64,7 +63,9 @@ def _get_config_list() -> List[Dict[str, str]]:
         },
     ]
     # filter out configs with no API key
-    config_list = [llm_config for llm_config in config_list if llm_config["api_key"] is not None]
+    config_list = [
+        llm_config for llm_config in config_list if llm_config["api_key"] is not None
+    ]
 
     if not config_list:
         raise ValueError(
@@ -96,7 +97,8 @@ def on_connect(iostream: IOWebsockets) -> None:
     user_proxy = autogen.UserProxyAgent(
         name="user_proxy",
         system_message="A proxy for the user.",
-        is_termination_msg=lambda x: x.get("content", "") and x.get("content", "").rstrip().endswith("TERMINATE"),
+        is_termination_msg=lambda x: x.get("content", "")
+        and x.get("content", "").rstrip().endswith("TERMINATE"),
         human_input_mode="NEVER",
         max_consecutive_auto_reply=10,
         code_execution_config=False,
@@ -107,7 +109,10 @@ def on_connect(iostream: IOWebsockets) -> None:
         return f"The weather forecast for {city} at {datetime.now()} is sunny."
 
     autogen.register_function(
-        weather_forecast, caller=agent, executor=user_proxy, description="Weather forecast for a city"
+        weather_forecast,
+        caller=agent,
+        executor=user_proxy,
+        description="Weather forecast for a city",
     )
 
     # instantiate a chat

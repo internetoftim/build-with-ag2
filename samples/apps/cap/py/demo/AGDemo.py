@@ -15,4 +15,6 @@ def ag_demo():
         code_execution_config={"work_dir": "coding"},
         is_termination_msg=lambda x: "TERMINATE" in x.get("content"),
     )
-    user_proxy.initiate_chat(assistant, message="Plot a chart of MSFT daily closing prices for last 1 Month.")
+    user_proxy.initiate_chat(
+        assistant, message="Plot a chart of MSFT daily closing prices for last 1 Month."
+    )

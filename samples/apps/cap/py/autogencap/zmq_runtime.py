@@ -80,7 +80,9 @@ class ZMQRuntime(IRuntime):
         return self.find_by_topic(termination_topic)
 
     def find_by_name_regex(self, name_regex) -> List[ActorInfo]:
-        actor_info: ActorInfoCollection = self._directory_svc.lookup_actor_info_by_name(name_regex)
+        actor_info: ActorInfoCollection = self._directory_svc.lookup_actor_info_by_name(
+            name_regex
+        )
         if actor_info is None:
             Warn("Local_Actor_Network", f"{name_regex}, not found in the network.")
             return None

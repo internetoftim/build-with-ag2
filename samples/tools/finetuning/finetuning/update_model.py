@@ -11,7 +11,10 @@ from autogen import Agent, ConversableAgent, ModelClient, OpenAIWrapper
 
 class UpdateableModelClient(ModelClient, Protocol):
     def update_model(
-        self, preference_data: List[Dict[str, Any]], inference_messages: List[Dict[str, Any]], **kwargs: Any
+        self,
+        preference_data: List[Dict[str, Any]],
+        inference_messages: List[Dict[str, Any]],
+        **kwargs: Any,
     ) -> Dict[str, Any]:
         """Optional method to learn from the preference data, if the model supports learning. Can be omitted.
 
@@ -60,11 +63,16 @@ def _client_wrapper_update_model(
     if hasattr(client, "update_model") and callable(getattr(client, "update_model")):
         return client.update_model(preference_data, inference_messages, **kwargs)
     else:
-        raise NotImplementedError(f"update_model is not implemented for {client.__class__.__name__}.")
+        raise NotImplementedError(
+            f"update_model is not implemented for {client.__class__.__name__}."
+        )
 
 
 def update_model(
-    update_agent: ConversableAgent, preference_data: List[Dict[str, Any]], other_agent: Agent, **kwargs
+    update_agent: ConversableAgent,
+    preference_data: List[Dict[str, Any]],
+    other_agent: Agent,
+    **kwargs,
 ) -> Dict[str, Any]:
     """Update the model using the preference data and the conversation history.
 

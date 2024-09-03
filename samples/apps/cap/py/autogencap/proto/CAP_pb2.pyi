@@ -30,7 +30,11 @@ class Error(_message.Message):
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     code: ErrorCode
     message: str
-    def __init__(self, code: _Optional[_Union[ErrorCode, str]] = ..., message: _Optional[str] = ...) -> None: ...
+    def __init__(
+        self,
+        code: _Optional[_Union[ErrorCode, str]] = ...,
+        message: _Optional[str] = ...,
+    ) -> None: ...
 
 class ActorInfo(_message.Message):
     __slots__ = ("name", "namespace", "description")
@@ -41,26 +45,35 @@ class ActorInfo(_message.Message):
     namespace: str
     description: str
     def __init__(
-        self, name: _Optional[str] = ..., namespace: _Optional[str] = ..., description: _Optional[str] = ...
+        self,
+        name: _Optional[str] = ...,
+        namespace: _Optional[str] = ...,
+        description: _Optional[str] = ...,
     ) -> None: ...
 
 class ActorRegistration(_message.Message):
     __slots__ = ("actor_info",)
     ACTOR_INFO_FIELD_NUMBER: _ClassVar[int]
     actor_info: ActorInfo
-    def __init__(self, actor_info: _Optional[_Union[ActorInfo, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self, actor_info: _Optional[_Union[ActorInfo, _Mapping]] = ...
+    ) -> None: ...
 
 class ActorLookup(_message.Message):
     __slots__ = ("actor_info",)
     ACTOR_INFO_FIELD_NUMBER: _ClassVar[int]
     actor_info: ActorInfo
-    def __init__(self, actor_info: _Optional[_Union[ActorInfo, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self, actor_info: _Optional[_Union[ActorInfo, _Mapping]] = ...
+    ) -> None: ...
 
 class ActorInfoCollection(_message.Message):
     __slots__ = ("info_coll",)
     INFO_COLL_FIELD_NUMBER: _ClassVar[int]
     info_coll: _containers.RepeatedCompositeFieldContainer[ActorInfo]
-    def __init__(self, info_coll: _Optional[_Iterable[_Union[ActorInfo, _Mapping]]] = ...) -> None: ...
+    def __init__(
+        self, info_coll: _Optional[_Iterable[_Union[ActorInfo, _Mapping]]] = ...
+    ) -> None: ...
 
 class ActorLookupResponse(_message.Message):
     __slots__ = ("found", "actor")
@@ -68,7 +81,11 @@ class ActorLookupResponse(_message.Message):
     ACTOR_FIELD_NUMBER: _ClassVar[int]
     found: bool
     actor: ActorInfoCollection
-    def __init__(self, found: bool = ..., actor: _Optional[_Union[ActorInfoCollection, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        found: bool = ...,
+        actor: _Optional[_Union[ActorInfoCollection, _Mapping]] = ...,
+    ) -> None: ...
 
 class Ping(_message.Message):
     __slots__ = ()

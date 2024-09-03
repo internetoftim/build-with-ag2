@@ -39,9 +39,17 @@ def cap_ag_group_demo():
     )
     ensemble = RuntimeFactory.get_runtime("ZMQ")
     cap_groupchat = CAPGroupChat(
-        agents=[user_proxy, coder, pm], messages=[], max_round=12, ensemble=ensemble, chat_initiator=user_proxy.name
+        agents=[user_proxy, coder, pm],
+        messages=[],
+        max_round=12,
+        ensemble=ensemble,
+        chat_initiator=user_proxy.name,
     )
-    manager = CAPGroupChatManager(groupchat=cap_groupchat, llm_config=gpt4_config, network=ensemble)
-    manager.initiate_chat("Find a latest paper about gpt-4 on arxiv and find its potential applications in software.")
+    manager = CAPGroupChatManager(
+        groupchat=cap_groupchat, llm_config=gpt4_config, network=ensemble
+    )
+    manager.initiate_chat(
+        "Find a latest paper about gpt-4 on arxiv and find its potential applications in software."
+    )
     ensemble.disconnect()
     Info("App", "App Exit")

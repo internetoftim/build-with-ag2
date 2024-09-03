@@ -15,7 +15,7 @@ import zmq
 from zmq.utils.monitor import recv_monitor_message
 
 from .Config import router_url, xpub_url, xsub_url
-from .DebugLog import Debug, Error, Info
+from .DebugLog import Debug, Error
 
 
 class ActorSender:
@@ -60,19 +60,34 @@ class ActorSender:
     def send_txt_msg(self, msg):
         Debug("ActorSender", f"[{self._topic}] send_txt_msg: {msg}")
         self._pub_socket.send_multipart(
-            [self._topic.encode("utf8"), "text".encode("utf8"), "no_resp".encode("utf8"), msg.encode("utf8")]
+            [
+                self._topic.encode("utf8"),
+                "text".encode("utf8"),
+                "no_resp".encode("utf8"),
+                msg.encode("utf8"),
+            ]
         )
 
     def send_bin_msg(self, msg_type: str, msg):
         Debug("ActorSender", f"[{self._topic}] send_bin_msg: {msg_type}")
         self._pub_socket.send_multipart(
-            [self._topic.encode("utf8"), msg_type.encode("utf8"), "no_resp".encode("utf8"), msg]
+            [
+                self._topic.encode("utf8"),
+                msg_type.encode("utf8"),
+                "no_resp".encode("utf8"),
+                msg,
+            ]
         )
 
     def send_bin_request_msg(self, msg_type: str, msg, resp_topic: str):
         Debug("ActorSender", f"[{self._topic}] send_bin_request_msg: {msg_type}")
         self._pub_socket.send_multipart(
-            [self._topic.encode("utf8"), msg_type.encode("utf8"), resp_topic.encode("utf8"), msg]
+            [
+                self._topic.encode("utf8"),
+                msg_type.encode("utf8"),
+                resp_topic.encode("utf8"),
+                msg,
+            ]
         )
 
     def close(self):
@@ -101,7 +116,10 @@ class ActorConnector:
             mon_evt = recv_monitor_message(monitor)
             evt.update(mon_evt)
             Debug("ActorConnector", evt)
-            if evt["event"] == zmq.EVENT_MONITOR_STOPPED or evt["event"] == zmq.EVENT_HANDSHAKE_SUCCEEDED:
+            if (
+                evt["event"] == zmq.EVENT_MONITOR_STOPPED
+                or evt["event"] == zmq.EVENT_HANDSHAKE_SUCCEEDED
+            ):
                 Debug("ActorConnector", "Handshake received (Or Monitor stopped)")
                 break
         self._resp_socket.disable_monitor()

@@ -14,7 +14,6 @@ from autogencap.Actor import Actor
 from autogencap.actor_runtime import IRuntime
 from autogencap.ActorConnector import ActorConnector
 from autogencap.DebugLog import Debug, Info, shorten
-from autogencap.runtime_factory import RuntimeFactory
 
 
 class GreeterAgent(Actor):
@@ -92,7 +91,8 @@ class QuantAgent(Actor):
     def __init__(
         self,
         agent_name="Quant",
-        description="This is the quant agent, who knows " "how to connect to a quant and get quant information.",
+        description="This is the quant agent, who knows "
+        "how to connect to a quant and get quant information.",
     ):
         super().__init__(agent_name, description)
 
@@ -186,12 +186,17 @@ class PersonalAssistant(Actor):
         """
         if msg.strip().lower() != "quit" and msg.strip().lower() != "":
             Info(self.actor_name, f"Helping user: {shorten(msg)}")
-            self.fidelity.send_txt_msg(f"I, {self.actor_name}, need your help to buy/sell assets for " + msg)
+            self.fidelity.send_txt_msg(
+                f"I, {self.actor_name}, need your help to buy/sell assets for " + msg
+            )
             self.financial_planner.send_txt_msg(
                 f"I, {self.actor_name}, need your help in creating a financial plan for {msg}'s goals."
             )
             self.quant.send_txt_msg(
-                f"I, {self.actor_name}, need your help with quantitative analysis of the interest rate for " + msg
+                f"I, {self.actor_name}, need your help with quantitative analysis of the interest rate for "
+                + msg
             )
-            self.risk_manager.send_txt_msg(f"I, {self.actor_name}, need your help in analyzing {msg}'s portfolio risk")
+            self.risk_manager.send_txt_msg(
+                f"I, {self.actor_name}, need your help in analyzing {msg}'s portfolio risk"
+            )
         return True

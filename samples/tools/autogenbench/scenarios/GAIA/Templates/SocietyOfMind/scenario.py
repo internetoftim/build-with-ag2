@@ -6,11 +6,8 @@
 # SPDX-License-Identifier: MIT
 # ruff: noqa: E722
 import copy
-import json
 import os
-import sys
 import traceback
-from datetime import datetime
 
 import testbed_utils
 
@@ -18,7 +15,7 @@ import autogen
 from autogen.agentchat.contrib.group_chat_moderator import GroupChatModerator
 from autogen.agentchat.contrib.society_of_mind_agent import SocietyOfMindAgent
 from autogen.agentchat.contrib.web_surfer import WebSurferAgent
-from autogen.token_count_utils import count_token, get_max_token_limit
+from autogen.token_count_utils import count_token
 
 testbed_utils.init()
 ##############################
@@ -39,7 +36,9 @@ summarizer_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={"model": ["gpt-3.5-turbo-16k"]},
 )
-summarizer_llm_config = testbed_utils.default_llm_config(summarizer_config_list, timeout=180)
+summarizer_llm_config = testbed_utils.default_llm_config(
+    summarizer_config_list, timeout=180
+)
 summarizer_llm_config["temperature"] = 0.1
 
 final_config_list = autogen.config_list_from_json(
@@ -105,7 +104,9 @@ If you are asked for a comma separated list, apply the above rules depending of 
     response = client.create(context=None, messages=messages)
     extracted_response = client.extract_text_or_completion_object(response)[0]
     if not isinstance(extracted_response, str):
-        return str(extracted_response.model_dump(mode="dict"))  # Not sure what to do here
+        return str(
+            extracted_response.model_dump(mode="dict")
+        )  # Not sure what to do here
     else:
         return extracted_response
 

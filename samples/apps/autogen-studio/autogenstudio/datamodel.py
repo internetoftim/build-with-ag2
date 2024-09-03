@@ -6,9 +6,9 @@
 # SPDX-License-Identifier: MIT
 from datetime import datetime
 from enum import Enum
-from typing import Any, Callable, Dict, List, Literal, Optional, Union
+from typing import Any, Callable, Dict, List, Optional, Union
 
-from sqlalchemy import ForeignKey, Integer, orm
+from sqlalchemy import ForeignKey, Integer
 from sqlmodel import (
     JSON,
     Column,
@@ -41,7 +41,8 @@ class Message(SQLModel, table=True):
     role: str
     content: str
     session_id: Optional[int] = Field(
-        default=None, sa_column=Column(Integer, ForeignKey("session.id", ondelete="CASCADE"))
+        default=None,
+        sa_column=Column(Integer, ForeignKey("session.id", ondelete="CASCADE")),
     )
     connection_id: Optional[str] = None
     meta: Optional[Dict] = Field(default={}, sa_column=Column(JSON))
@@ -93,7 +94,9 @@ class Skill(SQLModel, table=True):
     description: Optional[str] = None
     secrets: Optional[Dict] = Field(default={}, sa_column=Column(JSON))
     libraries: Optional[Dict] = Field(default={}, sa_column=Column(JSON))
-    agents: List["Agent"] = Relationship(back_populates="skills", link_model=AgentSkillLink)
+    agents: List["Agent"] = Relationship(
+        back_populates="skills", link_model=AgentSkillLink
+    )
 
 
 class LLMConfig(SQLModel, table=False):
@@ -128,10 +131,14 @@ class Model(SQLModel, table=True):
     model: str
     api_key: Optional[str] = None
     base_url: Optional[str] = None
-    api_type: ModelTypes = Field(default=ModelTypes.openai, sa_column=Column(SqlEnum(ModelTypes)))
+    api_type: ModelTypes = Field(
+        default=ModelTypes.openai, sa_column=Column(SqlEnum(ModelTypes))
+    )
     api_version: Optional[str] = None
     description: Optional[str] = None
-    agents: List["Agent"] = Relationship(back_populates="models", link_model=AgentModelLink)
+    agents: List["Agent"] = Relationship(
+        back_populates="models", link_model=AgentModelLink
+    )
 
 
 class CodeExecutionConfigTypes(str, Enum):
@@ -147,11 +154,14 @@ class AgentConfig(SQLModel, table=False):
     system_message: Optional[str] = None
     is_termination_msg: Optional[Union[bool, str, Callable]] = None
     code_execution_config: CodeExecutionConfigTypes = Field(
-        default=CodeExecutionConfigTypes.local, sa_column=Column(SqlEnum(CodeExecutionConfigTypes))
+        default=CodeExecutionConfigTypes.local,
+        sa_column=Column(SqlEnum(CodeExecutionConfigTypes)),
     )
     default_auto_reply: Optional[str] = ""
     description: Optional[str] = None
-    llm_config: Optional[Union[LLMConfig, bool]] = Field(default=False, sa_column=Column(JSON))
+    llm_config: Optional[Union[LLMConfig, bool]] = Field(
+        default=False, sa_column=Column(JSON)
+    )
 
     admin_name: Optional[str] = "Admin"
     messages: Optional[List[Dict]] = Field(default_factory=list)
@@ -184,8 +194,12 @@ class WorkflowAgentLink(SQLModel, table=True):
 
 class AgentLink(SQLModel, table=True):
     __table_args__ = {"sqlite_autoincrement": True}
-    parent_id: Optional[int] = Field(default=None, foreign_key="agent.id", primary_key=True)
-    agent_id: Optional[int] = Field(default=None, foreign_key="agent.id", primary_key=True)
+    parent_id: Optional[int] = Field(
+        default=None, foreign_key="agent.id", primary_key=True
+    )
+    agent_id: Optional[int] = Field(
+        default=None, foreign_key="agent.id", primary_key=True
+    )
 
 
 class Agent(SQLModel, table=True):
@@ -200,11 +214,19 @@ class Agent(SQLModel, table=True):
         sa_column=Column(DateTime(timezone=True), onupdate=func.now()),
     )  # pylint: disable=not-callable
     user_id: Optional[str] = None
-    type: AgentType = Field(default=AgentType.assistant, sa_column=Column(SqlEnum(AgentType)))
+    type: AgentType = Field(
+        default=AgentType.assistant, sa_column=Column(SqlEnum(AgentType))
+    )
     config: AgentConfig = Field(default_factory=AgentConfig, sa_column=Column(JSON))
-    skills: List[Skill] = Relationship(back_populates="agents", link_model=AgentSkillLink)
-    models: List[Model] = Relationship(back_populates="agents", link_model=AgentModelLink)
-    workflows: List["Workflow"] = Relationship(link_model=WorkflowAgentLink, back_populates="agents")
+    skills: List[Skill] = Relationship(
+        back_populates="agents", link_model=AgentSkillLink
+    )
+    models: List[Model] = Relationship(
+        back_populates="agents", link_model=AgentModelLink
+    )
+    workflows: List["Workflow"] = Relationship(
+        link_model=WorkflowAgentLink, back_populates="agents"
+    )
     parents: List["Agent"] = Relationship(
         back_populates="agents",
         link_model=AgentLink,
@@ -248,8 +270,12 @@ class Workflow(SQLModel, table=True):
     user_id: Optional[str] = None
     name: str
     description: str
-    agents: List[Agent] = Relationship(back_populates="workflows", link_model=WorkflowAgentLink)
-    type: WorkFlowType = Field(default=WorkFlowType.twoagents, sa_column=Column(SqlEnum(WorkFlowType)))
+    agents: List[Agent] = Relationship(
+        back_populates="workflows", link_model=WorkflowAgentLink
+    )
+    type: WorkFlowType = Field(
+        default=WorkFlowType.twoagents, sa_column=Column(SqlEnum(WorkFlowType))
+    )
     summary_method: Optional[WorkFlowSummaryMethod] = Field(
         default=WorkFlowSummaryMethod.last,
         sa_column=Column(SqlEnum(WorkFlowSummaryMethod)),

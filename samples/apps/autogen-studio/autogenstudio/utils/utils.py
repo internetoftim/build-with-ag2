@@ -184,7 +184,9 @@ def serialize_file(file_path: str) -> Tuple[str, str]:
     return base64_encoded_content, file_type
 
 
-def get_modified_files(start_timestamp: float, end_timestamp: float, source_dir: str) -> List[Dict[str, str]]:
+def get_modified_files(
+    start_timestamp: float, end_timestamp: float, source_dir: str
+) -> List[Dict[str, str]]:
     """
     Identify files from source_dir that were modified within a specified timestamp range.
     The function excludes files with certain file extensions and names.
@@ -206,7 +208,11 @@ def get_modified_files(start_timestamp: float, end_timestamp: float, source_dir:
     for root, dirs, files in os.walk(source_dir):
         # Update directories and files to exclude those to be ignored
         dirs[:] = [d for d in dirs if d not in ignore_files]
-        files[:] = [f for f in files if f not in ignore_files and os.path.splitext(f)[1] not in ignore_extensions]
+        files[:] = [
+            f
+            for f in files
+            if f not in ignore_files and os.path.splitext(f)[1] not in ignore_extensions
+        ]
 
         for file in files:
             file_path = os.path.join(root, file)
@@ -215,7 +221,9 @@ def get_modified_files(start_timestamp: float, end_timestamp: float, source_dir:
             # Verify if the file was modified within the given timestamp range
             if start_timestamp <= file_mtime <= end_timestamp:
                 file_relative_path = (
-                    "files/user" + file_path.split("files/user", 1)[1] if "files/user" in file_path else ""
+                    "files/user" + file_path.split("files/user", 1)[1]
+                    if "files/user" in file_path
+                    else ""
                 )
                 file_type = get_file_type(file_path)
 
@@ -402,7 +410,11 @@ def sanitize_model(model: Model):
         model = model.model_dump()
     valid_keys = ["model", "base_url", "api_key", "api_type", "api_version"]
     # only add key if value is not None
-    sanitized_model = {k: v for k, v in model.items() if (v is not None and v != "") and k in valid_keys}
+    sanitized_model = {
+        k: v
+        for k, v in model.items()
+        if (v is not None and v != "") and k in valid_keys
+    }
     return sanitized_model
 
 
@@ -413,11 +425,15 @@ def test_model(model: Model):
 
     sanitized_model = sanitize_model(model)
     client = OpenAIWrapper(config_list=[sanitized_model])
-    response = client.create(messages=[{"role": "user", "content": "2+2="}], cache_seed=None)
+    response = client.create(
+        messages=[{"role": "user", "content": "2+2="}], cache_seed=None
+    )
     return response.choices[0].message.content
 
 
-def load_code_execution_config(code_execution_type: CodeExecutionConfigTypes, work_dir: str):
+def load_code_execution_config(
+    code_execution_type: CodeExecutionConfigTypes, work_dir: str
+):
     """
     Load the code execution configuration based on the code execution type.
 
@@ -443,7 +459,9 @@ def load_code_execution_config(code_execution_type: CodeExecutionConfigTypes, wo
     return code_execution_config
 
 
-def summarize_chat_history(task: str, messages: List[Dict[str, str]], client: ModelClient):
+def summarize_chat_history(
+    task: str, messages: List[Dict[str, str]], client: ModelClient
+):
     """
     Summarize the chat history using the model endpoint and returning the response.
     """

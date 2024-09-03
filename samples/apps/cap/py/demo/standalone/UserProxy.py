@@ -6,13 +6,12 @@
 # SPDX-License-Identifier: MIT
 import time
 
-import _paths
 from autogencap.ag_adapter.CAP2AG import CAP2AG
 from autogencap.Config import IGNORED_LOG_CONTEXTS
 from autogencap.DebugLog import Info
 from autogencap.runtime_factory import RuntimeFactory
 
-from autogen import UserProxyAgent, config_list_from_json
+from autogen import UserProxyAgent
 
 
 # Starts the Broker and the Assistant. The UserProxy is started separately.
@@ -30,7 +29,12 @@ class StandaloneUserProxy:
         )
         # Composable Agent Network adapter
         ensemble = RuntimeFactory.get_runtime("ZMQ")
-        user_proxy_adptr = CAP2AG(ag_agent=user_proxy, the_other_name="assistant", init_chat=True, self_recursive=True)
+        user_proxy_adptr = CAP2AG(
+            ag_agent=user_proxy,
+            the_other_name="assistant",
+            init_chat=True,
+            self_recursive=True,
+        )
         ensemble.register(user_proxy_adptr)
         ensemble.connect()
 

@@ -6,7 +6,13 @@
 # SPDX-License-Identifier: MIT
 import time
 
-from AppAgents import FidelityAgent, FinancialPlannerAgent, PersonalAssistant, QuantAgent, RiskManager
+from AppAgents import (
+    FidelityAgent,
+    FinancialPlannerAgent,
+    PersonalAssistant,
+    QuantAgent,
+    RiskManager,
+)
 from autogencap.runtime_factory import RuntimeFactory
 from termcolor import colored
 

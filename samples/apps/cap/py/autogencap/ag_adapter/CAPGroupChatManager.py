@@ -31,7 +31,9 @@ class CAPGroupChatManager:
 
     def initiate_chat(self, txt_msg: str) -> None:
         self._ensemble.connect()
-        user_proxy_conn: ActorConnector = self._ensemble.find_by_name(self._cap_group_chat.chat_initiator)
+        user_proxy_conn: ActorConnector = self._ensemble.find_by_name(
+            self._cap_group_chat.chat_initiator
+        )
         user_proxy_conn.send_txt_msg(txt_msg)
         self._wait_for_user_exit()
 

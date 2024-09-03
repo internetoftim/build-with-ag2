@@ -10,7 +10,13 @@ from typing import Dict, Optional, Union
 from autogen import Agent
 
 from ..ActorConnector import ActorConnector
-from ..proto.Autogen_pb2 import GenReplyReq, GenReplyResp, PrepChat, ReceiveReq, Terminate
+from ..proto.Autogen_pb2 import (
+    GenReplyReq,
+    GenReplyResp,
+    PrepChat,
+    ReceiveReq,
+    Terminate,
+)
 
 
 class AutoGenConnector:
@@ -44,7 +50,9 @@ class AutoGenConnector:
         # Setting retry to -1 to keep trying until a response is received
         # This normal AutoGen behavior but does not handle the case when an AutoGen agent
         # is not running. In that case, the connector will keep trying indefinitely.
-        _, _, resp = self._can_channel.send_recv_msg(type(msg).__name__, serialized_msg, num_attempts=-1)
+        _, _, resp = self._can_channel.send_recv_msg(
+            type(msg).__name__, serialized_msg, num_attempts=-1
+        )
         gen_reply_resp = GenReplyResp()
         gen_reply_resp.ParseFromString(resp)
         return gen_reply_resp.data
@@ -81,7 +89,9 @@ class AutoGenConnector:
         msg.sender = sender.name
         self._send_msg(msg)
 
-    def send_prep_chat(self, recipient: "Agent", clear_history: bool, prepare_recipient: bool = True) -> None:
+    def send_prep_chat(
+        self, recipient: "Agent", clear_history: bool, prepare_recipient: bool = True
+    ) -> None:
         """
         Send a PrepChat message to CAP.
 

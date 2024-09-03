@@ -23,7 +23,9 @@ handler = logging.handlers.RotatingFileHandler(
     backupCount=5,  # Rotate through 5 files
 )
 dt_fmt = "%Y-%m-%d %H:%M:%S"
-formatter = logging.Formatter("[{asctime}] [{levelname:<8}] {name}: {message}", dt_fmt, style="{")
+formatter = logging.Formatter(
+    "[{asctime}] [{levelname:<8}] {name}: {message}", dt_fmt, style="{"
+)
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
@@ -44,7 +46,9 @@ bot = commands.Bot(command_prefix="/", intents=intents)
 
 @bot.event
 async def on_message(message):
-    logger.info({"message": message.content, "author": message.author, "id": message.id})
+    logger.info(
+        {"message": message.content, "author": message.author, "id": message.id}
+    )
     await bot.process_commands(message)
 
 
@@ -86,7 +90,9 @@ async def heyanny(ctx, task: str = None):
         response = await task_map[task](ctx)
         await ctx.send(response)
     else:
-        response = "Invalid command! Please type /heyanny help for the list of commands."
+        response = (
+            "Invalid command! Please type /heyanny help for the list of commands."
+        )
         await ctx.send(response)
 
 

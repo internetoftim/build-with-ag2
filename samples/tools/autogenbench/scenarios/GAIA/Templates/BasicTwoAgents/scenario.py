@@ -4,8 +4,6 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-import json
-import os
 from datetime import datetime
 
 import testbed_utils
@@ -44,13 +42,15 @@ config_list = autogen.config_list_from_json("OAI_CONFIG_LIST")
 assistant = autogen.AssistantAgent(
     "assistant",
     system_message=GAIA_SYSTEM_MESSAGE,
-    is_termination_msg=lambda x: x.get("content", "").rstrip().find("FINAL ANSWER") >= 0,
+    is_termination_msg=lambda x: x.get("content", "").rstrip().find("FINAL ANSWER")
+    >= 0,
     llm_config=testbed_utils.default_llm_config(config_list, timeout=180),
 )
 user_proxy = autogen.UserProxyAgent(
     "user_proxy",
     human_input_mode="NEVER",
-    is_termination_msg=lambda x: x.get("content", "").rstrip().find("FINAL ANSWER") >= 0,
+    is_termination_msg=lambda x: x.get("content", "").rstrip().find("FINAL ANSWER")
+    >= 0,
     code_execution_config={
         "work_dir": "coding",
         "use_docker": False,

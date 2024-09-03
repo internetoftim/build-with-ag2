@@ -4,7 +4,6 @@
 #
 # Portions derived from  https://github.com/microsoft/autogen are under the MIT License.
 # SPDX-License-Identifier: MIT
-import time
 from typing import Callable, Dict, List, Optional, Union
 
 from autogen import Agent, ConversableAgent
@@ -24,7 +23,9 @@ class AG2CAP(ConversableAgent):
         agent_name: str,
         agent_description: Optional[str] = None,
     ):
-        super().__init__(name=agent_name, description=agent_description, llm_config=False)
+        super().__init__(
+            name=agent_name, description=agent_description, llm_config=False
+        )
         self._agent_connector: AutoGenConnector = None
         self._ensemble: IRuntime = ensemble
         self._recv_called = False
@@ -44,8 +45,12 @@ class AG2CAP(ConversableAgent):
 
     def _check_connection(self):
         if self._agent_connector is None:
-            self._agent_connector = AutoGenConnector(self._ensemble.find_by_name(self.name))
-            self._terminate_connector = AutoGenConnector(self._ensemble.find_termination())
+            self._agent_connector = AutoGenConnector(
+                self._ensemble.find_by_name(self.name)
+            )
+            self._terminate_connector = AutoGenConnector(
+                self._ensemble.find_termination()
+            )
 
     def receive(
         self,
@@ -81,7 +86,9 @@ class AG2CAP(ConversableAgent):
         reply_at_receive: bool = True,
     ) -> None:
         self._check_connection()
-        self._agent_connector.send_prep_chat(recipient, clear_history, prepare_recipient)
+        self._agent_connector.send_prep_chat(
+            recipient, clear_history, prepare_recipient
+        )
 
     def send_terminate(self, recipient: ConversableAgent) -> None:
         self._check_connection()
