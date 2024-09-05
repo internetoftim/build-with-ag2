@@ -7,8 +7,6 @@
 
 AutoGen Studio is an AutoGen-powered AI app (user interface) to help you rapidly prototype AI agents, enhance them with skills, compose them into workflows and interact with them to accomplish tasks. It is built on top of the [AutoGen](https://autogen-ai.github.io/autogen) framework, which is a toolkit for building AI agents.
 
-Code for AutoGen Studio is on GitHub at [microsoft/autogen](https://github.com/microsoft/autogen/tree/main/samples/apps/autogen-studio)
-
 > **Note**: AutoGen Studio is meant to help you rapidly prototype multi-agent workflows and demonstrate an example of end user interfaces built with AutoGen. It is not meant to be a production-ready app.
 
 > [!WARNING]
@@ -91,10 +89,11 @@ Now that you have AutoGen Studio installed and running, you are ready to explore
 
 We welcome contributions to AutoGen Studio. We recommend the following general steps to contribute to the project:
 
-- Review the overall AutoGen project [contribution guide](https://github.com/microsoft/autogen?tab=readme-ov-file#contributing)
+- Review the overall AutoGen project [contribution guide](https://github.com/autogen-ai/autogen?tab=readme-ov-file#contributing)
+<!--
 - Please review the AutoGen Studio [roadmap](https://github.com/microsoft/autogen/issues/737) to get a sense of the current priorities for the project. Help is appreciated especially with Studio issues tagged with `help-wanted`
+-->
 - Please initiate a discussion on the roadmap issue or a new issue to discuss your proposed contribution.
-- Please review the autogenstudio dev branch here [dev branch](https://github.com/microsoft/autogen/tree/autogenstudio) and use as a base for your contribution. This way, your contribution will be aligned with the latest changes in the AutoGen Studio project.
 - Submit a pull request with your contribution!
 - If you are modifying AutoGen Studio, it has its own devcontainer. See instructions in `.devcontainer/README.md` to use it
 - Please use the tag `studio` for any issues, questions, and PRs related to Studio
