@@ -24,8 +24,8 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/microsoft/autogen"
-"Bug Tracker" = "https://github.com/microsoft/autogen/issues"
+"Homepage" = "https://github.com/autogen-ai/autogen"
+"Bug Tracker" = "https://github.com/autogen-ai/autogen/issues"
 
 [tool.hatch.build.targets.sdist]
 packages = ["autogencap"]

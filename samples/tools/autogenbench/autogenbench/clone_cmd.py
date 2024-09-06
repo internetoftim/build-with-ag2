@@ -18,7 +18,7 @@ SCRIPT_NAME = os.path.basename(SCRIPT_PATH)
 SCRIPT_DIR = os.path.dirname(SCRIPT_PATH)
 
 # Where are the manifests located?
-DEFAULT_REPO = "https://raw.githubusercontent.com/microsoft/autogen/"
+DEFAULT_REPO = "https://raw.githubusercontent.com/autogen-ai/build-with-autogen/"
 DEFAULT_BRANCH = "main"
 DEFAULT_PATH = "/samples/tools/autogenbench/scenarios/"
 # Full url is specified by DEFAULT_REPO + DEFAULT_BRANCH + DEFAULT_PATH
@@ -100,9 +100,7 @@ def clone_scenario(scenario, base_url):
     print(f"\n\nSuccessfully cloned '{scenario}'")
     for readme in ["README.md", "README.txt", "README"]:
         if os.path.isfile(os.path.join(local_folder, readme)):
-            print(
-                f"Please read '{os.path.join(local_folder, readme)}' for more information on running this benchmark."
-            )
+            print(f"Please read '{os.path.join(local_folder, readme)}' for more information on running this benchmark.")
             break
 
 

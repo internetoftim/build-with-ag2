@@ -20,10 +20,10 @@ AutoGenBench also requires Docker (Desktop or Engine). **It will not run in GitH
 pip install autogenbench
 ```
 
-If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/microsoft/autogen) repository, then install `autogenbench` via:
+If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/autogen-ai/build-with-autogen) repository, then install `autogenbench` via:
 
 ```
-pip install -e autogen/samples/tools/autogenbench
+pip install -e build-with-autogen/samples/tools/autogenbench
 ```
 
 After installation, you must configure your API keys. As with other AutoGen applications, AutoGenBench will look for the OpenAI keys in the OAI_CONFIG_LIST file in the current working directory, or the OAI_CONFIG_LIST environment variable. This behavior can be overridden using a command-line parameter described later.
