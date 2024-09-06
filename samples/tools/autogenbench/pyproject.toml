@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pyautogen",
+    "autogen",
     "docker",
     "huggingface_hub",
     "tabulate",
