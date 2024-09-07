@@ -20,10 +20,10 @@ AutoGenBench also requires Docker (Desktop or Engine). **It will not run in GitH
 pip install autogenbench
 ```
 
-If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/microsoft/autogen) repository, then install `autogenbench` via:
+If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/autogen-ai/build-with-autogen) repository, then install `autogenbench` via:
 
 ```
-pip install -e autogen/samples/tools/autogenbench
+pip install -e build-with-autogen/samples/tools/autogenbench
 ```
 
 After installation, you must configure your API keys. As with other AutoGen applications, AutoGenBench will look for the OpenAI keys in the OAI_CONFIG_LIST file in the current working directory, or the OAI_CONFIG_LIST environment variable. This behavior can be overridden using a command-line parameter described later.
@@ -162,7 +162,7 @@ This folder holds the results for the ``two_agent_stocks`` task of the ``default
 
 Within each folder, you will find the following files:
 
-- *timestamp.txt*: records the date and time of the run, along with the version of the pyautogen library installed
+- *timestamp.txt*: records the date and time of the run, along with the version of the autogen library installed
 - *console_log.txt*: all console output produced by Docker when running AutoGen. Read this like you would a regular console.
 - *[agent]_messages.json*: for each Agent, a log of their messages dictionaries
 - *./coding*: A directory containing all code written by AutoGen, and all artifacts produced by that code.

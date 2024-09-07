@@ -1,4 +1,4 @@
 pyzmq
 protobuf
 termcolor
-pyautogen
+autogen

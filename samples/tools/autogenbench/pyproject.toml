@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pyautogen",
+    "autogen",
     "docker",
     "huggingface_hub",
     "tabulate",
@@ -42,8 +42,8 @@ exclude = ["*.tests*"]
 "autogenbench" = ["*.*"]
 
 [project.urls]
-"Homepage" = "https://github.com/microsoft/autogen"
-"Bug Tracker" = "https://github.com/microsoft/autogen/issues"
+"Homepage" = "https://github.com/autogen-ai/autogen"
+"Bug Tracker" = "https://github.com/autogen-ai/autogen/issues"
 
 [project.scripts]
 autogenbench = "autogenbench.cli:main"
