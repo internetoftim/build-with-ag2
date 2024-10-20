@@ -24,7 +24,7 @@ const Footer = () => {
           target={"_blank"}
           rel={"noopener noreferrer"}
           className="underlipne inline-block border-accent border-b hover:text-accent"
-          href="https://autogen-ai.github.io/autogen/"
+          href="https://autogenhub.github.io/autogen/"
         >
           {" "}
           Team.

@@ -20,7 +20,7 @@ AutoGenBench also requires Docker (Desktop or Engine). **It will not run in GitH
 pip install autogenbench
 ```
 
-If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/autogen-ai/build-with-autogen) repository, then install `autogenbench` via:
+If you would prefer working from source code (e.g., for development, or to utilize an alternate branch), simply clone the [AutoGen](https://github.com/autogenhub/build-with-autogen) repository, then install `autogenbench` via:
 
 ```
 pip install -e build-with-autogen/samples/tools/autogenbench

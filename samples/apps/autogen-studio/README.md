@@ -5,12 +5,12 @@
 
 ![ARA](./docs/ara_stockprices.png)
 
-AutoGen Studio is an AutoGen-powered AI app (user interface) to help you rapidly prototype AI agents, enhance them with skills, compose them into workflows and interact with them to accomplish tasks. It is built on top of the [AutoGen](https://autogen-ai.github.io/autogen) framework, which is a toolkit for building AI agents.
+AutoGen Studio is an AutoGen-powered AI app (user interface) to help you rapidly prototype AI agents, enhance them with skills, compose them into workflows and interact with them to accomplish tasks. It is built on top of the [AutoGen](https://autogenhub.github.io/autogen) framework, which is a toolkit for building AI agents.
 
 > **Note**: AutoGen Studio is meant to help you rapidly prototype multi-agent workflows and demonstrate an example of end user interfaces built with AutoGen. It is not meant to be a production-ready app.
 
 > [!WARNING]
-> AutoGen Studio is currently under active development and we are iterating quickly. Kindly consider that we may introduce breaking changes in the releases during the upcoming weeks, and also the `README` might be outdated. Please see the AutoGen Studio [docs](https://autogen-ai.github.io/autogen/docs/autogen-studio/getting-started) page for the most up-to-date information.
+> AutoGen Studio is currently under active development and we are iterating quickly. Kindly consider that we may introduce breaking changes in the releases during the upcoming weeks, and also the `README` might be outdated. Please see the AutoGen Studio [docs](https://autogenhub.github.io/autogen/docs/autogen-studio/getting-started) page for the most up-to-date information.
 
 **Updates**
 
@@ -89,7 +89,7 @@ Now that you have AutoGen Studio installed and running, you are ready to explore
 
 We welcome contributions to AutoGen Studio. We recommend the following general steps to contribute to the project:
 
-- Review the overall AutoGen project [contribution guide](https://github.com/autogen-ai/autogen?tab=readme-ov-file#contributing)
+- Review the overall AutoGen project [contribution guide](https://github.com/autogenhub/autogen?tab=readme-ov-file#contributing)
 <!--
 - Please review the AutoGen Studio [roadmap](https://github.com/microsoft/autogen/issues/737) to get a sense of the current priorities for the project. Help is appreciated especially with Studio issues tagged with `help-wanted`
 -->
@@ -100,8 +100,8 @@ We welcome contributions to AutoGen Studio. We recommend the following general s
 
 ## FAQ
 
-Please refer to the AutoGen Studio [FAQs](https://autogen-ai.github.io/autogen/docs/autogen-studio/faqs) page for more information.
+Please refer to the AutoGen Studio [FAQs](https://autogenhub.github.io/autogen/docs/autogen-studio/faqs) page for more information.
 
 ## Acknowledgements
 
-AutoGen Studio is Based on the [AutoGen](https://autogen-ai.github.io/autogen) project. It was adapted from a research prototype built in October 2023 (original credits: Gagan Bansal, Adam Fourney, Victor Dibia, Piali Choudhury, Saleema Amershi, Ahmed Awadallah, Chi Wang).
+AutoGen Studio is Based on the [AutoGen](https://autogenhub.github.io/autogen) project. It was adapted from a research prototype built in October 2023 (original credits: Gagan Bansal, Adam Fourney, Victor Dibia, Piali Choudhury, Saleema Amershi, Ahmed Awadallah, Chi Wang).

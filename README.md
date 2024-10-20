@@ -4,7 +4,7 @@ Sample code and application showcases to get you going with AutoGen
 ## :notebook_with_decorative_cover: Cookbook
 Looking for a way to create group chats, sequential chats, nested chats, RAG agents, etc., check out these cookbooks that will get you started.
 
-[Cookbooks](https://autogen-ai.github.io/autogen/docs/notebooks)
+[Cookbooks](https://autogenhub.github.io/autogen/docs/notebooks)
 
 ## :stars: Samples
 Need some inspiration or interested in what AutoGen can do? Check out applications that use AutoGen.
@@ -23,7 +23,7 @@ Need some inspiration or interested in what AutoGen can do? Check out applicatio
 ## :city_sunset: Gallery
 Demonstrations, code, and videos of applications built with AutoGen.
 
-[Gallery](https://autogen-ai.github.io/autogen/docs/Gallery)
+[Gallery](https://autogenhub.github.io/autogen/docs/Gallery)
 
 ## Contributing
 Created something with AutoGen? We'd 💙 to share it with the community, please create a PR here or contact us at auto-gen@outlook.com.
