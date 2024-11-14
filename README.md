@@ -1,4 +1,4 @@
-# Build with AG2 (previously AutoGen)
+# Build with AG2 (formally AutoGen)
 Sample code and application showcases to get you going with AG2
 
 ## :notebook_with_decorative_cover: Cookbook
