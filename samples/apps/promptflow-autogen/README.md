@@ -74,12 +74,12 @@ pf flow test --flow <flow_folder> --interactive
 
 ## Autogen State Flow
 
-[Autogen State Flow](./autogen_stateflow.py) contains stateflow example shared at [StateFlow](https://autogenhub.github.io/autogen/blog/2024/02/29/StateFlow/) with Promptflow. All the interim messages are sent to Redis channel. You can use these to stream to frontend or take further actions. Output of Prompflow is `summary` message from group chat.
+[Autogen State Flow](./autogen_stateflow.py) contains stateflow example shared at [StateFlow](https://ag2ai.github.io/ag2/blog/2024/02/29/StateFlow/) with Promptflow. All the interim messages are sent to Redis channel. You can use these to stream to frontend or take further actions. Output of Prompflow is `summary` message from group chat.
 
 ## Agent Nested Chat
 
-[Autogen Nested Chat](./agentchat_nestedchat.py) contains Scenario 1 of nested chat example shared at [Nested Chats](https://autogenhub.github.io/autogen/docs/notebooks/agentchat_nestedchat) with Promptflow. All the interim messages are sent to Redis channel. You can use these to stream to frontend or take further actions. Output of Prompflow is `summary` message from group chat.
+[Autogen Nested Chat](./agentchat_nestedchat.py) contains Scenario 1 of nested chat example shared at [Nested Chats](https://ag2ai.github.io/ag2/docs/notebooks/agentchat_nestedchat) with Promptflow. All the interim messages are sent to Redis channel. You can use these to stream to frontend or take further actions. Output of Prompflow is `summary` message from group chat.
 
 ## Redis for Data cache and Interim Messages
 
-Autogen supports Redis for [data caching](https://autogenhub.github.io/autogen/docs/reference/cache/redis_cache/) and since redis supports a pub-subs model as well, this Promptflow example is configured for all agent callbacks to send messages to a Redis channel. This is optional feature but is essential for long running workflows and provides access to interim messages for your frontend. NOTE: Currently Promtpflow only support [SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) for streaming data and does not support websockets. NOTE: In multi user chat bot environment please make necessary changes to send messages to corresponding channel.
+Autogen supports Redis for [data caching](https://ag2ai.github.io/ag2/docs/reference/cache/redis_cache/) and since redis supports a pub-subs model as well, this Promptflow example is configured for all agent callbacks to send messages to a Redis channel. This is optional feature but is essential for long running workflows and provides access to interim messages for your frontend. NOTE: Currently Promtpflow only support [SSE](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) for streaming data and does not support websockets. NOTE: In multi user chat bot environment please make necessary changes to send messages to corresponding channel.

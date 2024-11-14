@@ -10,7 +10,7 @@ AutoGen Studio is an AutoGen-powered AI app (user interface) to help you rapidly
 > **Note**: AutoGen Studio is meant to help you rapidly prototype multi-agent workflows and demonstrate an example of end user interfaces built with AutoGen. It is not meant to be a production-ready app.
 
 > [!WARNING]
-> AutoGen Studio is currently under active development and we are iterating quickly. Kindly consider that we may introduce breaking changes in the releases during the upcoming weeks, and also the `README` might be outdated. Please see the AutoGen Studio [docs](https://autogenhub.github.io/autogen/docs/autogen-studio/getting-started) page for the most up-to-date information.
+> AutoGen Studio is currently under active development and we are iterating quickly. Kindly consider that we may introduce breaking changes in the releases during the upcoming weeks, and also the `README` might be outdated. Please see the AutoGen Studio [docs](https://ag2ai.github.io/ag2/docs/autogen-studio/getting-started) page for the most up-to-date information.
 
 **Updates**
 
@@ -100,7 +100,7 @@ We welcome contributions to AutoGen Studio. We recommend the following general s
 
 ## FAQ
 
-Please refer to the AutoGen Studio [FAQs](https://autogenhub.github.io/autogen/docs/autogen-studio/faqs) page for more information.
+Please refer to the AutoGen Studio [FAQs](https://ag2ai.github.io/ag2/docs/autogen-studio/faqs) page for more information.
 
 ## Acknowledgements
 
