@@ -1,0 +1,34 @@
+{
+    "name": "Kevin Doe",
+    "preferred_name": "Kev",
+    "preferred_language": "English",
+    "preferred_tone": "humorous",
+    "email": "kevdoe@gmail.com",
+    "phone_number": "xxx-xxx-8453",
+    "orders": {
+        "TR13845" : {
+            "order_number": "TR13845",
+            "status": "shipped", 
+            "return_status": "N/A",
+            "product": "matress",
+            "link": "https://www.example.com/TR13845",
+            "shipping_address": "123 Main St, State College, PA 12345"
+        },
+        "TR14234": {
+            "order_number": "TR14234",
+            "status": "delivered",
+            "return_status": "N/A",
+            "product": "pillow",
+            "link": "https://www.example.com/TR14234",
+            "shipping_address": "123 Main St, State College, PA 12345"
+        },
+        "TR29384": {
+            "order_number": "TR29384",
+            "status": "delivered",
+            "return_status": "N/A",
+            "product": "bed frame",
+            "link": "https://www.example.com/TR29384",
+            "shipping_address": "123 Main St, State College, PA 12345"
+        }
+    }
+}
