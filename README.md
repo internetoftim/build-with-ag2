@@ -39,5 +39,19 @@ A curated collection of awesome agentic applications built with AG2.
 ## 🤝 Contributing to AG2 Open Source
 Created something with AG2?  Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
 
+### Code Style and Linting
+This project uses pre-commit hooks to maintain code quality. Before contributing:
+
+1. Install pre-commit:
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+2. The hooks will run automatically on commit, or you can run them manually:
+```bash
+pre-commit run --all-files
+```
+
 ## 🌟 **Stay Updated**
 Star this repository and [AG2](https://github.com/ag2ai/ag2) to receive notifications about the newest and coolest agentic applications!
