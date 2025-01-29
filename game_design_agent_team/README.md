@@ -38,10 +38,10 @@ Before start, go to [OpenAI's platform](https://platform.openai.com/) to get an 
 
 Run the Streamlit app to start a web interface for the AI Game Design Agent Team.
 ```bash
-streamlit run ai_game_design_agent_team/game_design_agent_team.py
+streamlit run main.py
 ```
 
-In the web interface to the left, put your OpenAI API key in the sidebar. 
+In the web interface to the left, put your OpenAI API key in the sidebar.
 
 Now you can interact with it through your browser, and click `Generate Game Concept` to receive a comprehensive design output from the specialized agents.
 
