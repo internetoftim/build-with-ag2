@@ -8,7 +8,7 @@
     "orders": {
         "TR13845" : {
             "order_number": "TR13845",
-            "status": "shipped", 
+            "status": "shipped",
             "return_status": "N/A",
             "product": "matress",
             "link": "https://www.example.com/TR13845",

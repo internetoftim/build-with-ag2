@@ -1,15 +1,19 @@
-
-
 import autogen
-import json 
-from autogen import ON_CONDITION, AfterWorkOption, SwarmAgent, initiate_swarm_chat, SwarmResult, UserProxyAgent
-from typing import Union
+from autogen import (
+    ON_CONDITION,
+    AfterWorkOption,
+    SwarmAgent,
+    initiate_swarm_chat,
+    UserProxyAgent,
+)
 from prompts import *
 from functions import *
 
-# 1. Load the configuration file 
+# 1. Load the configuration file
 config_path = None
-config_list = autogen.config_list_from_json(config_path, filter_dict={"model": ["gpt-4o"]})
+config_list = autogen.config_list_from_json(
+    config_path, filter_dict={"model": ["gpt-4o"]}
+)
 
 # # 2. Load the keys directly
 # config_list = [
@@ -18,7 +22,6 @@ config_list = autogen.config_list_from_json(config_path, filter_dict={"model": [
 #         "api_key": open("...", "r").read(),
 #     }
 # ]
-
 
 
 llm_config = {
@@ -83,10 +86,22 @@ return_agent = SwarmAgent(
 )
 
 to_login = ON_CONDITION(target=login_agent, condition="Transfer to the login agent")
-order_triage_agent.register_hand_off([to_login, ON_CONDITION(target=tracking_agent, condition="Transfer to the tracking agent")])
+order_triage_agent.register_hand_off(
+    [
+        to_login,
+        ON_CONDITION(target=tracking_agent, condition="Transfer to the tracking agent"),
+    ]
+)
 tracking_agent.register_hand_off(to_login)
-order_management_agent.register_hand_off(ON_CONDITION(target=return_agent, condition="Transfer to the return agent"))
-return_agent.register_hand_off(ON_CONDITION(target=order_management_agent, condition="Transfer to the order management agent"))
+order_management_agent.register_hand_off(
+    ON_CONDITION(target=return_agent, condition="Transfer to the return agent")
+)
+return_agent.register_hand_off(
+    ON_CONDITION(
+        target=order_management_agent,
+        condition="Transfer to the order management agent",
+    )
+)
 
 user = UserProxyAgent(
     name="Customer",
@@ -96,12 +111,16 @@ user = UserProxyAgent(
 
 chat_history = initiate_swarm_chat(
     initial_agent=order_triage_agent,
-    agents=[order_triage_agent, tracking_agent, login_agent, order_management_agent, return_agent],
+    agents=[
+        order_triage_agent,
+        tracking_agent,
+        login_agent,
+        order_management_agent,
+        return_agent,
+    ],
     context_variables=context_variables,
     messages="Hello",
-    user_agent = user,
-    max_rounds = 40,
-    after_work=AfterWorkOption.REVERT_TO_USER
+    user_agent=user,
+    max_rounds=40,
+    after_work=AfterWorkOption.REVERT_TO_USER,
 )
-
-

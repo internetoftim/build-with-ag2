@@ -1,4 +1,3 @@
-
 order_triage_prompt = """You will manage a group of agents to provide customer support for an E-commerce platform.
 
 Please determine whether to trasfer to the tracking agent or the login agent.
