@@ -6,8 +6,22 @@ from autogen import (
     initiate_swarm_chat,
     UserProxyAgent,
 )
-from prompts import *
-from functions import *
+from prompts import (
+    order_triage_prompt,
+    tracking_order_prompt,
+    login_in_management_prompt,
+    order_management_prompt,
+    return_prompt,
+)
+from functions import (
+    verify_order_number,
+    verify_user_information,
+    login_account,
+    get_order_history,
+    check_order_status,
+    check_return_eligibility,
+    initiate_return_process,
+)
 
 # 1. Load the configuration file
 config_path = None
