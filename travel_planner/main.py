@@ -32,13 +32,12 @@ from google_map_platforms import Itinerary, update_itinerary_with_travel_times
 # ---------------------------------------------------------------------
 # 1. Initialize the LLM Configuration
 
-# Load the configuration file
-# TODO: configure the path to the configuration file
-config_path = None
+# Option 1: Load the configuration file
+config_path = "OAI_CONFIG_LIST"
 config_list = autogen.config_list_from_json(
     config_path, filter_dict={"model": ["gpt-4o"]}
 )
-# Load the keys directly
+# Option 2: Load the keys directly
 # config_list = [
 #     {
 #         "model": "gpt-4o",
@@ -46,15 +45,13 @@ config_list = autogen.config_list_from_json(
 #     }
 # ]
 
-# TODO: configure the Google API key
-os.environ["GOOGLE_MAP_API_KEY"] = open("<google_api_key_path>", "r").read()
-
-
 llm_config = {"config_list": config_list, "timeout": 120}
 os.environ["OPENAI_API_KEY"] = config_list[0][
     "api_key"
 ]  # Put the OpenAI API key into the environment
 
+# TODO: configure the Google API key
+# os.environ["GOOGLE_MAP_API_KEY"] = open("<google_api_key_path>", "r").read()
 
 # ---------------------------------------------------------------------
 # ---------------------------------------------------------------------
@@ -82,9 +79,10 @@ query_engine = FalkorGraphQueryEngine(
 )
 
 # Ingest data and initialize the database
-# query_engine.init_db(input_doc=input_documents)
+query_engine.init_db(input_doc=input_documents)
+
 # If you have already ingested and created the database, you can use this connect_db instead of init_db
-query_engine.connect_db()
+# query_engine.connect_db()
 
 
 # ---------------------------------------------------------------------
@@ -178,7 +176,7 @@ route_timing_agent = SwarmAgent(
 )
 
 # Our customer will be a human in the loop
-customer = UserProxyAgent(name="customer")
+customer = UserProxyAgent(name="customer", code_execution_config=False)
 
 planner_agent.register_hand_off(
     hand_to=[

@@ -46,12 +46,11 @@ To use Google's API to calculate travel times, you will need to have enabled the
 Once you have your API key, set your environment variable `GOOGLE_MAP_API_KEY` to the key.
 
 ### 2. Set Configuration and OpenAI API Key
-By default, FalkorDB uses OpenAI LLMs and that requires an OpenAI key in your environment variable `OPENAI_API_KEY`.
 
-You can utilise an OAI_CONFIG_LIST file and extract the OpenAI API key and put it in the environment, as will be shown in the following cell.
+Please modify the `config_list` in the `main.py` file (line 35). Read more about configurations [here](https://docs.ag2.ai/docs/topics/llm_configuration). This configuration will be used to set up ag2 agents.
 
-Alternatively, you can load the environment variable yourself.
-Please modify the `config_list` in the `main.py` as needed. Read more about configurations [here](https://docs.ag2.ai/docs/topics/llm_configuration).
+By default, FalkorDB uses OpenAI LLMs and that requires an OpenAI key in your environment variable `OPENAI_API_KEY`. We will extract the key from the configuration you set (line 49). If you are not using OpenAI in `config_list`, you may comment out the line and read from your environment variable directly.
+
 
 ### 3. Run the code
 ```bash
@@ -59,6 +58,8 @@ python main.py
 ```
 
 You can now interact with the system through the command line to plan a trip to Rome! You can also modify the initial message to plan a trip to another city.
+
+**Note**: after first run of the code, the db will be initialized and you can switch to `connect_db` in line 82 and 85 in `main.py` for faster rerun.
 
 ## Contact
 
