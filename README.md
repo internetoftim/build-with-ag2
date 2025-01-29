@@ -9,6 +9,7 @@ A curated collection of awesome agentic applications built with AG2.
 
 ## 📂 Featured Agentic Apps
 
+- Travel Planner: An trip planning swarm system that create an itinerary together with a customer.
 - E-Commerce Custom Service for Order Management: A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 
 

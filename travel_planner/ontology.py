@@ -1,5 +1,6 @@
 from graphrag_sdk import Attribute, AttributeType, Entity, Ontology, Relation
 
+
 def get_trip_ontology():
     # Attraction + Restaurant + City + Country Ontology
     trip_data_ontology = Ontology()

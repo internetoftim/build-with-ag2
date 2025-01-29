@@ -1,17 +1,10 @@
-
-
-
 import os
 import autogen
 
 # IMPORTS
 import copy
-import json
-import os
 from typing import Any, Dict
 
-import requests
-from pydantic import BaseModel
 
 from autogen import (
     AFTER_WORK,
@@ -24,8 +17,13 @@ from autogen import (
 )
 from autogen.agentchat.contrib.graph_rag.document import Document, DocumentType
 from graphrag_sdk.models.openai import OpenAiGenerativeModel
-from autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine import FalkorGraphQueryEngine
-from autogen.agentchat.contrib.graph_rag.falkor_graph_rag_capability import FalkorGraphRagCapability
+from autogen.agentchat.contrib.graph_rag.falkor_graph_query_engine import (
+    FalkorGraphQueryEngine,
+)
+from autogen.agentchat.contrib.graph_rag.falkor_graph_rag_capability import (
+    FalkorGraphRagCapability,
+)
+
 # local file imports
 from ontology import get_trip_ontology
 from google_map_platforms import Itinerary, update_itinerary_with_travel_times
@@ -53,7 +51,9 @@ os.environ["GOOGLE_MAP_API_KEY"] = open("<google_api_key_path>", "r").read()
 
 
 llm_config = {"config_list": config_list, "timeout": 120}
-os.environ["OPENAI_API_KEY"] = config_list[0]["api_key"] # Put the OpenAI API key into the environment
+os.environ["OPENAI_API_KEY"] = config_list[0][
+    "api_key"
+]  # Put the OpenAI API key into the environment
 
 
 # ---------------------------------------------------------------------
@@ -64,7 +64,10 @@ input_paths = [
     "./trip_planner_data/cities.json",
     "./trip_planner_data/restaurants.json",
 ]
-input_documents = [Document(doctype=DocumentType.TEXT, path_or_url=input_path) for input_path in input_paths]
+input_documents = [
+    Document(doctype=DocumentType.TEXT, path_or_url=input_path)
+    for input_path in input_paths
+]
 
 # Get the ontology
 trip_data_ontology = get_trip_ontology()
@@ -94,17 +97,25 @@ trip_context = {
     "structured_itinerary": None,
 }
 
-def mark_itinerary_as_complete(final_itinerary: str, context_variables: Dict[str, Any]) -> SwarmResult:
+
+def mark_itinerary_as_complete(
+    final_itinerary: str, context_variables: Dict[str, Any]
+) -> SwarmResult:
     """Store and mark our itinerary as accepted by the customer."""
     context_variables["itinerary_confirmed"] = True
     context_variables["itinerary"] = final_itinerary
 
     # This will update the context variables and then transfer to the Structured Output agent
     return SwarmResult(
-        agent="structured_output_agent", context_variables=context_variables, values="Itinerary recorded and confirmed."
+        agent="structured_output_agent",
+        context_variables=context_variables,
+        values="Itinerary recorded and confirmed.",
     )
 
-def create_structured_itinerary(context_variables: Dict[str, Any], structured_itinerary: str) -> SwarmResult:
+
+def create_structured_itinerary(
+    context_variables: Dict[str, Any], structured_itinerary: str
+) -> SwarmResult:
     """Once a structured itinerary is created, store it and pass on to the Route Timing agent."""
     # Ensure the itinerary is confirmed, if not, back to the Planner agent to confirm it with the customer
     if not context_variables["itinerary_confirmed"]:
@@ -117,7 +128,9 @@ def create_structured_itinerary(context_variables: Dict[str, Any], structured_it
 
     # This will update the context variables and then transfer to the Route Timing agent
     return SwarmResult(
-        agent="route_timing_agent", context_variables=context_variables, values="Structured itinerary stored."
+        agent="route_timing_agent",
+        context_variables=context_variables,
+        values="Structured itinerary stored.",
     )
 
 
@@ -174,7 +187,9 @@ planner_agent.register_hand_off(
             "Need information on the restaurants and attractions for a location. DO NOT call more than once at a time.",
         ),  # Get info from FalkorDB GraphRAG
         ON_CONDITION(structured_output_agent, "Itinerary is confirmed by the customer"),
-        AFTER_WORK(AfterWorkOption.REVERT_TO_USER),  # Revert to the customer for more information on their plans
+        AFTER_WORK(
+            AfterWorkOption.REVERT_TO_USER
+        ),  # Revert to the customer for more information on their plans
     ]
 )
 
@@ -186,7 +201,9 @@ structured_output_agent.register_hand_off(hand_to=[AFTER_WORK(route_timing_agent
 
 # Finally, once the route timing agent has finished, we can terminate the swarm
 route_timing_agent.register_hand_off(
-    hand_to=[AFTER_WORK(AfterWorkOption.TERMINATE)]  # Once this agent has finished, the swarm can terminate
+    hand_to=[
+        AFTER_WORK(AfterWorkOption.TERMINATE)
+    ]  # Once this agent has finished, the swarm can terminate
 )
 
 # Start the conversation
@@ -208,7 +225,9 @@ def print_itinerary(itinerary_data):
 
     for line in header.split("\n"):
         print(line.center(width))
-    print(f"Itinerary for {itinerary_data['days'][0]['events'][0]['city']}".center(width))
+    print(
+        f"Itinerary for {itinerary_data['days'][0]['events'][0]['city']}".center(width)
+    )
     print("=" * width)
 
     for day_num, day in enumerate(itinerary_data["days"], 1):

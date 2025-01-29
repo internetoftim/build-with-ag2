@@ -1,7 +1,5 @@
-import copy
 import json
 import os
-from typing import Any, Dict
 from pydantic import BaseModel
 import requests
 from autogen import SwarmResult
@@ -13,8 +11,10 @@ class Event(BaseModel):
     city: str
     description: str
 
+
 class Day(BaseModel):
     events: list[Event]
+
 
 class Itinerary(BaseModel):
     days: list[Day]
@@ -36,7 +36,10 @@ def _fetch_travel_time(origin: str, destination: str) -> dict:
     if response.status_code == 200:
         return response.json()
     else:
-        return {"error": "Failed to retrieve the route information", "status_code": response.status_code}
+        return {
+            "error": "Failed to retrieve the route information",
+            "status_code": response.status_code,
+        }
 
 
 def update_itinerary_with_travel_times(context_variables: dict) -> SwarmResult:
@@ -53,10 +56,14 @@ def update_itinerary_with_travel_times(context_variables: dict) -> SwarmResult:
             values="Structured itinerary not found, please create the structured output, structured_output_agent.",
         )
     elif "timed_itinerary" in context_variables:
-        return SwarmResult(values="Timed itinerary already done, inform the customer that their itinerary is ready!")
+        return SwarmResult(
+            values="Timed itinerary already done, inform the customer that their itinerary is ready!"
+        )
 
     # Process the itinerary, converting it back to an object and working through each event to work out travel time and distance
-    itinerary_object = Itinerary.model_validate(json.loads(context_variables["structured_itinerary"]))
+    itinerary_object = Itinerary.model_validate(
+        json.loads(context_variables["structured_itinerary"])
+    )
     for day in itinerary_object.days:
         events = day.events
         new_events = []
@@ -71,10 +78,14 @@ def update_itinerary_with_travel_times(context_variables: dict) -> SwarmResult:
             if pre_event:
                 origin = ", ".join([pre_event.location, pre_event.city])
                 destination = ", ".join([cur_event.location, cur_event.city])
-                maps_api_response = _fetch_travel_time(origin=origin, destination=destination)
+                maps_api_response = _fetch_travel_time(
+                    origin=origin, destination=destination
+                )
                 try:
                     leg = maps_api_response["routes"][0]["legs"][0]
-                    travel_time_txt = f"{leg['duration']['text']}, ({leg['distance']['text']})"
+                    travel_time_txt = (
+                        f"{leg['duration']['text']}, ({leg['distance']['text']})"
+                    )
                     new_events.append(
                         Event(
                             type="Travel",
@@ -84,11 +95,16 @@ def update_itinerary_with_travel_times(context_variables: dict) -> SwarmResult:
                         )
                     )
                 except Exception:
-                    print(f"Note: Unable to get travel time from {origin} to {destination}")
+                    print(
+                        f"Note: Unable to get travel time from {origin} to {destination}"
+                    )
             new_events.append(cur_event)
             index += 1
         day.events = new_events
 
     context_variables["timed_itinerary"] = itinerary_object.model_dump()
 
-    return SwarmResult(context_variables=context_variables, values="Timed itinerary added to context with travel times")
+    return SwarmResult(
+        context_variables=context_variables,
+        values="Timed itinerary added to context with travel times",
+    )
