@@ -1,5 +1,5 @@
 # 🌟 Build with AG2
-A curated collection of awesome agentic applications built with AG2.
+A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
 
 - 💡 Practical implementations demonstrating AI agents in action - from custom support to smart email management systems
 
@@ -9,7 +9,8 @@ A curated collection of awesome agentic applications built with AG2.
 
 ## 📂 Featured Agentic Apps
 
-- [E-Commerce Custom Service for Order Management](./e-commerce-custom_service/README.md): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
+- ✈️ [Travel Planner](travel_planner): An trip planning swarm system that create an itinerary together with a customer.
+- 🛍️ [E-Commerce Custom Service for Order Management](e-commerce-custom_service): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 - [AI Game Design Agent Team](./game_design_agent_team/README.md): A collaborative game design system that generates comprehensive game concepts through the coordination of multiple specialized AI agents.
 
 ## 🚀 Getting Started
@@ -29,6 +30,7 @@ A curated collection of awesome agentic applications built with AG2.
 3. **Install the required dependencies**
 
     ```bash
+    # Requires Python >= 3.9, < 3.14
     pip install -r requirements.txt
     ```
 
