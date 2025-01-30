@@ -21,7 +21,7 @@ python main.py
 ```
 
 ## Implementation Details
-The project uses AutoGen's `a_initiate_chats` interface to coordinate specialized agents:
+The project uses AG2's `initiate_chats` interface to coordinate a sequence of agent chat, i.e., [sequential chat](https://docs.ag2.ai/docs/tutorial/conversation-patterns#sequential-chats):
 - Financial Assistant: Analyzes market data
 - Research Assistant: Investigates market trends
 - Report Writer: Generates final analysis reports
