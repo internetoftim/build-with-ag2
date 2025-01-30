@@ -1,11 +1,13 @@
-# E-commerce Custom Service for order management
+# E-commerce Customer Service for order management
+
 <!-- [Overall Description, authorship/references,] -->
+
 - By [yiranwu0](https://github.com/yiranwu0)
 
 In this study, we build a robust and flexible order management system using decentralized agent orchestration. The system addresses two primary user needs: order tracking and order returns. The workflow considers the user’s login status during the initial interaction. Users can quickly track an order using a tracking number without logging in, while returns require authentication. This system leverages modular agents for triaging, tracking, login management, order management, and returns, ensuring a seamless user experience.
 
-
 ## Description
+
 <!-- [More detailed description, any additional information about the use case] -->
 
 **Agents and Workflow**
@@ -16,6 +18,7 @@ We initialize the context variables with two fields: `user_info` to store user i
 
 - **Tracking Agent**:
   Helps the user track an order without login. It will first ask the user to provide a tracking number. If the number is valid, it will ask for additional information (email, last name, phone number) to confirm the user’s identity. It can also transfer to the Login Agent if the user needs to manage the orders.
+
   - Tools:
     - `verify_tracking_number`: verifies if the tracking number is valid and updates the context variables with the order info if valid.
     - `verify_user_information`: validates the user’s information and returns the order details if correct.
@@ -29,13 +32,14 @@ We initialize the context variables with two fields: `user_info` to store user i
 - **Return Agent**:
   Helps the user return an order. It first verifies if the order is eligible for return via the `check_return_eligibility` tool, and then starts the process upon the user’s confirmation with `initiate_return_process`. It can transfer back to the Order Management Agent as needed.
 
-
 ## Installation
 
 To set up the environment, run the following command:
+
 ```bash
 pip install -r requirements.txt
 ```
+
 The primary dependency is the `ag2` library.
 
 ## Run the code
@@ -49,16 +53,17 @@ python main.py
 The system will start running, and you can interact with it through the command line.
 
 **Example Interaction 1: Cancel orders**
+
 1. `I want to cancel my order`
 2. `TR14234`
 3. .. Continue to interact with the system ..
 
 **Example Interaction 2: Track orders**
+
 1. `I want to track my order`
 2. `TR13845`
-3. `8453`    (last 4 digits of phone number)
+3. `8453` (last 4 digits of phone number)
 4. .. Continue to interact with the system ..
-
 
 ## Contact
 
