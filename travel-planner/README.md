@@ -9,11 +9,13 @@ In this project, we're building a trip planning swarm which has an objective to 
 ## Details
 
 The following diagram outlines the key components of the Swarm, with highlights being:
-
 - FalkorDB agent using a GraphRAG database of restaurants and attractions
 - Structured Output agent that will enforce a strict format for the accepted itinerary
 - Routing agent that utilises the Google Maps API to calculate distances between activites
 - Swarm orchestration utilising context variables
+
+<!-- Add figure here -->
+![Swarm Diagram](./trip_planner_data/travel-planning-overview.png)
 
 ## Installation
 1. Clone and navigate to the folder:
