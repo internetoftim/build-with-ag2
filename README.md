@@ -1,4 +1,5 @@
 # 🌟 Build with AG2
+
 A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
 
 - 💡 Practical implementations demonstrating AI agents in action - from custom support to smart email management systems
@@ -17,43 +18,55 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 1. **Clone the repository**
 
-    ```bash
-    git clone https://github.com/ag2ai/build-with-ag2.git
-    ```
+   ```bash
+   git clone https://github.com/ag2ai/build-with-ag2.git
+   ```
 
 2. **Navigate to the desired project directory**
 
-    ```bash
-    cd build-with-ag2/travel_planner
-    ```
+   ```bash
+   cd build-with-ag2/travel_planner
+   ```
 
 3. **Install the required dependencies**
 
-    ```bash
-    # Requires Python >= 3.9, < 3.14
-    pip install -r requirements.txt
-    ```
-
+   ```bash
+   # Requires Python >= 3.9, < 3.14
+   pip install -r requirements.txt
+   ```
 
 4. **Follow the project-specific instructions** in each project's `README.md` file to set up and run the app.
 
-
 ## 🤝 Contributing to AG2 Open Source
-Created something with AG2?  Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
+
+Created something with AG2? Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
+
+### Creating a new project
+
+- You can take the [project template](./project-template/) as a starting point
+- Use `kebab-case` for a new project, e.g. `space-time-travel-agent`
+- Add a `requirements.txt` file with the required libraries
+- Write a concise `README.md` file, use [this](./project-template/README.md) as a template
+- Add a `OAI_CONFIG_LIST_sample` file
+- Create your project and contribute. Happy coding!
 
 ### Code Style and Linting
+
 This project uses pre-commit hooks to maintain code quality. Before contributing:
 
 1. Install pre-commit:
+
 ```bash
 pip install pre-commit
 pre-commit install
 ```
 
 2. The hooks will run automatically on commit, or you can run them manually:
+
 ```bash
 pre-commit run --all-files
 ```
 
 ## 🌟 **Stay Updated**
+
 Star this repository and [AG2](https://github.com/ag2ai/ag2) to receive notifications about the newest and coolest agentic applications!
