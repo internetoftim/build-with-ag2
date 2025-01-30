@@ -1,5 +1,5 @@
 # 🌟 Build with AG2
-A curated collection of awesome agentic applications built with AG2.
+A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
 
 - 💡 Practical implementations demonstrating AI agents in action - from custom support to smart email management systems
 
@@ -9,8 +9,8 @@ A curated collection of awesome agentic applications built with AG2.
 
 ## 📂 Featured Agentic Apps
 
-- Travel Planner: An trip planning swarm system that create an itinerary together with a customer.
-- E-Commerce Custom Service for Order Management: A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
+- ✈️ [Travel Planner](travel_planner): An trip planning swarm system that create an itinerary together with a customer.
+- 🛍️ [E-Commerce Custom Service for Order Management](e-commerce-custom_service): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 
 
 ## 🚀 Getting Started
