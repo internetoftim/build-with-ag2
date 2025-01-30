@@ -42,8 +42,12 @@ user_proxy = autogen.UserProxyAgent(
     }
 )
 
+async def main():
+    return await user_proxy.a_initiate_chats(
+
 if __name__ == "__main__":
-    chat_results = await user_proxy.a_initiate_chats(
+    import asyncio
+    chat_results = asyncio.run(main(
         [
             {
                 "chat_id": 1,
@@ -72,4 +76,4 @@ if __name__ == "__main__":
                 "message": financial_tasks[3],
             }
         ]
-    )
+    ))
