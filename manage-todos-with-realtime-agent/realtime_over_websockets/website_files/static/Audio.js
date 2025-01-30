@@ -180,22 +180,22 @@ export class Audio {
     async decodePcm16Data(pcmData) {
         const audioData = new Float32Array(pcmData.byteLength / 2);
         const dataView = new DataView(pcmData);
-        
+
         // Add smoothing at chunk boundaries
         const smoothingWindowSize = 128;
         for (let i = 0; i < audioData.length; i++) {
             const pcm16 = dataView.getInt16(i * 2, true);
             let value = pcm16 / 32768;
-            
+
             // Apply smoothing at chunk boundaries (to avoid pops and clicks)
             if (i < smoothingWindowSize || i > audioData.length - smoothingWindowSize) {
                 const factor = Math.min(i, audioData.length - i) / smoothingWindowSize;
                 value *= factor;
             }
-            
+
             audioData[i] = value;
         }
-    
+
         const audioBuffer = this.outAudioContext.createBuffer(1, audioData.length, 24000);
         audioBuffer.getChannelData(0).set(audioData);
         return audioBuffer;

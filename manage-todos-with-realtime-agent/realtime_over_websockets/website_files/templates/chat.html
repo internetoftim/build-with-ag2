@@ -68,9 +68,9 @@
 <body>
     <!-- AG2 Logo -->
     <img src="/static/ag2.svg" alt="AG2 Logo" class="logo">
-    
+
     <h1>AG2 WebSockets Chat</h1>
-    
+
     <div class="instructions">
         <p>Ensure microphone and speaker access is enabled.</p>
         <p><strong>We're live!</strong></p>
@@ -97,44 +97,44 @@
                     throw new Error('Failed to load todos');
                 }
                 const todos = await response.json();
-                
+
                 const tableBody = document.querySelector('#todo-table tbody');
                 tableBody.innerHTML = ''; // Clear existing rows
-        
+
                 todos.forEach(todo => {
                     const row = document.createElement('tr');
-        
+
                     // Task name cell
                     const taskCell = document.createElement('td');
                     taskCell.textContent = todo.task;
                     row.appendChild(taskCell);
-        
+
                     // Status cell (with read-only checkbox)
                     const statusCell = document.createElement('td');
-                    
+
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
                     checkbox.classList.add('completed-checkbox');
                     checkbox.checked = (todo.status.toLowerCase() === 'done');
                     checkbox.disabled = true; // ensures user can’t modify it from the UI
-        
+
                     statusCell.appendChild(checkbox);
                     row.appendChild(statusCell);
-        
+
                     tableBody.appendChild(row);
                 });
             } catch (error) {
                 console.error('Error loading todos:', error);
             }
         }
-        
+
         // Automatically load todos when the page is ready
         window.addEventListener('DOMContentLoaded', () => {
             loadTodos();
 
             // Also reload every 5 seconds (5000ms)
             setInterval(loadTodos, 5000);
-        });    
+        });
 </script>
 </body>
 </html>
