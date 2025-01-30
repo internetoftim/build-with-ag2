@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "task": "complete three use cases for my project",
+        "status": "open"
+    },
+    {
+        "id": 2,
+        "task": "go skiing today at 2:00 p.m.",
+        "status": "open"
+    },
+    {
+        "id": 3,
+        "task": "go to dinner at my friend's place tonight",
+        "status": "open"
+    },
+    {
+        "id": 4,
+        "task": "chain sec for security",
+        "status": "open"
+    }
+]
