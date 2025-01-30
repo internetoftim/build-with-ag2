@@ -66,6 +66,8 @@ async def main():
         ]
     )
 
+
 if __name__ == "__main__":
     import asyncio
+
     chat_results = asyncio.run(main())
