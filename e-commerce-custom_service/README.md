@@ -1,10 +1,12 @@
 # E-commerce Custom Service for order management
+<!-- [Overall Description, authorship/references,] -->
+- By [yiranwu0](https://github.com/yiranwu0)
 
 In this study, we build a robust and flexible order management system using decentralized agent orchestration. The system addresses two primary user needs: order tracking and order returns. The workflow considers the user’s login status during the initial interaction. Users can quickly track an order using a tracking number without logging in, while returns require authentication. This system leverages modular agents for triaging, tracking, login management, order management, and returns, ensuring a seamless user experience.
 
-- By [yiranwu0](https://github.com/yiranwu0)
 
 ## Description
+<!-- [More detailed description, any additional information about the use case] -->
 
 **Agents and Workflow**
 We initialize the context variables with two fields: `user_info` to store user information (and order list when a user logs in) and `order_info` to store the retrieved order information. Since swarm is a decentralized orchestration, we will transfer logic in each agent:
@@ -36,7 +38,7 @@ pip install -r requirements.txt
 ```
 The primary dependency is the `ag2` library.
 
-## Running the code
+## Run the code
 
 First, set up the `config_list` in the `main.py` file (line 10). Read more about configurations [here](https://docs.ag2.ai/docs/topics/llm_configuration).
 
