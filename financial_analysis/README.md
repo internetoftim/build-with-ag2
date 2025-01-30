@@ -7,6 +7,13 @@ This project demonstrates AutoGen's multi-task async chat capabilities through a
 - Sequential task execution with context sharing
 - Automated report generation
 
+## Configuration
+
+Before running the demo, you need to set up your OpenAI API configuration:
+
+1. Create a file named `OAI_CONFIG_LIST` in the project root
+2. Configure your OpenAI API settings following the [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration)
+
 ## Usage
 ```bash
 pip install -r requirements.txt
