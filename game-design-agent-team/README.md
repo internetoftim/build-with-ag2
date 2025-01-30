@@ -35,7 +35,7 @@ The two dependencies are the ag2 (AG2) library and streamlit.
 
 ## Run the code
 
-Before start, go to [OpenAI's platform](https://platform.openai.com/) to get an API key if you don't have one.
+Before you start, go to [OpenAI's platform](https://platform.openai.com/) to get an API key if you don't have one.
 
 Run the Streamlit app to start a web interface for the AI Game Design Agent Team.
 ```bash
@@ -46,6 +46,12 @@ In the web interface to the left, put your OpenAI API key in the sidebar.
 
 Now you can interact with it through your browser, and click `Generate Game Concept` to receive a comprehensive design output from the specialized agents.
 
+## Screenshots
+
+![Game Design](./assets/game-design-page.png)
+
+![Game Designed](./assets/game-designed.png)
+
 ## Contact
 
 For more information or any questions, please refer to the documentation or reach out to us!
@@ -54,6 +60,7 @@ For more information or any questions, please refer to the documentation or reac
 -	AG2 Documentation: https://docs.ag2.ai/docs/Home
 -	AG2 GitHub: https://github.com/ag2ai/ag2
 -	Discord: https://discord.gg/pAbnFJrkgZ
+- X: https://x.com/ag2oss
 
 ## License
 
