@@ -28,7 +28,7 @@ A curated collection of awesome agentic applications built with AG2.
 3. **Install the required dependencies**
 
     ```bash
-    # Requires Python 3.8+
+    # Requires Python >= 3.9, < 3.14
     pip install -r requirements.txt
     ```
 
