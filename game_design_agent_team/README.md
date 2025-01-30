@@ -50,7 +50,7 @@ Now you can interact with it through your browser, and click `Generate Game Conc
 
 For more information or any questions, please refer to the documentation or reach out to us!
 
-- Original Code: https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/ai_agent_tutorials/ai_game_design_agent_team
+- Original Code (with permission to include here): https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/ai_agent_tutorials/ai_game_design_agent_team
 -	AG2 Documentation: https://docs.ag2.ai/docs/Home
 -	AG2 GitHub: https://github.com/ag2ai/ag2
 -	Discord: https://discord.gg/pAbnFJrkgZ
