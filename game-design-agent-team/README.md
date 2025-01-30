@@ -3,7 +3,7 @@
 - This project is collected and modified (with permission to include here) from the [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps) repository. Check out the original code [here](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/ai_agent_tutorials/ai_game_design_agent_team).
 - By [Shubham](https://x.com/Saboo_Shubham_)
 
-The AI Game Design Agent Team is a collaborative game design system that generates comprehensive game concepts through the coordination of multiple specialized AI agents, each focusing on different aspects of game design based on user inputs such as game type, target audience, art style, and technical requirements. This is built on AG2's new [swarm feature](https://docs.ag2.ai/notebooks/agentchat_swarm#swarm-orchestration-with-ag2) run through initiate_chat() method.
+The AI Game Design Agent Team is a collaborative game design system that generates comprehensive game concepts through the coordination of multiple specialized AI agents, each focusing on different aspects of game design based on user inputs such as game type, target audience, art style, and technical requirements. This is built on AG2's new [swarm feature](https://docs.ag2.ai/notebooks/agentchat_swarm#swarm-orchestration-with-ag2) run through initiate_swarm_chat() method.
 
 
 ## Description
