@@ -1,6 +1,8 @@
 import autogen
 
-config_list = autogen.config_list_from_json("OAI_CONFIG_LIST", filter_dict={"model": ["gpt-4"]})
+config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST", filter_dict={"model": ["gpt-4"]}
+)
 
 llm_config = {"config_list": config_list, "timeout": 60}
 
@@ -32,31 +34,37 @@ user_proxy = autogen.UserProxyAgent(
     name="user_proxy",
     human_input_mode="NEVER",
     max_consecutive_auto_reply=10,
-    code_execution_config={"work_dir": "workspace", "use_docker": False,},
+    code_execution_config={
+        "work_dir": "workspace",
+        "use_docker": False,
+    },
 )
 
+
 async def main():
-    return await user_proxy.a_initiate_chats([
-        {
-            "chat_id": 1,
-            "recipient": financial_assistant,
-            "message": financial_tasks[0],
-            "summary_method": "reflection_with_llm",
-        },
-        {
-            "chat_id": 2,
-            "prerequisites": [1],
-            "recipient": research_assistant,
-            "message": financial_tasks[1],
-            "summary_method": "reflection_with_llm",
-        },
-        {
-            "chat_id": 3,
-            "prerequisites": [1, 2],
-            "recipient": report_writer,
-            "message": financial_tasks[2],
-        },
-    ])
+    return await user_proxy.a_initiate_chats(
+        [
+            {
+                "chat_id": 1,
+                "recipient": financial_assistant,
+                "message": financial_tasks[0],
+                "summary_method": "reflection_with_llm",
+            },
+            {
+                "chat_id": 2,
+                "prerequisites": [1],
+                "recipient": research_assistant,
+                "message": financial_tasks[1],
+                "summary_method": "reflection_with_llm",
+            },
+            {
+                "chat_id": 3,
+                "prerequisites": [1, 2],
+                "recipient": report_writer,
+                "message": financial_tasks[2],
+            },
+        ]
+    )
 
 if __name__ == "__main__":
     import asyncio
