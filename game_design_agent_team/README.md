@@ -57,4 +57,4 @@ For more information or any questions, please refer to the documentation or reac
 
 ## License
 
-This project is licensed under the Apache License 2.0 from the [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps). See the [LICENSE](./LICENSE) for details.
+This project is also licensed under the Apache License 2.0 from the [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps). See the [LICENSE](./LICENSE) for details.
