@@ -23,7 +23,7 @@ Please provide a link to this repository [https://github.com/ag2ai/build-with-ag
     Please follow this format:
 
     ```markdown
-    - <Your Project Name with linke to your repo>: <A one-sentence description of your project>
+    - <Your Project Name with links to your repo>: <A one-sentence description of your project>
     ```
 We will review your changes and repo and merge them as soon as possible.
 
