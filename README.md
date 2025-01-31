@@ -1,4 +1,5 @@
 # 🌟 Build with AG2
+> Are you building with AG2? Add your project to the list by submitting code through pull requests or add a link to your own repository!
 
 A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
 

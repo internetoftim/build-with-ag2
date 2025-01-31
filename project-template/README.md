@@ -1,10 +1,14 @@
 # Title
 
-<Overall Description, authorship/references>
+<!-- Overall Description, authorship/references -->
 
 ## Detailed Description
 
-<More detailed description, any additional information about the use case>
+<!-- More detailed description, any additional information about the use case -->
+
+## AG2 Features
+
+<!-- What AG2 features are demonstrated in this project? Link to AG2 documents for the features. -->
 
 ## Installation
 
@@ -12,10 +16,12 @@
 
 ## Running the code
 
-<Code running instructions>
+<!-- Code running instructions -->
+<!-- Is there anything to pay attention when running the code? Any example usage?-->
 
 ## Contact
 
+<!-- Add any helpful resources here! -->
 For more information or any questions, please refer to the documentation or reach out to us!
 
 - View Documentation at: https://docs.ag2.ai/docs/Home
@@ -24,4 +30,4 @@ For more information or any questions, please refer to the documentation or reac
 
 ## License
 
-... <Comply with the license if the use case is modified>
+<!-- Comply with the license if the use case is modified -->
