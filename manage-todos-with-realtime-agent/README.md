@@ -20,7 +20,7 @@ By starting the app, you can directly speak to the assistant to manage your todo
 ### 1. Start by cloning the repository:
 ```bash
 git clone https://github.com/ag2ai/build-with-ag2.git
-cd realtime_todo_management
+cd manage-todos-with-realtime-agent
 ```
 
 ### 2. Then, install the required dependencies:
@@ -40,13 +40,13 @@ cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
 
 #### To use Gemini Live API
 1. In the OAI_CONFIG_LIST file, update the `api_key` to your Gemini API key for the configuration with the tag "gemini-realtime"
-2. In realtime_over_websockets/main.py update [filter_dict tag](https://github.com/ag2ai/realtime-agent-over-websockets/blob/main/realtime_over_websockets/main.py#L17) to "gemini-realtime"
+2. In main.py update [filter_dict tag] to "gemini-realtime".
 
 
 ## Run the code
 Run the application with Uvicorn:
 ```bash
-uvicorn realtime_over_websockets.main:app --port 5050
+uvicorn main:app --port 5050
 ```
 
 With the server running, open the client application in your browser by navigating to [http://localhost:5050/start-chat/](http://localhost:5050/start-chat/). Speak into your microphone, and the AI assistant will respond in real time.
