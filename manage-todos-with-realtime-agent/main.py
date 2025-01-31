@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 from logging import getLogger
 from pathlib import Path
-from typing import Annotated
 
 import autogen
 from autogen.agentchat.realtime_agent import RealtimeAgent, WebSocketAudioAdapter
@@ -10,14 +9,20 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from todo_utils import format_todo_str, get_data, save_data, add_todo, modify_todo, delete_todo
+from todo_utils import (
+    format_todo_str,
+    get_data,
+    add_todo,
+    modify_todo,
+    delete_todo,
+)
 import time
 
 realtime_config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
     filter_dict={
         "tags": [
-            "gemini-realtime"
+            "gpt-4o-mini-realtime",
         ],  # Use the tag of the model configuration defined in the OAI_CONFIG_LIST
     },
 )
@@ -110,7 +115,7 @@ You will help user manage todos. You can add, modify, and delete todos.
     realtime_agent.register_realtime_function(  # type: ignore [misc]
         name="modify_todo", description="Modify a todo"
     )(modify_todo)
-    
+
     realtime_agent.register_realtime_function(  # type: ignore [misc]
         name="delete_todo", description="Delete a todo"
     )(delete_todo)

@@ -4,6 +4,7 @@ from logging import getLogger
 
 logger = getLogger(__name__)
 
+
 def format_todo_str(data):
     todo_str = "Current todos:\n"
     for i, todo in enumerate(data):
@@ -88,9 +89,6 @@ def delete_todo(
     if is_todo_found:
         msg = f"Todo with id {id} deleted.\n" + format_todo_str(data)
     else:
-        msg = f"Todo with id {id} not found. Nothing changed.\n" + format_todo_str(
-            data
-        )
+        msg = f"Todo with id {id} not found. Nothing changed.\n" + format_todo_str(data)
     logger.info(f"Msg from delete: {msg}")
     return msg
-
