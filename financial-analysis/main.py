@@ -7,6 +7,13 @@ import textwrap
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST",
+    filter_dict={
+        "tags": ["gpt-4o"],
+    },
+)
+
 
 # code retrieved from https://stackoverflow.com/questions/79019497/retrieving-news-articles-from-yahoo-finance-canada-website
 def getUuids(companyName):
@@ -49,15 +56,7 @@ def getUuids(companyName):
     ]["uuids"]
 
 
-config_list = autogen.config_list_from_json(
-    "OAI_CONFIG_LIST",
-    filter_dict={
-        "tags": ["gpt-4o"],
-    },
-)
-
 llm_config = {"config_list": config_list, "timeout": 60}
-
 
 financial_assistant = autogen.AssistantAgent(
     name="financial_assistant",
@@ -157,9 +156,6 @@ async def main():
 
     # get user input
     stock_str = input("Enter the stock you want to investigate: ")
-    import time
-
-    current_datatime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
     financial_tasks = [
         f"Can you read recent news about {stock_str} stock? Retrieve the news links and get summaries for all news using functions.",

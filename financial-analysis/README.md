@@ -6,9 +6,9 @@
 This project retrieves news and stock price changes for a given stock symbol (e.g., AAPL) and generates a summarized market analysis report.
 
 ## Features
-- Getting news from Yahoo Finance
-- Getting stock price changes with Python Code
-- Summarized report and analysis report generation -> `market_analysis_report.md`
+- Getting 5 news from Yahoo Finance
+- Getting stock price changes with Python Code, and plot a 1-year stock price change graph.
+- Summarized report and analysis report generation in `market_analysis_report.md`, including a conclusion to buy, sell, or hold the stock. Note this is not a financial advice, but a demonstration of how AG2 can help with financial analysis.
 
 ## Installation
 
@@ -23,15 +23,17 @@ pip install -r requirements.txt
 ```
 ## Run the code
 
-Before running the demo, you need to set up your OpenAI API configuration:
-
-1. Create a file named `OAI_CONFIG_LIST` in the project root
-2. Configure your OpenAI API settings following the [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration)
+Before running the demo, you need to set up your OpenAI API configuration. Create a `OAI_CONFIG_LIST` file based on the provided `OAI_CONFIG_LIST_sample` and update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o". Change `filter_dict` tags in main.py if you want to use other models. Refer to [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration) for more details.
+```bash
+cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
+```
 
 
 ```bash
 python main.py
 ```
+
+At the `Enter the stock you want to investigate: ` prompt, enter the stock symbol or stock name you want to investigate. For example, you can enter `AAPL` for Apple Inc. stock.
 
 Checkout the generated `market_analysis_report.md` file for the summarized market analysis report.
 
@@ -45,4 +47,4 @@ For more information or any questions, please refer to the documentation or reac
 
 
 ## License
-This project is also licensed under the Apache License 2.0: [LICENSE](../LICENSE)
+This project is also licensed under the Apache License 2.0 [LICENSE](../LICENSE).
