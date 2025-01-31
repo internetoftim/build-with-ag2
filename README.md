@@ -1,5 +1,5 @@
 # 🌟 Build with AG2
-> Are you building with AG2? Add your project to the list by submitting code through pull requests or add a link to your own repository!
+> Are you building with AG2? Add your project to the list by [submitting code](./project-template/) through pull requests or [add a link](./external_repo_guide.md) to your own repository!
 
 A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
 
@@ -38,11 +38,17 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 4. **Follow the project-specific instructions** in each project's `README.md` file to set up and run the app.
 
+## 🔗 Links to More Projects Built with AG2
+
 ## 🤝 Contributing to AG2 Open Source
 
 Created something with AG2? Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
 
-### Creating a new project
+### Option 1: Link to your own repositories built with AG2
+
+Refer to the [external repository guide](./external_repo_guide.md) to link to your own repositories showcasing projects built with AG2.
+
+### Option 2: Creating a new project
 
 - You can take the [project template](./project-template/) as a starting point
 - Use `kebab-case` for a new project, e.g. `space-time-travel-agent`
@@ -51,7 +57,7 @@ Created something with AG2? Contributions are welcome! If you have any ideas, im
 - Add a `OAI_CONFIG_LIST_sample` file
 - Create your project and contribute. Happy coding!
 
-### Code Style and Linting
+#### Code Style and Linting
 
 This project uses pre-commit hooks to maintain code quality. Before contributing:
 
