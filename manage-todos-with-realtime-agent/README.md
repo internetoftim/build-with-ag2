@@ -15,6 +15,11 @@ By starting the app, you can directly speak to the assistant to manage your todo
 - **Resume chat**: The todos are saved in a local file and can be loaded when the server restarts.
 - **Realtime Web Interface**: A simple web interface to show the todos and will be updated in real-time by the assistant.
 
+
+## AG2 Features
+This project demonstrates the following AG2 features:
+- [Realtime Agent](https://docs.ag2.ai/docs/topics/realtime-agent): 
+
 ## Installation
 
 ### 1. Start by cloning the repository:
