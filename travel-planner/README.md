@@ -17,6 +17,13 @@ The following diagram outlines the key components of the Swarm, with highlights 
 <!-- Add figure here -->
 ![Swarm Diagram](./trip_planner_data/travel-planning-overview.png)
 
+## AG2 Features
+
+This project demonstrates the following AG2 features:
+- [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+- [GraphRAG](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_graph_rag_falkordb.ipynb)
+- [Structured Output](https://docs.ag2.ai/docs/user-guide/basic-concepts/structured-outputs#structured-outputs)
+
 ## Installation
 1. Clone and navigate to the folder:
     ```bash

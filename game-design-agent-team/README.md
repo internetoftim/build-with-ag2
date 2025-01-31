@@ -21,6 +21,11 @@ Provides technical architecture and implementation guidance—engine selection, 
 
 When a user provides high-level game requirements (e.g., game type, setting, audience, visuals, platform), we start the swarm to allocate requirements to the respective specialized agents. Each agent elaborates on its area of expertise, and final outputs are combined into a cohesive game design proposal.
 
+## AG2 Features
+This project demonstrates the following AG2 features:
+- [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+- [Agents with dynamic system message](https://docs.ag2.ai/docs/user-guide/advanced-concepts/enhanced-swarm#agents-with-dynamic-system-message)
+
 ## Installation
 1. Clone and navigate to the folder:
   ```bash
