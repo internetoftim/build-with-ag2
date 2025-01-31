@@ -18,7 +18,7 @@ By starting the app, you can directly speak to the assistant to manage your todo
 
 ## AG2 Features
 This project demonstrates the following AG2 features:
-- [Realtime Agent](https://docs.ag2.ai/docs/topics/realtime-agent): 
+- [Realtime Agent](https://docs.ag2.ai/docs/topics/realtime-agent):
 
 ## Installation
 
