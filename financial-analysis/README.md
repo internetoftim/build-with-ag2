@@ -5,10 +5,15 @@
 
 This project retrieves news and stock price changes for a given stock symbol (e.g., AAPL) and generates a summarized market analysis report.
 
-## Features
+## Details
 - Getting 5 news from Yahoo Finance
 - Getting stock price changes with Python Code, and plot a 1-year stock price change graph.
 - Summarized report and analysis report generation in `market_analysis_report.md`, including a conclusion to buy, sell, or hold the stock. Note this is not a financial advice, but a demonstration of how AG2 can help with financial analysis.
+
+## AG2 Features
+This project uses the following AG2 features:
+- [Using Tools](https://docs.ag2.ai/docs/user-guide/basic-concepts/tools)
+- [Async Initiate Chat and Chat Summary](https://docs.ag2.ai/docs/api-reference/autogen/ConversableAgent#a-initiate-chat) and 
 
 ## Installation
 
