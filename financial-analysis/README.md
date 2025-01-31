@@ -13,7 +13,7 @@ This project retrieves news and stock price changes for a given stock symbol (e.
 ## AG2 Features
 This project uses the following AG2 features:
 - [Using Tools](https://docs.ag2.ai/docs/user-guide/basic-concepts/tools)
-- [Async Initiate Chat and Chat Summary](https://docs.ag2.ai/docs/api-reference/autogen/ConversableAgent#a-initiate-chat) and 
+- [Async Initiate Chat and Chat Summary](https://docs.ag2.ai/docs/api-reference/autogen/ConversableAgent#a-initiate-chat) and
 
 ## Installation
 
