@@ -10,6 +10,12 @@
 
 <!-- What AG2 features are demonstrated in this project? Link to AG2 documents for the features. -->
 
+## TAGS
+
+<!-- Add relevant tags for indexing and searching, they can be usecase or technology related -->
+
+TAGS: swarm, graphrag, AG2-features, use-case, automation, etc.
+
 ## Installation
 
 <Instructions for installing>
@@ -22,6 +28,7 @@
 ## Contact
 
 <!-- Add any helpful resources here! -->
+
 For more information or any questions, please refer to the documentation or reach out to us!
 
 - View Documentation at: https://docs.ag2.ai/docs/Home
