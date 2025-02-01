@@ -13,6 +13,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 - ✈️ [Travel Planner](travel-planner): An trip planning swarm system that create an itinerary together with a customer.
 - 🛍️ [E-Commerce Custom Service for Order Management](e-commerce-customer-service): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 - 🎮 [AI Game Design Agent Team](game-design-agent-team): A collaborative game design system that generates comprehensive game concepts through the coordination of multiple specialized AI agents.
+- ☑ [Manage Todos With Realtime Agent](manage-todos-with-realtime-agent): A voice-controlled todo assistant with real-time interaction.
 
 ## 🚀 Getting Started
 
