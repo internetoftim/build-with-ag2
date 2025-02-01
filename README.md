@@ -1,4 +1,5 @@
 # 🌟 Build with AG2
+
 > Are you building with AG2? Add your project to the list by [submitting code](./project-template/) through pull requests or [add a link](./external_repo_guide.md) to your own repository!
 
 A curated collection of awesome agentic applications built with [AG2](https://github.com/ag2ai/ag2).
@@ -26,7 +27,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 2. **Navigate to the desired project directory**
 
    ```bash
-   cd build-with-ag2/travel_planner
+   cd build-with-ag2/travel-planner
    ```
 
 3. **Install the required dependencies**
@@ -39,6 +40,8 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 4. **Follow the project-specific instructions** in each project's `README.md` file to set up and run the app.
 
 ## 🔗 Links to More Projects Built with AG2
+
+- [📓 AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
 
 ## 🤝 Contributing to AG2 Open Source
 
