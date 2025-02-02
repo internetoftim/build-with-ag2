@@ -1,5 +1,4 @@
 import autogen
-import asyncio
 
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
@@ -7,6 +6,12 @@ config_list = autogen.config_list_from_json(
 )
 
 llm_config = {"config_list": config_list, "timeout": 60}
+
+financial_tasks = [
+    "Analyze current market trends and sentiment for major tech companies.",
+    "Investigate key factors influencing the observed market patterns.",
+    "Generate a comprehensive market analysis report incorporating all findings.",
+]
 
 financial_assistant = autogen.AssistantAgent(
     name="financial_assistant",
@@ -23,7 +28,9 @@ research_assistant = autogen.AssistantAgent(
 report_writer = autogen.AssistantAgent(
     name="report_writer",
     llm_config=llm_config,
-    system_message="You are a professional writer. Transform financial analysis into engaging reports. Reply TERMINATE when done.",
+    system_message="""You are a professional writer, known for your insightful and engaging articles.
+    You transform complex concepts into compelling narratives.
+    Reply TERMINATE in the end when everything is done.""",
 )
 
 user_proxy = autogen.UserProxyAgent(
@@ -35,13 +42,8 @@ user_proxy = autogen.UserProxyAgent(
 
 
 async def main():
-    financial_tasks = [
-        "Analyze the current market trends and key performance metrics for major tech stocks.",
-        "Investigate possible reasons for the observed market performance patterns.",
-        "Generate a comprehensive market analysis report incorporating all findings.",
-    ]
 
-    return await user_proxy.a_initiate_chats(
+    chat_results = await user_proxy.a_initiate_chats(
         [
             {
                 "chat_id": 1,
@@ -64,6 +66,7 @@ async def main():
             },
         ]
     )
+    return chat_results
 
 
 if __name__ == "__main__":
