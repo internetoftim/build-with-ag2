@@ -40,7 +40,7 @@ async def main():
         "Generate a comprehensive market analysis report incorporating all findings.",
     ]
 
-    chat_results = await user_proxy.a_initiate_chats(
+    return await user_proxy.a_initiate_chats(
         [
             {
                 "chat_id": 1,
