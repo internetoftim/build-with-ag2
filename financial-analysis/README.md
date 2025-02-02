@@ -26,12 +26,28 @@ cd financial-analysis
 ```bash
 pip install -r requirements.txt
 ```
-## Run the code
+## Configuration
 
-Before running the demo, you need to set up your OpenAI API configuration. Create a `OAI_CONFIG_LIST` file based on the provided `OAI_CONFIG_LIST_sample` and update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o". Change `filter_dict` tags in main.py if you want to use other models. Refer to [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration) for more details.
+Before running the demo, you need to set up your OpenAI API configuration:
+
+1. Create a file named `OAI_CONFIG_LIST` in the project root:
 ```bash
 cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
 ```
+
+2. Edit the `OAI_CONFIG_LIST` file to include your OpenAI API configuration:
+```json
+[
+    {
+        "model": "gpt-4",
+        "api_key": "YOUR_OPENAI_API_KEY"
+    }
+]
+```
+
+The configuration file supports multiple model configurations. For more details on available options and advanced configurations, refer to the [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration).
+
+## Run the Demo
 
 
 ```bash

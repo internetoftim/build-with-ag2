@@ -16,21 +16,26 @@ financial_tasks = [
 financial_assistant = autogen.AssistantAgent(
     name="financial_assistant",
     llm_config=llm_config,
-    system_message="You are a financial analysis expert. Help analyze market trends and generate insights.",
+    system_message="""You are a financial analysis expert specializing in market trends and technical analysis.
+    Focus on identifying key market patterns, technical indicators, and overall market sentiment.
+    Provide clear, data-driven insights about market movements and trends.""",
 )
 
 research_assistant = autogen.AssistantAgent(
     name="research_assistant",
     llm_config=llm_config,
-    system_message="You are a market research specialist. Investigate and explain market trends and company performance.",
+    system_message="""You are a market research specialist with expertise in fundamental analysis.
+    Investigate and explain market trends by analyzing economic factors, industry conditions,
+    and company-specific events that influence market behavior.""",
 )
 
 report_writer = autogen.AssistantAgent(
     name="report_writer",
     llm_config=llm_config,
-    system_message="""You are a professional writer, known for your insightful and engaging articles.
-    You transform complex concepts into compelling narratives.
-    Reply TERMINATE in the end when everything is done.""",
+    system_message="""You are a professional financial writer, known for transforming complex market analysis
+    into clear, actionable insights. Synthesize technical and fundamental analysis into
+    comprehensive market reports that highlight key findings and their implications.
+    Reply TERMINATE when the report is complete.""",
 )
 
 user_proxy = autogen.UserProxyAgent(
