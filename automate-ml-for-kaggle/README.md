@@ -1,4 +1,4 @@
-# Machine Learning Workflow
+# Automated Machine Learning Workflow
 
 In this project, we build a machine learning workflow using AG2. The workflow involves data analysis, preprocessing, and model training to build a machine learning model.
 
@@ -43,16 +43,16 @@ This project demonstrates the following AG2 features:
 
 
 ## Installation
-1. Clone and navigate to the folder:
-    ```bash
-    git clone https://github.com/ag2ai/build-with-ag2.git
-    cd build-with-ag2/game_design_agent_team
-    ```
-2. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    The dependency is ag2 with graphrag option.
+First, Clone and navigate to the folder:
+```bash
+git clone https://github.com/ag2ai/build-with-ag2.git
+cd build-with-ag2/game_design_agent_team
+```
+Then install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
+The dependency is ag2 with graphrag option.
 
 
 ## Run the code
