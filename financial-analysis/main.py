@@ -33,6 +33,7 @@ user_proxy = autogen.UserProxyAgent(
     code_execution_config=False,
 )
 
+
 async def main():
     financial_tasks = [
         "Analyze the current market trends and key performance metrics for major tech stocks.",
