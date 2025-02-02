@@ -103,7 +103,6 @@ def get_news_links(companyCode: str) -> str:
             if "2025" in news_modifiedDate:
                 news_urls = i["data"]["partnerData"]["finalUrl"]
                 news_title = i["data"]["partnerData"]["pageTitle"]
-                # print(f"News URL:  {news_urls}\nModifiedDate: {news_modifiedDate}\nTitle: {news_title}\n=================")
                 all_links += f"News URL:  {news_urls}\nModifiedDate: {news_modifiedDate}\nTitle: {news_title}\n\n"
                 max_news -= 1
         except Exception:
