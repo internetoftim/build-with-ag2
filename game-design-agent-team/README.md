@@ -24,7 +24,7 @@ When a user provides high-level game requirements (e.g., game type, setting, aud
 ## AG2 Features
 This project demonstrates the following AG2 features:
 - [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
-- [Agents with dynamic system message](https://docs.ag2.ai/docs/user-guide/advanced-concepts/enhanced-swarm#agents-with-dynamic-system-message)
+- [Dynamic system message](https://docs.ag2.ai/docs/user-guide/advanced-concepts/enhanced-swarm#agents-with-dynamic-system-message)
 
 ## Installation
 1. Clone and navigate to the folder:
