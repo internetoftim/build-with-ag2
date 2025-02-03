@@ -46,6 +46,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 - [📓 AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
 - [🦸 HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
+- 🌐 [Agent-E](https://github.com/EmergenceAI/Agent-E): A browser automation agent for natural language-driven web interactions and task automation.
 
 ## 🤝 Contributing to AG2 Open Source
 
