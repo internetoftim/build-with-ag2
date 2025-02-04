@@ -44,9 +44,9 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 ## 🔗 Links to More Projects Built with AG2
 
-- [📓 AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
-- [🦸 HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
-
+- 📓 [AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
+- 🦸 [HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
+- 🔬 [SciAgents: Automating scientific discovery through multi-agent intelligent graph reasoning](https://github.com/lamm-mit/SciAgentsDiscovery)
 ## 🤝 Contributing to AG2 Open Source
 
 Created something with AG2? Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
