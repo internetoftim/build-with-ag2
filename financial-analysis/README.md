@@ -26,7 +26,7 @@ cd financial-analysis
 ```bash
 pip install -r requirements.txt
 ```
-## Configuration
+## Run the code
 
 Before running the demo, you need to set up your OpenAI API configuration:
 
