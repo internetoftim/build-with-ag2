@@ -24,6 +24,8 @@ This project demonstrates the following AG2 features:
 - [GraphRAG](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_graph_rag_falkordb.ipynb)
 - [Structured Output](https://docs.ag2.ai/docs/user-guide/basic-concepts/structured-outputs#structured-outputs)
 
+TAGS: trip planning, swarm, graphrag, structured output
+
 ## Installation
 1. Clone and navigate to the folder:
     ```bash

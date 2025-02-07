@@ -41,6 +41,7 @@ This project demonstrates the following AG2 features:
 - [Build with StateFlow design](https://docs.ag2.ai/docs/blog/2024-02-29-StateFlow/index#stateflow-build-state-driven-workflows-with-customized-speaker-selection-in-groupchat)
 - [Code Execution](https://docs.ag2.ai/docs/user-guide/advanced-concepts/code-execution#code-execution)
 
+TAGS: data analysis, groupchat, stateflow, code execution
 
 ## Installation
 First, Clone and navigate to the folder:

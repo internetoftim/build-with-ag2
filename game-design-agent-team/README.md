@@ -26,6 +26,8 @@ This project demonstrates the following AG2 features:
 - [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
 - [Dynamic system message](https://docs.ag2.ai/docs/user-guide/advanced-concepts/enhanced-swarm#agents-with-dynamic-system-message)
 
+TAGS: game design, swarm, dynamic system message
+
 ## Installation
 1. Clone and navigate to the folder:
   ```bash
