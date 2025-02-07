@@ -44,8 +44,9 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 ## 🔗 Links to More Projects Built with AG2
 
-- [📓 AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
-- [🦸 HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
+- 📓 [AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
+- 🦸 [HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
+- 🔬 [SciAgents: Automating scientific discovery through multi-agent intelligent graph reasoning](https://github.com/lamm-mit/SciAgentsDiscovery)
 - 🌐 [Agent-E](https://github.com/EmergenceAI/Agent-E): A browser automation agent for natural language-driven web interactions and task automation.
 
 ## 🤝 Contributing to AG2 Open Source
