@@ -23,7 +23,7 @@ This project demonstrates several key AG2 features:
 
 For further details on these features, please refer to the [AG2 Documentation](https://docs.ag2.ai/docs/Home).
 
-**TAGS:** swarm, function-call
+TAGS: swarm, function-call, tool-use
 
 ## Installation
 
