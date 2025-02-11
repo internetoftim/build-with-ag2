@@ -23,7 +23,9 @@ This project demonstrates several key AG2 features:
 
 For further details on these features, please refer to the [AG2 Documentation](https://docs.ag2.ai/docs/Home).
 
-TAGS: swarm, function-call, tool-use
+## TAGS
+
+TAGS: swarm, function-call, tool-use, email management, automation, gmail integration, email triage, workflow optimization, ai assistant
 
 ## Installation
 
