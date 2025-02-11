@@ -12,7 +12,7 @@ This project demonstrates the following AG2 features:
 
 - [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
 
-## TAGS
+## TAGS
 
 TAGS: swarm, e-commerce, order management, customer service, order tracking, returns processing, authentication, workflow automation, agent orchestration
 
