@@ -6,6 +6,16 @@
 
 In this study, we build a robust and flexible order management system using decentralized agent orchestration. The system addresses two primary user needs: order tracking and order returns. The workflow considers the user’s login status during the initial interaction. Users can quickly track an order using a tracking number without logging in, while returns require authentication. This system leverages modular agents for triaging, tracking, login management, order management, and returns, ensuring a seamless user experience.
 
+## AG2 Features
+
+This project demonstrates the following AG2 features:
+
+- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+
+## TAGS
+
+TAGS: swarm, e-commerce, order management, customer service, order tracking, returns processing, authentication, workflow automation, agent orchestration
+
 ## Description
 
 <!-- [More detailed description, any additional information about the use case] -->
