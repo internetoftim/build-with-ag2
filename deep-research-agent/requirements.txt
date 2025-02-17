@@ -1,4 +1,3 @@
-ag2
 ag2[browser-use]
 autogen>=0.7.4
 fastapi>=0.115.8
