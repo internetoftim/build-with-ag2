@@ -12,6 +12,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 ## 📂 Featured Agentic Apps
 
+- 🧑‍🔬 [Deep Research Agent](deep-research-agent): Reference implementation of the deep research agent.
 - ✈️ [Travel Planner](travel-planner): An trip planning swarm system that create an itinerary together with a customer.
 - 🛍️ [E-Commerce Custom Service for Order Management](e-commerce-customer-service): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 - 📈 [Financial Analysis](financial-analysis): A AI-powered stock analysis generating market insights and recommendations.
@@ -47,6 +48,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 - 📓 [AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook)
 - 🦸 [HeroYouth: Empowering Youth Against School Bullying](https://github.com/linmou/HeroYouth)
 - 🔬 [SciAgents: Automating scientific discovery through multi-agent intelligent graph reasoning](https://github.com/lamm-mit/SciAgentsDiscovery)
+
 ## 🤝 Contributing to AG2 Open Source
 
 Created something with AG2? Contributions are welcome! If you have any ideas, improvements, or new apps to add, please create a new [GitHub Issue](https://github.com/ag2ai/build-with-ag2/issues) or submit a pull request. Make sure to follow the existing project structure and include a detailed `README.md` for each new app.
