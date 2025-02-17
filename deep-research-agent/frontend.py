@@ -13,7 +13,7 @@ def fetch_research_results(user_query):
     response = requests.post("http://127.0.0.1:8000/chat", json={"message": user_query})
 
     if response.status_code == 200:
-        return response.json()  # ✅ Directly returns JSON
+        return response.json()
     else:
         return {"error": "Failed to fetch response"}
 

@@ -31,7 +31,7 @@ def run_agent(user_query):
         summary_method="reflection_with_llm",
     )
 
-    return final_result  # ✅ Returns a JSON-compatible object
+    return final_result
 
 
 @app.post("/chat")
