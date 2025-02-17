@@ -1,6 +1,7 @@
 # Reference implementation of AG2 DeepResearchAgent
 
-- By [willhama](https://github.com/willhama)
+- Created by [willhama](https://github.com/willhama)
+- Revised by [rjambrecic](https://github.com/rjambrecic)
 
 DeepResearchAgent is an advanced research tool built on the AG2 framework, leaned on to OpenAIs Deep Research Agent.
 
@@ -70,6 +71,8 @@ uv run uvicorn backend:app --reload
 ```bash
 streamlit run frontend.py
 ```
+
+3. Visit your app on `http://localhost:8501/`
 
 ## Contact
 
