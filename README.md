@@ -12,6 +12,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 
 ## 📂 Featured Agentic Apps
 
+- 🧑‍🔬 [Deep Research Agent](deep-research-agent): Reference implementation of the deep research agent.
 - ✈️ [Travel Planner](travel-planner): An trip planning swarm system that create an itinerary together with a customer.
 - 🛍️ [E-Commerce Custom Service for Order Management](e-commerce-customer-service): A smart, agent-driven system that makes order tracking quick and easy while simplifying returns for both logged-in and guest users.
 - 📈 [Financial Analysis](financial-analysis): A AI-powered stock analysis generating market insights and recommendations.
