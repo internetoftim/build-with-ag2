@@ -3,11 +3,11 @@
 - Created by [willhama](https://github.com/willhama)
 - Revised by [rjambrecic](https://github.com/rjambrecic)
 
-DeepResearchAgent is an advanced research tool built on the AG2 framework, leaned on to OpenAIs Deep Research Agent.
+DeepResearchAgent is an advanced research tool built on the AG2 framework, inspired by OpenAI's deep research agent.
 
 ## Detailed Description
 
-This is the reference implenetation from openais deep-research-agent. It efficiently retrieves relevant data, processes information, and provides concise conclusions, helping analysts and investors make informed decisions.
+This is the reference implementation from OpenAI's deep research agent. It efficiently retrieves relevant data, processes information, and provides concise conclusions, helping analysts and investors make informed decisions.
 https://openai.com/index/introducing-deep-research/
 
 ## AG2 Features
@@ -48,7 +48,7 @@ DeepResearchAgent requires Python 3.11 or higher.
 
 ## Running the code
 
-Before running the demo, you need to set up your OpenAI API configuration. Create a `OAI_CONFIG_LIST` file based on the provided `OAI_CONFIG_LIST_sample` and update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o". Change `filter_dict` tags in main.py if you want to use other models. Refer to [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration) for more details.
+Before running the demo, you need to set up your OpenAI API configuration. Create an `OAI_CONFIG_LIST` file based on the provided `OAI_CONFIG_LIST_sample` and update the `api_key` to your OpenAI API key for the configuration with the tag "gpt-4o". Change `filter_dict` tags in main.py if you want to use other models. Refer to [AutoGen configuration guide](https://docs.ag2.ai/getting-started#configuration) for more details.
 
 ```bash
 cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
