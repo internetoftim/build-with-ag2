@@ -46,15 +46,15 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 ## 🔗 Links to More Projects Built with AG2
 
 - 📓 [AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook): AG2 notebooks
-- 🦸 [HeroYouth](https://github.com/linmou/HeroYouth): Empowering Youth Against School Bullying
+- 🦸 [HeroYouth](https://github.com/linmou/HeroYouth): Empowering youth against school bullying
 - 🔬 [SciAgents](https://github.com/lamm-mit/SciAgentsDiscovery): Automating scientific discovery through multi-agent intelligent graph reasoning
 - 🌐 [Agent-E](https://github.com/EmergenceAI/Agent-E): A browser automation agent for natural language-driven web interactions and task automation.
-- 📱 [Aquinas](https://github.com/thomasturek/aquinas): AI-Powered Social Media Engagement Tool
+- 📱 [Aquinas](https://github.com/thomasturek/aquinas): AI-Powered social media engagement tool
 - 🛡️ [disarmBot](https://github.com/ultra-supara/disarmBot): A multi-agent LM system for analyzing disinformation based on DISARM
-- 🛠️ [Hercules](https://github.com/test-zeus-ai/testzeus-hercules): an open-source testing agent that turns simple Gherkin steps into fully automated end-to-end tests
+- 🛠️ [Hercules](https://github.com/test-zeus-ai/testzeus-hercules): An open-source testing agent that turns simple Gherkin steps into fully automated end-to-end tests
 - [CMBAgent](https://github.com/CMBAgents/cmbagent): Multi-agent system for data analysis and visualization
-- 🔏 [AutoDefense](https://github.com/XHMY/AutoDefense): Multi-agent LLM Defense against Jailbreak Attacks
-- 🔍 [Prompt Leakage Probing](https://github.com/airtai/prompt-leakage-probing): Framework for testing LLM agents for system prompt leaks.
+- 🔏 [AutoDefense](https://github.com/XHMY/AutoDefense): Multi-agent LLM Defense against jailbreak attacks
+- 🔍 [Prompt Leakage Probing](https://github.com/airtai/prompt-leakage-probing): Framework for testing LLM agents for system prompt leaks
 
 ## 🤝 Contributing to AG2 Open Source
 
