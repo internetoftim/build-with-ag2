@@ -37,10 +37,10 @@
 ### Difficulty
 <!-- Choose one: Easy | Moderate | Hard -->
 
-### Any related issues?
+### Are there any related issues?
 <!-- If this is related to another issue, reference it here. -->
 
-### Any relevant discussions?
+### Are there any relevant discussions?
 <!-- If there are any discussions or forum threads related to this issue, provide links. -->
 
 ### Checklist
