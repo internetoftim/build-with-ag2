@@ -3,7 +3,7 @@
 - This project used the template from this [example project](https://github.com/ag2ai/realtime-agent-over-websockets) by [Tvrtko](https://github.com/sternakt) and [Mark](https://github.com/marklysze).
 - Todo management is added by [yiranwu0](https://github.com/yiranwu0)
 
-From AG2 realtime agent example project, we build a todo management assistant that can be interacted through voice.
+From AG2 realtime agent example project, we build a todo management assistant that can be interacted with through voice.
 
 ## Description
 
