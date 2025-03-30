@@ -10,7 +10,7 @@ In this study, we build a robust and flexible order management system using dece
 
 This project demonstrates the following AG2 features:
 
-- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm/deep-dive)
 
 ## TAGS
 
