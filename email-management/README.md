@@ -18,7 +18,7 @@ This project streamlines your email workflow by performing the following tasks:
 
 This project demonstrates several key AG2 features:
 
-- **[Swarm Agent](https://docs.ag2.ai/docs/user-guide/basic-concepts/swarm):** Multiple agents work together to manage different aspects of email processing.
+- **[Swarm Agent](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm/deep-dive):** Multiple agents work together to manage different aspects of email processing.
 - **[Tool using](https://docs.ag2.ai/docs/user-guide/basic-concepts/tools):** Agents trigger Python functions (e.g., marking emails as read, retrieving email threads) based on real-time context.
 
 For further details on these features, please refer to the [AG2 Documentation](https://docs.ag2.ai/docs/Home).
