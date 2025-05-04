@@ -1,11 +1,13 @@
 import autogen
-from autogen import (
+
+from autogen.agentchat.contrib.swarm_agent import (
     ON_CONDITION,
     AfterWorkOption,
     SwarmAgent,
     initiate_swarm_chat,
     UserProxyAgent,
 )
+
 from prompts import (
     order_triage_prompt,
     tracking_order_prompt,
