@@ -9,6 +9,12 @@ from email_utils import (
     fetch_email_thread,
 )
 import autogen
+from autogen.agentchat.contrib.swarm_agent import (
+    SwarmAgent,
+    initiate_swarm_chat,
+    AFTER_WORK,
+    AfterWorkOption,
+)
 
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST",
@@ -106,7 +112,7 @@ user_proxy = autogen.UserProxyAgent(
     is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
 )
 
-filter_agent = autogen.SwarmAgent(
+filter_agent = SwarmAgent(
     name="filter_agent",
     llm_config=llm_config,
     system_message="""You are helping the user to read emails and mark them as read.
@@ -132,12 +138,12 @@ for sender, emails in sorted_grouped_emails.items():
     print("-" * 100)
     print("\n")
 
-autogen.initiate_swarm_chat(
+initiate_swarm_chat(
     filter_agent,
     agents=[filter_agent],
     messages=input_str,
     user_agent=user_proxy,
-    after_work=autogen.AFTER_WORK(autogen.AfterWorkOption.REVERT_TO_USER),
+    after_work=AFTER_WORK(AfterWorkOption.REVERT_TO_USER),
 )
 
 # remove read emails from unread_emails
@@ -168,7 +174,7 @@ def get_full_thread(email_thread_id: str) -> str:
     return fetch_email_thread(gmail_service, email_thread_id)
 
 
-email_assistant = autogen.SwarmAgent(
+email_assistant = SwarmAgent(
     name="email_assistant",
     llm_config=llm_config,
     system_message="""You are an email assistant.
@@ -197,10 +203,10 @@ for email in unread_emails:
     email_str += "\n"
 
 
-autogen.initiate_swarm_chat(
+initiate_swarm_chat(
     email_assistant,
     agents=[email_assistant],
     messages=email_str,
     user_agent=user_proxy,
-    after_work=autogen.AFTER_WORK(autogen.AfterWorkOption.REVERT_TO_USER),
+    after_work=AFTER_WORK(AfterWorkOption.REVERT_TO_USER),
 )
