@@ -2,7 +2,10 @@ import json
 import os
 from pydantic import BaseModel
 import requests
-from autogen import SwarmResult
+
+from autogen.agentchat.contrib.swarm_agent import (
+    SwarmResult,
+)
 
 
 class Event(BaseModel):
