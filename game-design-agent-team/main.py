@@ -1,5 +1,6 @@
 import streamlit as st
-from autogen import (
+
+from autogen.agentchat.contrib.swarm_agent import (
     SwarmAgent,
     SwarmResult,
     initiate_swarm_chat,
@@ -171,11 +172,11 @@ if st.button("Generate Game Concept"):
             - Player Perspective: {player_perspective}
             - Multiplayer Support: {multiplayer}
             - Art Style: {art_style}
-            - Target Platforms: {', '.join(platform)}
+            - Target Platforms: {", ".join(platform)}
             - Development Time: {development_time} months
             - Budget: ${cost:,}
-            - Core Mechanics: {', '.join(core_mechanics)}
-            - Mood/Atmosphere: {', '.join(mood)}
+            - Core Mechanics: {", ".join(core_mechanics)}
+            - Mood/Atmosphere: {", ".join(mood)}
             - Inspiration: {inspiration}
             - Unique Features: {unique_features}
             - Detail Level: {depth}
