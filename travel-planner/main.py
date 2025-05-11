@@ -6,7 +6,7 @@ import copy
 from typing import Any, Dict
 
 
-from autogen import (
+from autogen.agentchat.contrib.swarm_agent import (
     AFTER_WORK,
     ON_CONDITION,
     AfterWorkOption,

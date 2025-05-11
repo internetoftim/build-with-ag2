@@ -1,5 +1,7 @@
 ## Trip Planning
 
+WIP: This project is currently not working properly.Latest release of AG2 0.9 introduced minor issues which will be fixed as soon as possible.
+
 - This code is forked from the [trip planning notebook](https://docs.ag2.ai/notebooks/agentchat_swarm_graphrag_trip_planner#trip-planning-with-a-falkordb-graphrag-agent-using-a-swarm) from AG2.
 - By [Mark](https://github.com/marklysze)
 

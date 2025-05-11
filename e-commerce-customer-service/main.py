@@ -1,11 +1,13 @@
-import autogen
-from autogen import (
+from autogen import config_list_from_json
+
+from autogen.agentchat.contrib.swarm_agent import (
     ON_CONDITION,
     AfterWorkOption,
     SwarmAgent,
     initiate_swarm_chat,
     UserProxyAgent,
 )
+
 from prompts import (
     order_triage_prompt,
     tracking_order_prompt,
@@ -24,10 +26,7 @@ from functions import (
 )
 
 # 1. Load the configuration file
-config_path = None
-config_list = autogen.config_list_from_json(
-    config_path, filter_dict={"model": ["gpt-4o"]}
-)
+config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
 
 # # 2. Load the keys directly
 # config_list = [
