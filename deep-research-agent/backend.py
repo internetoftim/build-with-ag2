@@ -31,6 +31,8 @@ def run_agent(user_query):
         summary_method="reflection_with_llm",
     )
 
+    final_result.process()
+
     return final_result
 
 
@@ -48,7 +50,8 @@ async def chat(request: Request):
     captured_output = buffer.getvalue()
 
     results = {
-        "final_result": final_result,
+        "final_result_summary": final_result.summary,
+        "final_result_cost": final_result.cost,
         "captured_output": captured_output,
     }
     return results
