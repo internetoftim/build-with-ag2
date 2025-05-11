@@ -1,9 +1,7 @@
 # Reference implementation of AG2 DeepResearchAgent
 
-WIP: This project is currently not working properly.Latest release of AG2 0.9 introduced minor issues which will be fixed as soon as possible.
-
 - Created by [willhama](https://github.com/willhama)
-- Revised by [rjambrecic](https://github.com/rjambrecic)
+- Last revision: 11/05/2025 by [willhama](https://github.com/willhama)
 
 DeepResearchAgent is an advanced research tool built on the AG2 framework, inspired by OpenAI's deep research agent.
 
@@ -65,7 +63,7 @@ There is also a streamlit frontend and fastapi backend application that can be r
 1. Start the backend
 
 ```bash
-uv run uvicorn backend:app --reload
+uvicorn backend:app --reload
 ```
 
 2. Start the frontend
