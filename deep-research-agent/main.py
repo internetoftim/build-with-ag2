@@ -23,6 +23,7 @@ def main():
     )
 
     print("#### DEEP RESEARCH RESULT ####")
+    result.process()
     print(result.summary)
 
 
