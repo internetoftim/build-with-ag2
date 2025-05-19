@@ -55,7 +55,7 @@ First, Clone and navigate to the folder:
 
 ```bash
 git clone https://github.com/ag2ai/build-with-ag2.git
-cd build-with-ag2/game_design_agent_team
+cd build-with-ag2/automate-ml-for-kaggle
 ```
 
 Then install the required dependencies:
