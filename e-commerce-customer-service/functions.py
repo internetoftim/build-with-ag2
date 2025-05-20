@@ -1,6 +1,6 @@
 import json
 from typing import Union
-from autogen import SwarmResult
+from autogen.agentchat.contrib.swarm_agent import SwarmResult
 
 with open("./mock_order_database.json") as f:
     MOCK_ORDER_DATABASE = json.load(f)

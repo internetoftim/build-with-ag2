@@ -1,5 +1,7 @@
 ## Trip Planning
 
+WIP: This project is currently not working properly.Latest release of AG2 0.9 introduced minor issues which will be fixed as soon as possible.
+
 - This code is forked from the [trip planning notebook](https://docs.ag2.ai/notebooks/agentchat_swarm_graphrag_trip_planner#trip-planning-with-a-falkordb-graphrag-agent-using-a-swarm) from AG2.
 - By [Mark](https://github.com/marklysze)
 
@@ -22,9 +24,9 @@ The following diagram outlines the key components of the Swarm, with highlights 
 
 This project demonstrates the following AG2 features:
 
-- [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+- [Swarm Orchestration](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm/deep-dive)
 - [GraphRAG](https://github.com/ag2ai/ag2/blob/main/notebook/agentchat_graph_rag_falkordb.ipynb)
-- [Structured Output](https://docs.ag2.ai/docs/user-guide/basic-concepts/structured-outputs#structured-outputs)
+- [Structured Output](https://docs.ag2.ai/docs/use-cases/notebooks/notebooks/agentchat_structured_outputs#structured-output)
 
 ## TAGS
 

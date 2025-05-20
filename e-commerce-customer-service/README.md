@@ -1,5 +1,7 @@
 # E-commerce Customer Service for order management
 
+WIP: This project is currently not working properly.Latest release of AG2 0.9 introduced minor issues which will be fixed as soon as possible.
+
 <!-- [Overall Description, authorship/references,] -->
 
 - By [yiranwu0](https://github.com/yiranwu0)
@@ -10,7 +12,7 @@ In this study, we build a robust and flexible order management system using dece
 
 This project demonstrates the following AG2 features:
 
-- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm-deep-dive)
+- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm/deep-dive)
 
 ## TAGS
 
