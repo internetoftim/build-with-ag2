@@ -1,6 +1,9 @@
 import json
 from typing import Union
 from autogen.agentchat.contrib.swarm_agent import SwarmResult
+from autogen.agentchat.group import (
+    ContextVariables,
+)
 
 with open("./mock_order_database.json") as f:
     MOCK_ORDER_DATABASE = json.load(f)
@@ -10,7 +13,7 @@ with open("mock_user_info.json") as f:
 
 
 # for order management agent
-def get_order_history(context_variables: dict) -> str:
+def get_order_history(context_variables: ContextVariables) -> str:
     """Return the order history of the user."""
     order_str = ""
     orders = context_variables["user_info"]["orders"]
@@ -20,7 +23,7 @@ def get_order_history(context_variables: dict) -> str:
 
 
 # for order management agent
-def check_order_status(order_number: str, context_variables: dict) -> str:
+def check_order_status(order_number: str, context_variables: ContextVariables) -> str:
     orders = context_variables["user_info"]["orders"]
     if order_number not in orders:
         return "The order number is invalid"
@@ -28,7 +31,7 @@ def check_order_status(order_number: str, context_variables: dict) -> str:
 
 
 # for login agent
-def login_account(context_variables: dict) -> Union[str, SwarmResult]:
+def login_account(context_variables: ContextVariables) -> Union[str, SwarmResult]:
     def mock_login_process():
         return True, MOCK_USER_INFO
 
@@ -48,7 +51,9 @@ def login_account(context_variables: dict) -> Union[str, SwarmResult]:
 
 
 # for return agent
-def check_return_eligibility(order_number: str, context_variables: dict) -> str:
+def check_return_eligibility(
+    order_number: str, context_variables: ContextVariables
+) -> str:
     orders = context_variables["user_info"]["orders"]
     if order_number not in orders:
         return "The order number is invalid"
@@ -62,7 +67,7 @@ def check_return_eligibility(order_number: str, context_variables: dict) -> str:
 
 
 def initiate_return_process(
-    order_number: str, context_variables: dict
+    order_number: str, context_variables: ContextVariables
 ) -> Union[str, SwarmResult]:
     orders = context_variables["user_info"]["orders"]
     if (
@@ -77,7 +82,7 @@ def initiate_return_process(
 
 # for tracking agent
 def verify_order_number(
-    order_number: str, context_variables: dict
+    order_number: str, context_variables: ContextVariables
 ) -> Union[str, SwarmResult]:
     # check the database to see if the order number is valid
     if order_number not in MOCK_ORDER_DATABASE:
@@ -94,7 +99,7 @@ def verify_order_number(
 def verify_user_information(
     email: str = None,
     phone_number_last_4_digit: str = None,
-    context_variables: dict = None,
+    context_variables: ContextVariables = None,
 ) -> str:
     if context_variables["order_info"] is None:
         return "An valid order number is not provided."
