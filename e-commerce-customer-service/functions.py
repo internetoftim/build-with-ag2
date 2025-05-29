@@ -1,6 +1,10 @@
 import json
 from typing import Union
-from autogen.agentchat.contrib.swarm_agent import SwarmResult
+from autogen.agentchat.group import (
+    ContextVariables,
+    AgentNameTarget,
+)
+from autogen.agentchat.group import ReplyResult
 
 with open("./mock_order_database.json") as f:
     MOCK_ORDER_DATABASE = json.load(f)
@@ -10,17 +14,19 @@ with open("mock_user_info.json") as f:
 
 
 # for order management agent
-def get_order_history(context_variables: dict) -> str:
+def get_order_history(context_variables: ContextVariables) -> str:
     """Return the order history of the user."""
     order_str = ""
     orders = context_variables["user_info"]["orders"]
+    if not orders:
+        return "No order history found"
     for order in orders:
         order_str += f"Order Number: {order['order_number']}, Product: {order['product']}, Status: {order['status']}, link: {order['link']}\n"
     return order_str
 
 
 # for order management agent
-def check_order_status(order_number: str, context_variables: dict) -> str:
+def check_order_status(order_number: str, context_variables: ContextVariables) -> str:
     orders = context_variables["user_info"]["orders"]
     if order_number not in orders:
         return "The order number is invalid"
@@ -28,7 +34,7 @@ def check_order_status(order_number: str, context_variables: dict) -> str:
 
 
 # for login agent
-def login_account(context_variables: dict) -> Union[str, SwarmResult]:
+def login_account(context_variables: ContextVariables) -> Union[str, ReplyResult]:
     def mock_login_process():
         return True, MOCK_USER_INFO
 
@@ -38,9 +44,9 @@ def login_account(context_variables: dict) -> Union[str, SwarmResult]:
     context_variables["user_info"] = user_info
     if login_in_status:
         user_preferrance_str = f"Name: {user_info['name']}, Preferred Name: {user_info['preferred_name']}, Preferred Language: {user_info['preferred_language']}, Preferred Tone: {user_info['preferred_tone']}"
-        return SwarmResult(
-            agent="order_management_agent",
-            values=f"User is successfully logged in. {user_preferrance_str}",
+        return ReplyResult(
+            target=AgentNameTarget("order_management_agent"),
+            message=f"User is successfully logged in. {user_preferrance_str}",
             context_variables=context_variables,
         )
     else:
@@ -48,7 +54,9 @@ def login_account(context_variables: dict) -> Union[str, SwarmResult]:
 
 
 # for return agent
-def check_return_eligibility(order_number: str, context_variables: dict) -> str:
+def check_return_eligibility(
+    order_number: str, context_variables: ContextVariables
+) -> str:
     orders = context_variables["user_info"]["orders"]
     if order_number not in orders:
         return "The order number is invalid"
@@ -62,8 +70,8 @@ def check_return_eligibility(order_number: str, context_variables: dict) -> str:
 
 
 def initiate_return_process(
-    order_number: str, context_variables: dict
-) -> Union[str, SwarmResult]:
+    order_number: str, context_variables: ContextVariables
+) -> Union[str, ReplyResult]:
     orders = context_variables["user_info"]["orders"]
     if (
         not check_return_eligibility(order_number, context_variables)
@@ -77,16 +85,17 @@ def initiate_return_process(
 
 # for tracking agent
 def verify_order_number(
-    order_number: str, context_variables: dict
-) -> Union[str, SwarmResult]:
+    order_number: str, context_variables: ContextVariables
+) -> Union[str, ReplyResult]:
     # check the database to see if the order number is valid
     if order_number not in MOCK_ORDER_DATABASE:
         return "The order number is invalid"
 
     context_variables["order_number"] = order_number
     context_variables["order_info"] = MOCK_ORDER_DATABASE[order_number]
-    return SwarmResult(
-        values="The order number is valid.", context_variables=context_variables
+    return ReplyResult(
+        message="The order number is valid.",
+        context_variables=context_variables,
     )
 
 
@@ -94,7 +103,7 @@ def verify_order_number(
 def verify_user_information(
     email: str = None,
     phone_number_last_4_digit: str = None,
-    context_variables: dict = None,
+    context_variables: ContextVariables = None,
 ) -> str:
     if context_variables["order_info"] is None:
         return "An valid order number is not provided."

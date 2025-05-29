@@ -5,6 +5,7 @@ WIP: This project is currently not working properly.Latest release of AG2 0.9 in
 <!-- [Overall Description, authorship/references,] -->
 
 - By [yiranwu0](https://github.com/yiranwu0)
+- Last revision: 26/05/2025 by [willhama](https://github.com/willhama)
 
 In this study, we build a robust and flexible order management system using decentralized agent orchestration. The system addresses two primary user needs: order tracking and order returns. The workflow considers the user’s login status during the initial interaction. Users can quickly track an order using a tracking number without logging in, while returns require authentication. This system leverages modular agents for triaging, tracking, login management, order management, and returns, ensuring a seamless user experience.
 
@@ -12,18 +13,18 @@ In this study, we build a robust and flexible order management system using dece
 
 This project demonstrates the following AG2 features:
 
-- [Swarm](https://docs.ag2.ai/docs/user-guide/advanced-concepts/swarm/deep-dive)
+- [Groupchat](https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/introduction/#purpose-and-benefits)
 
 ## TAGS
 
-TAGS: swarm, e-commerce, order management, customer service, order tracking, returns processing, authentication, workflow automation, agent orchestration
+TAGS: groupchat, e-commerce, order management, customer service, order tracking, returns processing, authentication, workflow automation, agent orchestration
 
 ## Description
 
 <!-- [More detailed description, any additional information about the use case] -->
 
 **Agents and Workflow**
-We initialize the context variables with two fields: `user_info` to store user information (and order list when a user logs in) and `order_info` to store the retrieved order information. Since swarm is a decentralized orchestration, we will transfer logic in each agent:
+We initialize the context variables with two fields: `user_info` to store user information (and order list when a user logs in) and `order_info` to store the retrieved order information. Since groupchat is a decentralized orchestration, we will transfer logic in each agent:
 
 - **Order Triage Agent**:
   When the user sends a message related to orders, it will be routed to the Order Triage Agent. This agent will further decide whether to transfer to the Tracking Agent or the Login Agent.
