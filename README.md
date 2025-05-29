@@ -52,7 +52,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 - 📱 [Aquinas](https://github.com/thomasturek/aquinas): AI-Powered social media engagement tool
 - 🛡️ [disarmBot](https://github.com/ultra-supara/disarmBot): A multi-agent LM system for analyzing disinformation based on DISARM
 - 🛠️ [Hercules](https://github.com/test-zeus-ai/testzeus-hercules): An open-source testing agent that turns simple Gherkin steps into fully automated end-to-end tests
-- [CMBAgent](https://github.com/CMBAgents/cmbagent): Multi-agent system for data analysis and visualization
+- 📊 [CMBAgent](https://github.com/CMBAgents/cmbagent): Multi-agent system for data analysis and visualization
 - 🔏 [AutoDefense](https://github.com/XHMY/AutoDefense): Multi-agent LLM Defense against jailbreak attacks
 - 🔍 [Prompt Leakage Probing](https://github.com/airtai/prompt-leakage-probing): Framework for testing LLM agents for system prompt leaks
 
