@@ -1,12 +1,17 @@
 from autogen import config_list_from_json
-
-from autogen.agentchat.contrib.swarm_agent import (
-    ON_CONDITION,
-    AfterWorkOption,
-    SwarmAgent,
-    initiate_swarm_chat,
-    UserProxyAgent,
+from autogen.agentchat import initiate_group_chat
+from autogen.agentchat.group import (
+    AgentTarget,
+    ContextVariables,
+    OnCondition,
+    StringLLMCondition,
+    RevertToUserTarget,
 )
+from autogen.agentchat.group.patterns import DefaultPattern
+
+
+from autogen import ConversableAgent, UserProxyAgent
+
 
 from prompts import (
     order_triage_prompt,
@@ -62,57 +67,70 @@ INIT_USER_INFO = {
     "order_info": None,
 }
 
+support_context = ContextVariables(context_variables)
 
-order_triage_agent = SwarmAgent(
-    llm_config=llm_config,
+order_triage_agent = ConversableAgent(
     name="order_triage_agent",
     system_message=order_triage_prompt,
+    llm_config=llm_config,
 )
 
-tracking_agent = SwarmAgent(
+tracking_agent = ConversableAgent(
     name="order_tracking_agent",
     system_message=tracking_order_prompt,
     llm_config=llm_config,
     functions=[verify_order_number, verify_user_information],
 )
 
-login_agent = SwarmAgent(
+login_agent = ConversableAgent(
     name="login_management_agent",
     system_message=login_in_management_prompt,
     llm_config=llm_config,
     functions=[login_account],
 )
 
-order_management_agent = SwarmAgent(
+order_management_agent = ConversableAgent(
     name="order_management_agent",
     system_message=order_management_prompt,
     llm_config=llm_config,
     functions=[get_order_history, check_order_status],
 )
 
-
-return_agent = SwarmAgent(
+return_agent = ConversableAgent(
     name="return_agent",
     system_message=return_prompt,
     llm_config=llm_config,
     functions=[check_return_eligibility, initiate_return_process],
 )
 
-to_login = ON_CONDITION(target=login_agent, condition="Transfer to the login agent")
-order_triage_agent.register_hand_off(
+order_triage_agent.handoffs.add_llm_conditions(
     [
-        to_login,
-        ON_CONDITION(target=tracking_agent, condition="Transfer to the tracking agent"),
+        OnCondition(
+            target=AgentTarget(login_agent),
+            condition=StringLLMCondition(prompt="Transfer to the login agent"),
+        ),
+        OnCondition(
+            target=AgentTarget(tracking_agent),
+            condition=StringLLMCondition(prompt="Transfer to the tracking agent"),
+        ),
     ]
 )
-tracking_agent.register_hand_off(to_login)
-order_management_agent.register_hand_off(
-    ON_CONDITION(target=return_agent, condition="Transfer to the return agent")
+tracking_agent.handoffs.add_llm_condition(
+    OnCondition(
+        target=AgentTarget(login_agent),
+        condition=StringLLMCondition(prompt="Transfer to the login agent"),
+    )
 )
-return_agent.register_hand_off(
-    ON_CONDITION(
-        target=order_management_agent,
-        condition="Transfer to the order management agent",
+order_management_agent.handoffs.add_llm_condition(
+    OnCondition(
+        target=AgentTarget(return_agent),
+        condition=StringLLMCondition(prompt="Transfer to the return agent"),
+    )
+)
+return_agent.handoffs.add_llm_condition(
+    OnCondition(
+        target=AgentTarget(order_management_agent),
+        condition=StringLLMCondition(prompt="Transfer to the order management agent"),
     )
 )
 
@@ -122,8 +140,8 @@ user = UserProxyAgent(
     code_execution_config=False,
 )
 
-chat_history = initiate_swarm_chat(
-    initial_agent=order_triage_agent,
+
+agent_pattern = DefaultPattern(
     agents=[
         order_triage_agent,
         tracking_agent,
@@ -131,9 +149,14 @@ chat_history = initiate_swarm_chat(
         order_management_agent,
         return_agent,
     ],
-    context_variables=context_variables,
-    messages="Hello",
+    initial_agent=order_triage_agent,
+    context_variables=support_context,
     user_agent=user,
+    group_after_work=RevertToUserTarget(),
+)
+
+result, final_context, last_agent = initiate_group_chat(
+    pattern=agent_pattern,
+    messages="Hello",
     max_rounds=40,
-    after_work=AfterWorkOption.REVERT_TO_USER,
 )

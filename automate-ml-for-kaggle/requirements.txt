@@ -1,4 +1,4 @@
-ag2[jupyter_executor]
+ag2[jupyter-executor]
 scikit-learn
 pandas
 matplotlib
