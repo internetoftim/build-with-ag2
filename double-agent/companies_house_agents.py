@@ -3,7 +3,7 @@ import autogen
 from autogen import Agent, AssistantAgent, config_list_from_json, GroupChat, GroupChatManager, UserProxyAgent
 from typing import Dict, Any
 from dotenv import load_dotenv
-
+from state_transition import state_transition
 
 # Load environment variables
 load_dotenv()
@@ -23,6 +23,9 @@ def get_config_list():
         "api_key": os.environ.get("OPENAI_API_KEY"),
     }
 ]
+
+# Get the configuration
+config_list = get_config_list()
 
 # Mock Companies House API functions
 def mock_search_company(query: str) -> Dict[str, Any]:
@@ -287,50 +290,7 @@ profile_agent.register_function({
 document_agent.register_function({"get_document": mock_get_document})
 analysis_agent.register_function({"save_to_database": mock_save_to_database})
 
-# Define a state transition function to select the next speaker based on the conversation context
-def state_transition(
-    last_speaker: Agent,
-    groupchat: GroupChat
-) -> Agent:
-    """Determine which agent should speak next based on the conversation context."""
-    # Get the last message in the conversation
-    last_message = groupchat.messages[-1]["content"] if groupchat.messages else ""
-    last_message_lower = last_message.lower()
-    
-    # If the user asks a question, the search agent should respond first
-    if last_speaker.name == "User":
-        if "search" in last_message_lower or "find" in last_message_lower or "looking for" in last_message_lower:
-            return search_agent
-        # If analysis is explicitly requested, go straight to analysis agent
-        elif "analyze" in last_message_lower or "analysis" in last_message_lower:
-            return analysis_agent
-        # Default to search agent for most user queries
-        return search_agent
-        
-    # If search agent just spoke, the profile agent should retrieve detailed information
-    elif last_speaker.name == "SearchAgent":
-        if "company_number" in last_message_lower or "found" in last_message_lower:
-            return profile_agent
-        # If no results found, return to user
-        return user_proxy
-        
-    # If profile agent just spoke, the document agent should retrieve relevant documents
-    elif last_speaker.name == "ProfileAgent":
-        if "document" in last_message_lower or "filing" in last_message_lower:
-            return document_agent
-        # If no documents mentioned, go straight to analysis
-        return analysis_agent
-        
-    # If document agent just spoke, the analysis agent should analyze the information
-    elif last_speaker.name == "DocumentAgent":
-        return analysis_agent
-        
-    # If analysis agent just spoke, go back to the user
-    elif last_speaker.name == "AnalysisAgent":
-        return user_proxy
-        
-    # Default back to the user if no other condition is met
-    return user_proxy
+# State transition function is now imported from state_transition.py
 
 # Create a group chat with all agents
 groupchat = GroupChat(
@@ -345,11 +305,44 @@ manager = GroupChatManager(groupchat=groupchat, llm_config={"config_list": confi
 
 # Run the system
 def main():
-    # Start the conversation with a query from the user
-    user_proxy.initiate_chat(
-        manager,
-        message="I need information about Apple Ltd. Can you search for it and analyze their latest financial data?"
-    )
+    # Start the conversation and automatically run the workflow
+    # First, search for the company
+    print("\nAutomatically running the Companies House multi-agent workflow:\n")
+    result = mock_search_company("apple")
+    print(f"1. Search result: {result}")
+    
+    # Get company profile and filing history
+    company_number = result["results"][0]["company_number"]
+    profile = mock_get_company_profile(company_number)
+    filings = mock_get_filing_history(company_number)
+    print(f"2. Company profile: {profile}")
+    print(f"3. Filing history: {filings}")
+    
+    # Get document details
+    document_id = filings["items"][0]["links"]["document_metadata"]
+    document = mock_get_document(document_id)
+    print(f"4. Document content: {document}")
+    
+    # Analyze and save to database
+    analysis_data = {
+        "company_name": profile["data"]["name"],
+        "company_number": company_number,
+        "status": profile["data"]["status"],
+        "incorporation_date": profile["data"]["date_of_creation"],
+        "latest_filing": filings["items"][0]["description"],
+        "financial_summary": document["data"]["content"]
+    }
+    save_result = mock_save_to_database(analysis_data)
+    print(f"5. Database save result: {save_result}")
+    
+    print("\nWorkflow complete! This demonstrates the full Companies House agent workflow.\n")
+    print("In a real implementation, these functions would interact with the actual Companies House API.\n")
+    
+    # You could also initiate the chat-based workflow:
+    # user_proxy.initiate_chat(
+    #     manager,
+    #     message="I need information about Apple Ltd. Can you search for it and analyze their latest financial data?"
+    # )
 
 if __name__ == "__main__":
     main()
