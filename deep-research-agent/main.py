@@ -3,6 +3,7 @@ from autogen import GroupChat, GroupChatManager
 from autogen.agents.experimental import DeepResearchAgent
 import os
 import datetime
+import argparse
 
 
 def generate_filename(query):
@@ -42,6 +43,12 @@ def save_research_to_file(content, filename=None, directory="research_results"):
 
 
 def main():
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Deep Research Agent')
+    parser.add_argument('--use-fake', action='store_true', help='Use fake research agent instead of the real one')
+    args = parser.parse_args()
+    
+    # Get the configuration for LLM models
     config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
     # You can also set config_list directly as a list, for example, config_list = [{'model': 'gpt-4o', 'api_key': '<your OpenAI API key here>'},]
 
@@ -181,19 +188,26 @@ def main():
         )
         result.process()
         return result.summary
+
+    
+    # Create group chat based on command-line argument
+    if args.use_fake:
+        print("Using FakeResearchAgent for testing...")
+        research_agent = fake_agent
+    else:
+        print("Using DeepResearchAgent for real research...")
+        research_agent = agent
     
     # Register the delegate_research_task function with all agents
-    for agent_obj in [user_proxy, agent, echo_agent, data_handler_agent]:
+    for agent_obj in [user_proxy, research_agent, echo_agent, data_handler_agent]:
         agent_obj.register_function(
             function_map={
                 "delegate_research_task": delegate_research_task
             }
         )
-    
-    # Create group chat
+        
     group_chat = GroupChat(
-        # agents=[agent, echo_agent, data_handler_agent, user_proxy], # real deep research agent
-        agents=[fake_agent, echo_agent, data_handler_agent, user_proxy], # fake agent for testing
+        agents=[research_agent, echo_agent, data_handler_agent, user_proxy],
         messages=[],
         max_round=50,
         speaker_selection_method="auto",
@@ -205,7 +219,7 @@ def main():
     # Start the conversation
     user_proxy.initiate_chat(
         group_chat_manager,
-        message="What would you like to research deeply",
+        message="What would you like to research deeply"
     )
 
     # first_message = input("What would you like to research deeply?: ")
