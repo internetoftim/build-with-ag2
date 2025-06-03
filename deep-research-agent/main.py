@@ -113,7 +113,7 @@ def main():
         agents=[agent, echo_agent, user_proxy],
         messages=[],
         max_round=50,
-        speaker_selection_method="round_robin",
+        speaker_selection_method="auto",
     )
 
     # Create group chat manager
