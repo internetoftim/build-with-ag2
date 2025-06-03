@@ -22,28 +22,50 @@ TAGS: deep-research, data-retrieval, automation, research-assistant, streamlit, 
 
 DeepResearchAgent requires Python 3.11 or higher.
 
-1. Install the required packages:
+### Option 1: Automated Setup (Recommended)
+
+Use the provided setup script to automatically create a virtual environment, install dependencies, and set up Playwright:
+
+```bash
+./setup.sh
+```
+
+This script will:
+1. Create a Python virtual environment
+2. Install all required packages
+3. Install Playwright browsers automatically
+
+### Option 2: Manual Installation
+
+1. Create a virtual environment (recommended):
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. Install the required packages:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-2. If you are already using `autogen` or `pyautogen`, simply upgrade:
+3. If you are already using `autogen` or `pyautogen`, simply upgrade:
 
    ```bash
    pip install -U autogen[browser-use]
    ```
 
-3. Install Playwright (required for web data retrieval):
+4. Install Playwright (required for web data retrieval):
 
    ```bash
-   playwright install
+   python -m playwright install
    ```
 
    **For Linux users only:**
 
    ```bash
-   playwright install-deps
+   python -m playwright install-deps
    ```
 
 ## Running the code

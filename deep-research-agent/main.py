@@ -51,12 +51,19 @@ def main():
         name="DeepResearchAgent",
         llm_config={"config_list": config_list},
     )
+# Fake Reserach Agent for testing
+    fake_agent = AssistantAgent(
+        name="FakeResearchAgent",
+        system_message="""You are a fake research agent.You don't have anything else to do but always return a made-up report about the topic you are researching. As if you are the DeepResearchAgent""",
+        llm_config={"config_list": config_list},
+    )
+
 
     # Agent 2: Echo Agent
     echo_agent = AssistantAgent(
         name="EchoAgent",
         system_message="""You are an assistant that echoes and summarizes research results.
-        When you receive research content from the DeepResearchAgent, your job is to:
+        When you receive research content from the DeepResearchAgent or FakeResearchAgent, your job is to:
         1. Confirm receipt of the research
         2. Summarize the key points in bullet form
         3. Save the research to a file using the save_research_to_file function
@@ -110,7 +117,8 @@ def main():
     
     # Create group chat
     group_chat = GroupChat(
-        agents=[agent, echo_agent, user_proxy],
+        agents=[ agent,echo_agent, user_proxy], #real deep research agent
+        # agents=[ fake_agent,echo_agent, user_proxy],
         messages=[],
         max_round=50,
         speaker_selection_method="auto",
