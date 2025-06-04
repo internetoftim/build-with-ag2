@@ -1,6 +1,7 @@
-from autogen import config_list_from_json, AssistantAgent, UserProxyAgent
+from autogen import config_list_from_json, AssistantAgent, UserProxyAgent, LLMConfig
 from autogen import GroupChat, GroupChatManager
 from autogen.agents.experimental import DeepResearchAgent
+from autogen.tools.experimental.google import GoogleCredentialsLocalProvider, GoogleDriveToolkit
 import os
 import datetime
 import argparse
@@ -42,10 +43,29 @@ def save_research_to_file(content, filename=None, directory="research_results"):
     return filepath
 
 
+def authenticate_google_drive():
+    """Authenticate with Google Drive and return credentials"""
+    # Define paths for Google Drive authentication
+    client_secret_file = "./credentials.json"
+    token_file = "./token.json"
+    
+    # Set up provider for Google Drive authentication
+    provider = GoogleCredentialsLocalProvider(
+        client_secret_file=client_secret_file,
+        scopes=GoogleDriveToolkit.recommended_scopes(),
+        token_file=token_file,
+    )
+    
+    # Get credentials (this will initiate OAuth flow if needed)
+    credentials = provider.get_credentials()
+    return credentials
+
+
 def main():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Deep Research Agent')
     parser.add_argument('--use-fake', action='store_true', help='Use fake research agent instead of the real one')
+    parser.add_argument('--use-gdrive', action='store_true', help='Include Google Drive agent in the conversation')
     args = parser.parse_args()
     
     # Get the configuration for LLM models
@@ -206,14 +226,56 @@ def main():
             }
         )
         
+    gdrive_agent = None
+    if args.use_gdrive:
+        try:
+            # Get Google Drive credentials
+            credentials = authenticate_google_drive()
+            
+            # Create directory for downloads
+            os.makedirs("ag2_drive_downloads", exist_ok=True)
+            
+            # Create Google Drive agent
+            gdrive_agent = AssistantAgent(
+                name="GoogleDriveAgent", 
+                llm_config={"config_list": config_list},
+                system_message="""You are an agent that helps users access their Google Drive files.
+                You can list files, download documents, search for specific files, and perform other Google Drive operations.
+                When asked to get files, first list the available files to show the user what's available.
+                Then offer to download specific files based on their selection or requirements.
+                Always use the provided Google Drive API functions and only report actual results from these function calls.
+                """
+            )
+            
+            # Create and register Google Drive toolkit
+            google_drive_toolkit = GoogleDriveToolkit(
+                credentials=credentials,
+                download_folder="ag2_drive_downloads",
+            )
+            
+            # Register toolkit with the agent and user proxy for execution
+            google_drive_toolkit.register_for_execution(user_proxy)
+            google_drive_toolkit.register_for_llm(gdrive_agent)
+            
+            print("Google Drive agent initialized successfully")
+        except Exception as e:
+            print(f"Error initializing Google Drive agent: {e}")
+            print("Continuing without Google Drive agent...")
+    
+    # Create a group chat and manager
+    groupchat_agents = [user_proxy, echo_agent, research_agent, data_handler_agent]
+    
+    # Add Google Drive agent to the group chat if available
+    if gdrive_agent:
+        groupchat_agents.append(gdrive_agent)
+        
     group_chat = GroupChat(
-        agents=[research_agent, echo_agent, data_handler_agent, user_proxy],
-        messages=[],
+        agents=groupchat_agents, 
+        messages=[], 
         max_round=50,
-        speaker_selection_method="auto",
+        speaker_selection_method="round_robin",
+        allow_repeat_speaker=False,
     )
-
-    # Create group chat manager
     group_chat_manager = GroupChatManager(groupchat=group_chat, llm_config={"config_list": config_list})
 
     # Start the conversation
