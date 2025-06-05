@@ -273,7 +273,7 @@ def main():
         agents=groupchat_agents, 
         messages=[], 
         max_round=50,
-        speaker_selection_method="round_robin",
+        speaker_selection_method="auto",
         allow_repeat_speaker=False,
     )
     group_chat_manager = GroupChatManager(groupchat=group_chat, llm_config={"config_list": config_list})
