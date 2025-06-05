@@ -16,11 +16,20 @@ def generate_filename(query):
     # Add timestamp for uniqueness
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    return f"research_{clean_query}_{timestamp}.txt"
+    return f"research_{clean_query}_{timestamp}.md"
 
 
-def save_research_to_file(content, filename=None, directory="research_results"):
-    """Save research content to a text file."""
+def save_research_to_file(content, filename=None, directory="research_reports"):
+    """Save research content to a markdown file.
+    
+    Args:
+        content (str): The research content to save (will be formatted as markdown)
+        filename (str, optional): The filename to use. If not provided, one will be generated.
+        directory (str, optional): Directory to save the file in. Defaults to "research_reports".
+        
+    Returns:
+        str: The path to the saved file
+    """
     # Create directory if it doesn't exist
     os.makedirs(directory, exist_ok=True)
     
@@ -28,9 +37,16 @@ def save_research_to_file(content, filename=None, directory="research_results"):
     if not filename:
         filename = generate_filename("research")
     
-    # Ensure filename has .txt extension
-    if not filename.endswith('.txt'):
-        filename += '.txt'
+    # Ensure filename has .md extension
+    if not filename.endswith('.md'):
+        if filename.endswith('.txt'):
+            filename = filename.replace('.txt', '.md')
+        else:
+            filename += '.md'
+    
+    # Extract markdown content if wrapped in ```markdown blocks
+    if "```markdown" in content and "```" in content.split("```markdown", 1)[1]:
+        content = content.split("```markdown", 1)[1].split("```", 1)[0].strip()
     
     # Full path for the output file
     filepath = os.path.join(directory, filename)
@@ -39,7 +55,7 @@ def save_research_to_file(content, filename=None, directory="research_results"):
     with open(filepath, 'w', encoding='utf-8') as file:
         file.write(content)
     
-    print(f"\nResearch saved to: {filepath}")
+    print(f"\nResearch report saved as markdown to: {filepath}")
     return filepath
 
 
@@ -108,12 +124,19 @@ def main():
         When you receive research content from the DeepResearchAgent or FakeResearchAgent, your job is to:
         1. Create a structured, comprehensive report in markdown format
         2. Include an executive summary, key findings, and analysis sections
-        3. Format the report professionally with proper headings, lists, and code blocks
-        4. Save the completed report using the save_research_to_file function
+        3. Format the report professionally with proper markdown syntax:
+           - Use # headings for main sections (# Executive Summary, ## Key Findings, etc)
+           - Format lists with proper markdown bullets
+           - Use code blocks with ``` when including code snippets
+           - Add emphasis with **bold** and *italic* when appropriate
+           - Include properly formatted [links](url) for references
+        4. Save the completed report using the save_research_to_file function - your output will be saved as .md files
         5. Ask if the user would like more details on any specific aspect
         
         Always ensure your reports are well-organized, readable, and include all the important information from the research.
-        Return your complete report formatted in markdown.""",
+        The report should be ready for immediate reading as a professional markdown document without requiring any additional formatting.
+        
+        You don't need to wrap your response in ```markdown``` tags since the save function will handle this.""",
         llm_config={"config_list": config_list},
     )
     
@@ -121,7 +144,7 @@ def main():
     data_handler_agent = AssistantAgent(
         name="DataHandlerAgent",
         system_message="""You are a specialized data handler agent focused solely on data persistence.
-        Your ONLY job is to receive data and save it correctly as text files. When you receive content:
+        Your ONLY job is to receive data and save it correctly as markdown files. When you receive content:
         1. DO NOT summarize or analyze the content
         2. DO NOT engage in discussions about the content
         3. IMMEDIATELY save the received content using EITHER:
@@ -130,7 +153,7 @@ def main():
         4. Confirm the exact filepath where the data was saved
         5. Keep your responses extremely brief and focused on the file-saving operation
         
-        When saving files, ensure they follow consistent naming patterns and always have .txt extensions.
+        When saving files, ensure they follow consistent naming patterns and always have .md extensions.
         If you receive JSON data, format it properly before saving.
         If you receive tabular data, ensure it's aligned in columns with proper spacing.
         
@@ -145,13 +168,13 @@ def main():
         
         # Generate a filename with timestamp
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f'data_{timestamp}.txt'
+        filename = f'data_{timestamp}.md'
         
         # Create output directory if needed
-        os.makedirs('data_output', exist_ok=True)
+        os.makedirs('research_reports', exist_ok=True)
         
         # Save the file
-        filepath = os.path.join('data_output', filename)
+        filepath = os.path.join('research_reports', filename)
         with open(filepath, 'w') as f:
             f.write(formatted_data)
         
@@ -166,7 +189,6 @@ def main():
             "use_docker": False,  # No need for Docker
         },
     )
-    
     # Register the save_research_to_file function with the report writer agent
     report_writer.register_function(
         function_map={
