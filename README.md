@@ -46,6 +46,7 @@ A curated collection of awesome agentic applications built with [AG2](https://gi
 ## 🔗 Links to More Projects Built with AG2
 
 - 📓 [AG2 Notebooks](https://github.com/ag2ai/ag2/tree/main/notebook): AG2 notebooks
+- 🖥️ [Waldiez](https://github.com/waldiez/waldiez): UI for designing AG2-based workflows using drag-and-drop
 - 🦸 [HeroYouth](https://github.com/linmou/HeroYouth): Empowering youth against school bullying
 - 🔬 [SciAgents](https://github.com/lamm-mit/SciAgentsDiscovery): Automating scientific discovery through multi-agent intelligent graph reasoning
 - 🌐 [Agent-E](https://github.com/EmergenceAI/Agent-E): A browser automation agent for natural language-driven web interactions and task automation.
