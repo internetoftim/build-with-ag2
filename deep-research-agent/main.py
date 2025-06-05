@@ -101,16 +101,19 @@ def main():
     )
 
 
-    # Agent 2: Echo Agent
-    echo_agent = AssistantAgent(
-        name="EchoAgent",
-        system_message="""You are an assistant that echoes and summarizes research results.
+    # Agent 2: Report Writer Agent
+    report_writer = AssistantAgent(
+        name="ReportWriter",
+        system_message="""You are a specialized report writer agent that creates well-formatted markdown reports.
         When you receive research content from the DeepResearchAgent or FakeResearchAgent, your job is to:
-        1. Confirm receipt of the research
-        2. Summarize the key points in bullet form
-        3. Save the research to a file using the save_research_to_file function
-        4. Ask if the user would like more details on any specific aspect
-        Your role is currently a placeholder for future expansion, so keep your responses concise.""",
+        1. Create a structured, comprehensive report in markdown format
+        2. Include an executive summary, key findings, and analysis sections
+        3. Format the report professionally with proper headings, lists, and code blocks
+        4. Save the completed report using the save_research_to_file function
+        5. Ask if the user would like more details on any specific aspect
+        
+        Always ensure your reports are well-organized, readable, and include all the important information from the research.
+        Return your complete report formatted in markdown.""",
         llm_config={"config_list": config_list},
     )
     
@@ -164,8 +167,8 @@ def main():
         },
     )
     
-    # Register the save_research_to_file function with the echo agent
-    echo_agent.register_function(
+    # Register the save_research_to_file function with the report writer agent
+    report_writer.register_function(
         function_map={
             "save_research_to_file": save_research_to_file
         }
@@ -185,8 +188,8 @@ def main():
         code_execution_config={"work_dir": ".", "use_docker": False},
     )
 
-    # Register the save_research_to_file function with the user proxy and echoagent for testing
-    for agent_obj in [user_proxy, echo_agent]:
+    # Register the save_research_to_file function with the user proxy and report writer for testing
+    for agent_obj in [user_proxy, report_writer]:
         agent_obj.register_function(
             function_map={
                 "save_research_to_file": save_research_to_file
@@ -219,7 +222,7 @@ def main():
         research_agent = agent
     
     # Register the delegate_research_task function with all agents
-    for agent_obj in [user_proxy, research_agent, echo_agent, data_handler_agent]:
+    for agent_obj in [user_proxy, research_agent, report_writer, data_handler_agent]:
         agent_obj.register_function(
             function_map={
                 "delegate_research_task": delegate_research_task
@@ -263,7 +266,7 @@ def main():
             print("Continuing without Google Drive agent...")
     
     # Create a group chat and manager
-    groupchat_agents = [user_proxy, echo_agent, research_agent, data_handler_agent]
+    groupchat_agents = [user_proxy, report_writer, research_agent, data_handler_agent]
     
     # Add Google Drive agent to the group chat if available
     if gdrive_agent:
