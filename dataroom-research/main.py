@@ -5,6 +5,7 @@ from autogen.tools.experimental.google import GoogleCredentialsLocalProvider, Go
 import os
 import datetime
 import argparse
+from gdrive_signin import authenticate_google_drive
 
 
 def generate_filename(query):
@@ -334,4 +335,5 @@ def main():
 
 
 if __name__ == "__main__":
+    authenticate_google_drive()
     main()

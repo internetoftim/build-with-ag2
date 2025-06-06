@@ -83,14 +83,15 @@ To enable Google Drive features, you need OAuth credentials following [Google's 
 1. Create a Google Cloud project and enable the Drive API
 2. Create OAuth 2.0 credentials and download as `credentials.json`
 3. Place `credentials.json` in the project root directory
-4. Generate the `token.json` file by running [gdrive-quickstart.py](https://github.com/googleworkspace/python-samples/blob/main/drive/quickstart/quickstart.py)
-```bash
-python gdrive-quickstart.py
-```
+4. (Optional) Generate the `token.json` file by running [gdrive_signin.py](https://github.com/googleworkspace/python-samples/blob/main/drive/quickstart/quickstart.py)
 
 The system will automatically handle OAuth authentication on first run, and you should be able to see the files in your Google Drive account get listed here.
 
-You can now copy over the `credentials.json` and `token.json` to run the [AG2 Google Drive Collab Notebook](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/tools_google_drive/)
+```bash
+python gdrive_signin.py
+```
+
+You can also copy over the `credentials.json` and `token.json` to run the [AG2 Google Drive Collab Notebook](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/tools_google_drive/)
 
 ## 3. Run the System
 
