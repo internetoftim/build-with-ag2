@@ -7,7 +7,6 @@ import datetime
 import argparse
 from gdrive_signin import authenticate_google_drive
 
-
 def generate_filename(query):
     """Generate a filename based on the research query."""
     # Clean the query to create a filename-friendly string
@@ -189,7 +188,19 @@ def main():
         print(f'Data saved to {filepath}')
         ```
         
-        ALWAYS USE YOUR CODE EXECUTION CAPABILITIES when complex data formatting or specialized file handling is required.""",
+        ALWAYS USE YOUR CODE EXECUTION CAPABILITIES when complex data formatting or specialized file handling is required.
+        
+        YOU ARE ALSO RESPONSIBLE FOR READING CSV AND EXCEL FILES, generate python code to read them.
+        here is an example of how to read an excel file:
+        ```python
+        import pandas as pd
+
+        # read by default 1st sheet of an excel file
+        dataframe1 = pd.read_excel({filepath})
+
+        print(dataframe1)
+        ```
+        """,
         llm_config=llm_config,
         code_execution_config={
             "last_n_messages": 3,  # Consider last 3 messages for code generation
@@ -204,6 +215,8 @@ def main():
         name="User",
         human_input_mode="ALWAYS",
         code_execution_config={"work_dir": ".", "use_docker": False},
+        # code_execution_config={
+        # "executor": JupyterCodeExecutor(server, output_dir=output_dir),
     )
 
     
@@ -251,23 +264,10 @@ def main():
             print(f"Error initializing Google Drive agent: {e}")
             print("Continuing without Google Drive agent...")
 
-    # Register the save_research_to_file function with the report writer agent
-    report_writer.register_function(
-        function_map={
-            "save_research_to_file": save_research_to_file
-        }
-    )
-
-    # Register the save_research_to_file function with the data handler agent
-    data_handler_agent.register_function(
-        function_map={
-            "save_research_to_file": save_research_to_file
-        }
-    )
 
 
-    # Register the save_research_to_file function with the user proxy and report writer for testing
-    for agent_obj in [user_proxy, report_writer]:
+    # Register the save_research_to_file function with the user proxy and report writer 
+    for agent_obj in [user_proxy, report_writer, data_handler_agent]:
         agent_obj.register_function(
             function_map={
                 "save_research_to_file": save_research_to_file
@@ -318,20 +318,6 @@ def main():
         group_chat_manager,
         message="What would you like to research deeply"
     )
-
-    # first_message = input("What would you like to research deeply?: ")
-
-    # result = agent.run(
-    #     message=first_message,
-    #     tools=agent.tools,
-    #     max_turns=2,
-    #     user_input=False,
-    #     summary_method="reflection_with_llm",
-    # )
-
-    # print("#### DEEP RESEARCH RESULT ####")
-    # result.process()
-    # print(result.summary)
 
 
 if __name__ == "__main__":

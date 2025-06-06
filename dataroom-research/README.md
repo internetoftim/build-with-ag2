@@ -20,6 +20,7 @@ The system also features a professional report writer agent that creates well-st
 
 - [DeepResearchAgent](https://docs.ag2.ai/docs/blog/2025-02-13-DeepResearchAgent/index) - For advanced web research and data gathering
 - [GoogleDriveToolkit](https://docs.ag2.ai/latest/docs/user-guide/reference-tools/google-api/google-drive/) - For seamless Google Drive integration
+- [GroupChat](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/agentchat_groupchat_tools/) - Flexible orchestration of multiple specialized agents
 
 ## TAGS
 
@@ -160,7 +161,7 @@ ollama pull llama3:8b
 ollama serve
 ```
 
-Ollama runs a REST API on http://localhost:11434 by default. You can use OLLAMA_CONFIG_LIST to use the local LLM with your agent.
+Ollama runs a REST API on http://localhost:11434 by default. The Ollama configuration is included in OAI_CONFIG_LIST to use the local LLM with your agent.
 
 
 For more information or any questions, please refer to the documentation or reach out to us!
