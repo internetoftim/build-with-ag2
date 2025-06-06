@@ -87,12 +87,19 @@ def main():
     # Get the configuration for LLM models
     config_list = config_list_from_json(env_or_file="OAI_CONFIG_LIST")
     # You can also set config_list directly as a list, for example, config_list = [{'model': 'gpt-4o', 'api_key': '<your OpenAI API key here>'},]
+    
+    llm_config = {
+        "cache_seed": 42,  # change the cache_seed for different trials
+        "temperature": 1,
+        "config_list": config_list,
+
+    }
 
 # Agent 1: DeepResearch Agent 
 
     agent = DeepResearchAgent(
         name="DeepResearchAgent",
-        llm_config={"config_list": config_list},
+        llm_config=llm_config,
     )
 # Fake Reserach Agent for testing
     fake_agent = AssistantAgent(
@@ -113,7 +120,7 @@ def main():
         Month 11: $92,214
         Month 12: $104,328
         """,
-        llm_config={"config_list": config_list},
+        llm_config=llm_config,
     )
 
 
@@ -137,7 +144,7 @@ def main():
         The report should be ready for immediate reading as a professional markdown document without requiring any additional formatting.
         
         You don't need to wrap your response in ```markdown``` tags since the save function will handle this.""",
-        llm_config={"config_list": config_list},
+        llm_config=llm_config,
     )
     
     # Agent 3: Data Handler Agent
@@ -182,57 +189,21 @@ def main():
         ```
         
         ALWAYS USE YOUR CODE EXECUTION CAPABILITIES when complex data formatting or specialized file handling is required.""",
-        llm_config={"config_list": config_list},
+        llm_config=llm_config,
         code_execution_config={
             "last_n_messages": 3,  # Consider last 3 messages for code generation
             "work_dir": "research_results",  # Use the same directory as save_research_to_file
             "use_docker": False,  # No need for Docker
         },
     )
-    # Register the save_research_to_file function with the report writer agent
-    report_writer.register_function(
-        function_map={
-            "save_research_to_file": save_research_to_file
-        }
-    )
 
-    # Register the save_research_to_file function with the data handler agent
-    data_handler_agent.register_function(
-        function_map={
-            "save_research_to_file": save_research_to_file
-        }
-    )
 
-    # Agent 3: User Proxy
+    # Agent 4: User Proxy
     user_proxy = UserProxyAgent(
         name="User",
         human_input_mode="ALWAYS",
         code_execution_config={"work_dir": ".", "use_docker": False},
     )
-
-    # Register the save_research_to_file function with the user proxy and report writer for testing
-    for agent_obj in [user_proxy, report_writer]:
-        agent_obj.register_function(
-            function_map={
-                "save_research_to_file": save_research_to_file
-            }
-        )
-
-
-    
-    # Define a custom function for the DeepResearchAgent to call
-    def delegate_research_task(task):
-        """Delegate research task to the DeepResearchAgent and return the result."""
-        print(f"\n[System] Processing research task: {task}")
-        result = agent.run(
-            message=task,
-            tools=agent.tools,
-            max_turns=2,
-            user_input=False,
-            summary_method="reflection_with_llm",
-        )
-        result.process()
-        return result.summary
 
     
     # Create group chat based on command-line argument
@@ -243,14 +214,6 @@ def main():
         print("Using DeepResearchAgent for real research...")
         research_agent = agent
     
-    # Register the delegate_research_task function with all agents
-    for agent_obj in [user_proxy, research_agent, report_writer, data_handler_agent]:
-        agent_obj.register_function(
-            function_map={
-                "delegate_research_task": delegate_research_task
-            }
-        )
-        
     gdrive_agent = None
     if args.use_gdrive:
         try:
@@ -286,7 +249,53 @@ def main():
         except Exception as e:
             print(f"Error initializing Google Drive agent: {e}")
             print("Continuing without Google Drive agent...")
-    
+
+    # Register the save_research_to_file function with the report writer agent
+    report_writer.register_function(
+        function_map={
+            "save_research_to_file": save_research_to_file
+        }
+    )
+
+    # Register the save_research_to_file function with the data handler agent
+    data_handler_agent.register_function(
+        function_map={
+            "save_research_to_file": save_research_to_file
+        }
+    )
+
+
+    # Register the save_research_to_file function with the user proxy and report writer for testing
+    for agent_obj in [user_proxy, report_writer]:
+        agent_obj.register_function(
+            function_map={
+                "save_research_to_file": save_research_to_file
+            }
+        )
+
+
+    # Define a custom function for the DeepResearchAgent to call
+    def delegate_research_task(task):
+        """Delegate research task to the DeepResearchAgent and return the result."""
+        print(f"\n[System] Processing research task: {task}")
+        result = agent.run(
+            message=task,
+            tools=agent.tools,
+            max_turns=2,
+            user_input=False,
+            summary_method="reflection_with_llm",
+        )
+        result.process()
+        return result.summary
+
+    # Register the delegate_research_task function with all agents
+    for agent_obj in [user_proxy, research_agent, report_writer, data_handler_agent]:
+        agent_obj.register_function(
+            function_map={
+                "delegate_research_task": delegate_research_task
+            }
+        )
+
     # Create a group chat and manager
     groupchat_agents = [user_proxy, report_writer, research_agent, data_handler_agent]
     
