@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  ml-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      # For Jupyter or other web services if needed
+      - "8888:8888"
+    environment:
+      - PYTHONPATH=/app
+    # Command can be overridden at runtime
+    # By default, it will run train_file_by_agent.py
+    command: ["train_file_by_agent.py"]
