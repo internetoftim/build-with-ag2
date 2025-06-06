@@ -243,7 +243,7 @@ def main():
             )
             
             # Register toolkit with the agent and user proxy for execution
-            google_drive_toolkit.register_for_execution(user_proxy)
+            google_drive_toolkit.register_for_execution(gdrive_agent)
             google_drive_toolkit.register_for_llm(gdrive_agent)
             
             print("Google Drive agent initialized successfully")
