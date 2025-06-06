@@ -3,7 +3,7 @@
 - Created by [internetoftim](https://github.com/internetoftim)
 - Last revision: 06/06/2025
 
-DataRoom Research is an advanced multi-agent research system that combines the capabilities of DeepResearchAgent with GoogleDriveToolkit, built on the AG2 framework. It enhances OpenAI's deep research agent concept by adding document handling and Google Drive integration.
+DataRoom Research is an multi-agent research system that combines the capabilities of DeepResearchAgent with GoogleDriveToolkit, built on the AG2 framework. It enhances OpenAI's deep research agent concept by adding document handling and Google Drive integration.
 
 ## Detailed Description
 
@@ -29,20 +29,7 @@ TAGS: deep-research, data-retrieval, google-drive, document-analysis, multi-agen
 
 DeepResearchAgent requires Python 3.11 or higher.
 
-### Option 1: Automated Setup (Recommended)
-
-Use the provided setup script to automatically create a virtual environment, install dependencies, and set up Playwright:
-
-```bash
-./setup.sh
-```
-
-This script will:
-1. Create a Python virtual environment
-2. Install all required packages
-3. Install Playwright browsers automatically
-
-### Option 2: Manual Installation
+### Manual Installation
 
 1. Create a virtual environment (recommended):
 
@@ -83,35 +70,31 @@ Create an `OAI_CONFIG_LIST` file based on the provided sample and update the `ap
 cp OAI_CONFIG_LIST_sample OAI_CONFIG_LIST
 # Edit the file to add your API key
 ```
-## 2. Using Local LLMs with Ollama (Optional)
 
-This system supports using local language models through Ollama as an alternative to OpenAI's API. This can provide privacy benefits, reduce costs, and enable offline usage.
+### 2. Google Drive Integration
 
-###  Setting Up Ollama
+For a detailed tutorial on the Google Drive Toolkit functionality, see the 
+[AG2 Google Drive Documentation](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/tools_google_drive/)
 
-1. Install Ollama by following the instructions at [Ollama's official website](https://ollama.ai/download)
+Note: In order to successfully run that notebook, you would need to do the following steps first
 
-2. Pull a compatible model (we recommend models with at least 7B parameters):
-
-```bash
-# Install a model (example)
-ollama pull deepseek-r1
-# or another compatible model
-ollama pull llama3:8b
-
-
-#### 3. Google Drive Integration
-To enable Google Drive features, you need OAuth credentials:
+To enable Google Drive features, you need OAuth credentials following [Google's Quickstart](https://developers.google.com/workspace/drive/api/quickstart/python#set-up-environment):
 
 1. Create a Google Cloud project and enable the Drive API
 2. Create OAuth 2.0 credentials and download as `credentials.json`
 3. Place `credentials.json` in the project root directory
+4. Generate the `token.json` file by running [gdrive-quickstart.py](https://github.com/googleworkspace/python-samples/blob/main/drive/quickstart/quickstart.py)
+```bash
+python gdrive-quickstart.py
+```
 
-The system will automatically handle OAuth authentication on first run.
+The system will automatically handle OAuth authentication on first run, and you should be able to see the files in your Google Drive account get listed here.
 
-### 2. Run the System
+You can now copy over the `credentials.json` and `token.json` to run the [AG2 Google Drive Collab Notebook](https://docs.ag2.ai/latest/docs/use-cases/notebooks/notebooks/tools_google_drive/)
 
-#### Basic Command-line Interface
+## 3. Run the System
+
+### Basic Command-line Interface
 
 Run the main application with standard research capabilities:
 
@@ -131,8 +114,6 @@ For testing with simulated research responses:
 python main.py --use-fake
 ```
 
-#### Web Interface (Optional)
-
 ## Features and Capabilities
 
 ### DeepResearchAgent
@@ -148,14 +129,38 @@ python main.py --use-fake
 - Searches Drive for specific file types or content
 - Integrates downloaded documents seamlessly with the document analysis capabilities
 
-For a detailed tutorial on the Google Drive Toolkit functionality, see the [Official AG2 Google Drive Jupyter Notebook](https://github.com/ag2ai/ag2/blob/main/notebook/tools_google_drive.ipynb)
-
 ###  Report Generation
-- The Report Writer agent creates well-structured markdown reports with proper sections
+- The Report Writer agent creates well-structured markdown reports with proper sections and exports it as a Markdown file
 - Executive summaries, key findings, and detailed analysis in consistent formatting
 
 
-<!-- Add any helpful resources here! -->
+## (Optional) Using Local LLMs with Ollama
+
+This system supports using local language models through Ollama as an alternative to OpenAI's API. This can provide privacy benefits, reduce costs, and enable offline usage.
+
+###  Setting Up Ollama
+
+1. Install Ollama by following the instructions at [Ollama's official website](https://ollama.ai/download)
+
+2. Pull a compatible model (we recommend models with at least 7B parameters):
+
+Install a model (example)
+```bash
+ollama pull deepseek-r1
+```
+
+# or another compatible model
+```bash
+ollama pull llama3:8b
+```
+
+# Start the Ollama server
+```bash
+ollama serve
+```
+
+Ollama runs a REST API on http://localhost:11434 by default. You can use OLLAMA_CONFIG_LIST to use the local LLM with your agent.
+
 
 For more information or any questions, please refer to the documentation or reach out to us!
 
