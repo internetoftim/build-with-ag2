@@ -1,6 +1,5 @@
 # API key configuration files
 OAI_CONFIG_LIST
-OLLAMA_CONFIG_LIST
 
 # Authentication and credential files
 credentials.json
