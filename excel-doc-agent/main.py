@@ -323,7 +323,7 @@ def main():
         agents=[assistant, data_analyst, visualizer, code_summarizer, code_executor, user_proxy],
         messages=[],
         max_round=50,
-        speaker_selection_method=select_next_speaker,  # Use custom speaker selection
+        speaker_selection_method='auto',  # Use custom speaker selection
     )
     
     # Create a group chat manager
@@ -333,10 +333,15 @@ def main():
     chat_result = user_proxy.initiate_chat(
         group_chat_manager,
         message="""I need help analyzing Excel files, creating visualizations, and executing code. 
-        I can provide Excel files for you to analyze.
+        I can provide Excel files for you to analyze. Read this file: ReferandumSonucu.xlsx
         Please guide me through the process of analyzing data, creating insightful visualizations, and executing code in Jupyter notebooks.
         You can also summarize the analysis and provide integrated code when needed.
-        Then answer this question, how much are the sales per category in September Q3 of 2024."""
+        Then answer this question, 'Adana'nın Ceyhan ilçesindeki 'evet' oyu sayısı kaçtır?'"""        
+        # message="""I need help analyzing Excel files, creating visualizations, and executing code. 
+        # I can provide Excel files for you to analyze.
+        # Please guide me through the process of analyzing data, creating insightful visualizations, and executing code in Jupyter notebooks.
+        # You can also summarize the analysis and provide integrated code when needed.
+        # Then answer this question, how much are the sales per category in September Q3 of 2024."""
     )
     
     # Extract and save code from the conversation if available
